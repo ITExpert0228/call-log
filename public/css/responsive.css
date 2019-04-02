@@ -1,0 +1,114 @@
+/* Medium Layout: 1280px. */
+@media only screen and (min-width: 992px) and (max-width: 1200px) { 
+
+.main-nav a {
+    padding: 10px;
+    font-size: 12px;
+}
+.vs-d {
+    font-size: 20px;
+    padding: 20px 24px;
+}
+}
+/* Tablet Layout: 768px. */
+@media only screen and (min-width: 768px) and (max-width: 991px) { 
+
+.main-nav a {
+    padding: 10px;
+    font-size: 12px;
+}
+.single-area {
+    padding: 15px;
+}
+.vs-d {
+    font-size: 14px;
+    padding: 13px 15px;top: 195px;
+}
+.left-side {
+    padding: 15px;
+}
+.vote-list li {
+    margin-bottom: 10px;
+    font-size: 14px;
+}  
+#portfolio .m-title {
+    font-size: 18px;
+}
+}  
+/* Wide Mobile Layout: 480px. */
+@media only screen and (min-width: 480px) and (max-width: 767px) { 
+.single-area {
+    padding: 10px;    width: 43%;
+}
+.vs-d {
+    font-size: 14px;
+    padding: 13px 15px;top: 195px;
+}
+}
+/* Mobile Layout: 320px. */
+@media only screen and (max-width: 479px) { 
+.single-area {
+    display: block;
+    width: 100%;
+    padding: 0;
+    position: relative;
+}
+.vs-d {
+    width: 100px;
+    height: 100px;
+    top: auto;
+    padding: 20px 25px;
+    display: block;
+    margin: 50px auto;
+    text-align: center;
+    line-height: 60px;
+}
+.vs-d:after {
+    height: 2px;
+    width: 100%;
+    left: 95px;
+    bottom: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    right: auto;
+}
+.vs-d:before {
+    height: 2px;
+    width: 100%;
+    left: auto;
+    bottom: 85px;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 95px;
+}
+
+.vote-list .vs-d {
+    width: 50px;
+    height: 50px;
+    line-height: 40px;    margin: 0 auto;
+}
+.status-b {
+    padding: 0;
+    width: 100%;
+    display: inline-block;
+}
+.cate-area .vote-list ol {
+    padding-left: 0;
+}
+.left-side {
+    padding: 15px;
+} 
+.left-side .vote-list .vs-d, .cate-area .vote-list .vs-d{
+    display: inline-block;
+
+}
+h2.title-name {
+    font-size: 24px;
+
+}
+.mt-150 {
+
+    margin-top: 20px;
+
+}
+} 
