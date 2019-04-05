@@ -7,17 +7,26 @@ app.config(function($routeProvider, $locationProvider) {
         templateUrl: 'admin/modules/dashboard/dashboard.html',
         resolve: {
             user: ['$cookieStore', '$q', function ($cookieStore, $q) {
-                    if ($cookieStore.get("user") || $q.reject({ unAuthorized: true })) {
-                    } else {
-                        alert("Invalid permission!");
-                        $location.path('/');
-                    }
-                }]
+                var user = $cookieStore.get("user")
+                if (!user || user == null) {
+                    window.location.href = '/';
+                }
+            }]
+        },
+        controller: 'DashboardCtrl'
+    }).when('/manager', {
+        templateUrl: 'admin/modules/dashboard/dashboard.html',
+        resolve: {
+            user: ['$cookieStore', '$q', function ($cookieStore, $q) {
+                var user = $cookieStore.get("user")
+                if (!user || user == null) {
+                    window.location.href = '/';
+                }
+            }]
         },
         controller: 'DashboardCtrl'
     }).when('/admin/users', {
-        templateUrl: 'admin/modules/users/users.html',
-        controller: 'UsersCtrl'
+        templateUrl: 'admin/modules/user/user.html',
+        controller: 'UserCtrl'
     }).otherwise({ redirectTo: '/admin' });
-
 });

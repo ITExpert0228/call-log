@@ -36,9 +36,19 @@
         <!-- Main Stylesheet File -->
         <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
         <link href="css/style.css" rel="stylesheet">
+        <link href="css/page_loading.css" rel="stylesheet">
         <link href="css/responsive.css" rel="stylesheet">
+        
 	</head>
 	<body  class="fix-header card-no-border">
+            <div id="LoadingLoop">
+                <div class="loop_container">
+                    <div class="loop_content">
+                        <div class="circle stop"></div>
+                        <div class="circle1 stop"></div>
+                    </div>
+                </div>
+            </div>
           <!--==========================
   Header
   ============================-->
@@ -86,6 +96,7 @@
 		<script src="lib/angular/angular.min.js"></script>
         <script src="lib/angular/angular-route.min.js"></script>
         <script src="lib/angular/angular-cookies.min.js"></script>
+        
         <script src="modules/app.js"></script>
         <script src="modules/home/homeCtrl.js"></script>
         <script src="modules/products/productsCtrl.js"></script>
@@ -134,5 +145,15 @@
         <script src="lib/lightbox/js/lightbox.min.js"></script>
         <script src="js/imagesloaded.min.js"></script>
         <script src="js/main.js"></script>
+        <!-- <script src="js/page_loading.js"></script> -->
+        <script src="js/pace.js"></script>
+        <script>
+            $(document).ready(function (e) {
+                // Loop.init(2, "Loading...", 0);
+                setTimeout(function(){
+                    $('#LoadingLoop').hide();
+                }, 1000)
+            })
+        </script>
 	</body>
 </html>

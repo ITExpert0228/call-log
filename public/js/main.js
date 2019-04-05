@@ -90,6 +90,9 @@
         main_nav.find('a[href="#'+$(this).attr('id')+'"]').parent('li').addClass('active');
       }
     });
+
+    $('.pace').removeClass('pace-active');
+    $('.pace').addClass('pace-inactive');
   });
 
   // jQuery counterUp (used in Whu Us section)

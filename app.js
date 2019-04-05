@@ -1,39 +1,40 @@
 var express = require('express');
-var app = express(); // the main app
+var app = express();
 var admin = express();
+var routes = require("./server/routes");
+var bodyParser = require('body-parser');
+
+// Set up mongoose connection
+var mongoose = require('mongoose');
+var dev_db_url = 'mongodb://localhost:27017/optio_db';
+var mongoDB = process.env.MONGODB_URI || dev_db_url;
+mongoose.connect(mongoDB);
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
+routes.register(app);
 
 admin.set("view options", {layout: false});
 admin.use(express.static(__dirname + '/public/admin'));
 
 admin.get('/', function (req, res) {
-  console.log(admin.mountpath); // [ '/adm*n', '/manager' ]
+  console.log(admin.mountpath);
   res.render('index.html');
-// res.redirect('/secret');
 });
 
-// var secret = express();
-// secret.get('/', function (req, res) {
-//   console.log(secret.mountpath); // /secr*t
-//   res.send('Admin Secret');
-// });
-
-// admin.use('/secr*t', secret); // load the 'secret' router on '/secr*t', on the 'admin' sub app
-app.use(['/admin', '/manager', '/admin/*', '/manager/*'], admin); // load the 'admin' router on '/adm*n' and '/manager', on the parent app
+app.use(['/admin', '/manager', '/admin/*', '/manager/*'], admin);
 
 app.set("view options", {layout: false});
 app.use(express.static(__dirname + '/public'));
 
 app.all('/admin*', function(req, res, next) {
-  // Just send the index.html for other files to support HTML5Mode
   res.sendFile('index.html', { root: __dirname + '/public/admin' });
 });
 
-
-// app.get('/', function(req, res) {
-//     res.render('index.html');
-// });
 app.all('/*', function(req, res, next) {
-  // Just send the index.html for other files to support HTML5Mode
   res.sendFile('index.html', { root: __dirname + '/public' });
 });
 

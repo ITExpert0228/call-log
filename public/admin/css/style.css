@@ -81,6 +81,7 @@ body {
   font-family: "Poppins", sans-serif;
   margin: 0;
   overflow-x: hidden;
+  overflow-y: scroll;
   color: #67757c;
   font-weight: 300; }
 
@@ -8256,3 +8257,40 @@ li.name-s {
     background-color: #08bb44;
 }
 /*CODER END*/
+
+  @media only screen and (min-width: 768px) and (max-width: 991px) { 
+  .loop_container {
+      width:100%;
+  }
+  .loop_content {
+      width: 100%;
+  }
+  }  
+  /* Wide Mobile Layout: 480px. */
+  @media only screen and (min-width: 480px) and (max-width: 767px) { 
+  .loop_container {
+      padding-top: 60%;
+      width:100%;
+  }
+  .loop_content {
+      width: 100%;
+  }
+  }
+  /* Mobile Layout: 320px. */
+  @media only screen and (max-width: 479px) { 
+
+  .loop_container {
+      width:100%;
+      padding-top: 60%;
+  }
+  .loop_content {
+      width: 100%;
+  }
+  } 
+
+.pace-progress {
+    top: 60px;
+}
+.pace:before {
+    top: 60px;
+}

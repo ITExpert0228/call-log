@@ -6,8 +6,11 @@ File: js
 */
 $(function () {
     "use strict";
-    $(function () {
-        $(".preloader").fadeOut();
+    $(document).ready(function () {
+        setTimeout(function(){
+            $(".preloader").fadeOut();
+        }, 3000);
+        
     });
     jQuery(document).on('click', '.mega-dropdown', function (e) {
         e.stopPropagation()

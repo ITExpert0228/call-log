@@ -21,9 +21,27 @@ app.config(function($routeProvider, $locationProvider) {
         controller: 'EarnCtrl'
     }).when('/login', {
         templateUrl: 'modules/auth/login.html',
+        resolve: {
+            user: ['$cookieStore', '$q', function ($cookieStore, $q) {
+                var user = $cookieStore.get("user")
+                if (user != null) {
+                    if (user.role == "admin") window.location.href = '/admin';
+                    else window.location.href = '/manager';
+                }
+            }]
+        },
         controller: 'AuthCtrl'
     }).when('/register', {
         templateUrl: 'modules/auth/register.html',
+        resolve: {
+            user: ['$cookieStore', '$q', function ($cookieStore, $q) {
+                var user = $cookieStore.get("user")
+                if (user != null) {
+                    if (user.role == "admin") window.location.href = '/admin';
+                    else window.location.href = '/manager';
+                }
+            }]
+        },
         controller: 'AuthCtrl'
     }).otherwise({ redirectTo: '/' });
 
