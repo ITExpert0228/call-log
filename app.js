@@ -20,19 +20,18 @@ routes.register(app);
 admin.set("view options", {layout: false});
 admin.use(express.static(__dirname + '/public/admin'));
 
-admin.get('/', function (req, res) {
-  console.log(admin.mountpath);
-  res.render('index.html');
+// admin.get('/', function (req, res) {
+//   console.log(admin.mountpath);
+//   res.render('index.html');
+// });
+admin.all('/*', function(req, res, next) {
+  res.sendFile('index.html', { root: __dirname + '/public/admin' });
 });
 
 app.use(['/admin', '/manager', '/admin/*', '/manager/*'], admin);
 
 app.set("view options", {layout: false});
 app.use(express.static(__dirname + '/public'));
-
-app.all('/admin*', function(req, res, next) {
-  res.sendFile('index.html', { root: __dirname + '/public/admin' });
-});
 
 app.all('/*', function(req, res, next) {
   res.sendFile('index.html', { root: __dirname + '/public' });

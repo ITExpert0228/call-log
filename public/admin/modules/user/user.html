@@ -51,7 +51,7 @@
                                             <td>
                                                 <a href="javascript:void(0)"><img ng-src="{{user.avatarUrl==''?'img/empty.jpg':user.avatarUrl}}" alt="user" width="40" class="img-circle" /> &nbsp;&nbsp;{{user.firstName+' '+user.lastName}}</a>
                                             </td>
-                                            <td>{{user.loginName}}</td>
+                                            <td>{{user.loginEmail}}</td>
                                             <td>{{user.gender}}</td>
                                             <td><span class="label label-danger" ng-show="user.role == 'admin'">Administrator</span><span class="label label-info" ng-show="user.role != 'admin'">Voter</span></td>
                                             <td>{{user.birthday}}</td>

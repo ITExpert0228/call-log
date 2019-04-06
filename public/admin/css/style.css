@@ -1583,7 +1583,7 @@ dropdown-item
 Custom-select
 ******************/
 .custom-select {
-  background: url(../../assets/images/custom-select.png) right 0.75rem center no-repeat; }
+  background: url(../assets/images/custom-select.png) right 0.75rem center no-repeat; }
 
 /*******************
 textarea
@@ -8288,9 +8288,21 @@ li.name-s {
   }
   } 
 
-.pace-progress {
-    top: 60px;
+  /* .img-container {
+    max-height: 416px;
+    
+  }
+  
+  @media (min-width: 768px) {
+    .img-container {
+      min-height: 350px;
+    }
+  } */
+
+.cropper-line, .cropper-point {
+    background-color: #08bb44;
 }
-.pace:before {
-    top: 60px;
+.cropper-view-box {
+  outline: #08bb44 solid 1px;
+  outline-color: rgba(51,253,155,.75);
 }

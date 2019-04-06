@@ -97,6 +97,7 @@
                         </div>
                     </nav>
                 </header>
+
                 <!-- ============================================================== -->
                 <!-- End Topbar header -->
                 <!-- ============================================================== -->
@@ -109,13 +110,13 @@
                         <!-- User profile -->
                         <div class="user-profile">
                             <!-- User profile image -->
-                            <div class="profile-img"> <img src="admin/assets/images/users/profile.png" alt="user" /> 
+                            <div class="profile-img"> <a href="/admin"> <img src="{{loggedInUser.avatarUrl==''?'img/empty.jpg':loggedInUser.avatarUrl}}" alt="user" /> </a> 
                                      <!-- this is blinking heartbit-->
                                     <div class="notify setpos"> <span class="heartbit"></span> <span class="point"></span> </div>
                             </div>
                             <!-- User profile text-->
                             <div class="profile-text"> 
-                                    <h5>Markarn Doe</h5>
+                                <h5>{{loggedInUser.firstName + '&nbsp;' + loggedInUser.lastName}}</h5>
                                     <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"><i class="mdi mdi-settings"></i></a>
                                      <a href="app-email.html" class="" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
                                     <a ng-click="logout()" href="#" class="" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
@@ -203,8 +204,16 @@
         <script src="admin/modules/user/userService.js"></script>
         <script src="modules/auth/authService.js"></script>
         <script src="admin/modules/home/homeCtrl.js"></script>        
+        <script src="admin/modules/manager/managerCtrl.js"></script>        
+        <script src="admin/modules/optio/createCtrl.js"></script>        
+        <script src="admin/modules/optio/inventoryCtrl.js"></script>        
+        <script src="admin/modules/optio/manageCtrl.js"></script>        
+        <script src="admin/modules/media/mmanageCtrl.js"></script>        
+        <script src="admin/modules/media/muploadCtrl.js"></script>        
 
         <script src="admin/assets/plugins/jquery/jquery.min.js"></script>
+
+        <script src="js/pace.js"></script>
         <!-- Bootstrap tether Core JavaScript -->
         <script src="admin/assets/plugins/bootstrap/js/popper.min.js"></script>
 
@@ -226,10 +235,10 @@
         <!--Custom JavaScript -->
         <!-- Image cropper JavaScript -->
         <script src="admin/assets/plugins/cropper/cropper.min.js"></script>
-        <!-- <script src="admin/assets/plugins/cropper/cropper-init.js"></script> -->
         <script src="admin/js/custom.min.js"></script>
+        <script src="admin/js/jasny-bootstrap.js"></script>
         <!-- <script src="js/page_loading.js"></script> -->
-        <script src="js/pace.js"></script>
+        
         <script>
             $(document).ready(function (e) {
                 // Loop.init(2, "Loading...", 0);

@@ -15,7 +15,7 @@
     startOnPageLoad: true,
     restartOnPushState: true,
     restartOnRequestAfter: 500,
-    target: 'body',
+    target: 'header',
     elements: {
       checkInterval: 100,
       selectors: ['body']

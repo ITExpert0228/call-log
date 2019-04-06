@@ -100,13 +100,13 @@ app.controller('AuthCtrl', ['$scope', '$rootScope', '$cookieStore', '$location',
         if ($cookieStore.get('remember_me'))
             $scope.remember_me = $cookieStore.get('remember_me');
 
-        if ($cookieStore.get('loginName')) {
+        if ($cookieStore.get('loginEmail')) {
             $scope.credentials = {};
-            $scope.credentials.loginName = $cookieStore.get('loginName');
+            $scope.credentials.loginEmail = $cookieStore.get('loginEmail');
             $('.preneed').addClass('active');
         }
         if ($cookieStore.get('password')) {
-            if (!$scope.credentials.loginName)
+            if (!$scope.credentials.loginEmail)
                 $scope.credentials = {};
             $scope.credentials.password = $cookieStore.get('password');
         }

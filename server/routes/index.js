@@ -6,7 +6,7 @@ var userAPIRouter = require("./user");
 
 function register(app) {
     // app.use(["/api" + "/roles", "/roles"], roleAPIRouter);
-    app.use(["/api" + "/users", "/users"], userAPIRouter);
+    app.use(["/api" + "/users"], userAPIRouter);
     // app.use(["/api" + "/assets", "/assets"], assetsAPIRouter);
 }
 
