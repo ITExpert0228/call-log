@@ -134,6 +134,9 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
             // $.SweetAlert.init()
 
             $('#image').imagesLoaded(function () {
+              setTimeout(function(){
+
+              
             // ------------------------------ image crop module
             var console = window.console || { log: function () {} };
             var $image = $('#image');
@@ -198,13 +201,6 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
               $('button[data-method="rotate"]').prop('disabled', true);
               $('button[data-method="scale"]').prop('disabled', true);
             }
-          
-          
-            // Download
-            // if (typeof $download[0].download === 'undefined') {
-            //   $download.addClass('disabled');
-            // }
-          
           
             // Options
             $('.docs-toggles').on('change', 'input', function () {
@@ -367,14 +363,11 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
               });
             } else {
                 console.log('aaa');
-            //   $inputImage.prop('disabled', true).parent().addClass('disabled');
+              $inputImage.prop('disabled', true).parent().addClass('disabled');
             }
-          
-          });
 
-          
-
-          
-          });
+            }, 3000);
+          })
+        })
     })
 }]);
