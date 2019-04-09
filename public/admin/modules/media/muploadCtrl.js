@@ -1,9 +1,149 @@
-app.controller('MUploadCtrl', ['$scope', function($scope) {
+app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$cookieStore', function($scope, categoryService, mediaService, $cookieStore) {
 
     $scope.newCat = false;
+    $scope.categorys = [];
+    var cropperObj;
+    $scope.loggedInUser = $cookieStore.get("user");
+    // $scope.newModel = 'aaaaaab';
+    categoryService.getAll().then(function(data){
+        console.log(data);
+        $scope.categorys = data;
+        $scope.categorys.push({id:'null', cName:'Create a Category'})
+    }, function (err) {
+        console.log(err)
+    })
+
+    mediaService.getAll().then(function(data){
+        var resData = [];
+        angular.forEach(data, function (media) {
+            resData.push(media.mName);
+        });
+        $("#myText").autocomplete({
+            source: resData,
+            minLength: 1,
+            change: function() {
+                // $("#myText").val("").css("display", 2);
+            }
+        });
+
+        $("#enableComplete").click(function(){
+            $('#myText').autocomplete('option', 'minLength', 0);
+            $('#myText').autocomplete('search', $('#myText').val());
+        });
+    }, function (err) {
+        console.log(err)
+    }) 
+
+    $scope.categoryChanged = function() {
+        if ($scope.selectedCategory == 'null') $scope.newCat = true;
+    }
+
+    $scope.saveCategory = function() {
+        var categoryObj = {
+            cName: $scope.newModel
+        }
+
+        // $('#LoadingLoop').show();
+        categoryService.create(categoryObj).then(function(newCategory) {
+            categoryService.getAll().then(function(data){
+                // $('#LoadingLoop').hide();
+                $scope.newCat = false;
+                $scope.categorys = data;
+                $scope.categorys.push({id:'null', cName:'Create a Category'});
+                $scope.selectedCategory = newCategory.id;
+            }, function (err) {
+                // $('#LoadingLoop').hide();
+                console.log(err)
+            });
+            
+        }, function (err) {
+            // $('#LoadingLoop').hide();
+            console.log(err);
+        })
+    }
+
+    $scope.createCancel = function() {
+        $scope.newCat = false;
+        $scope.selectedCategory = '';
+    }
+
+    $scope.save = function() {
+        var $image = $('#image');
+        var cropper = $image.data('cropper');
+        cropper.getCroppedCanvas().toBlob((blob) => {
+            var formData = new FormData();
+            formData.append('media', blob, '1.jpg');
+
+            $.ajax("/api/media/upload", {
+                method: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (res) {
+                    console.log(res);
+                    var mediaObj = {
+                        mName: $scope.tagName,
+                        mCategory: $scope.selectedCategory,
+                        mImage: res.path,
+                        mUser: $scope.loggedInUser.id
+                    }
+                    mediaService.create(mediaObj).then(function(newMedia){
+                        swal({   
+                            title: "Media Successfully Uploaded!",   
+                            text: "Recently joined twitter",   
+                            imageUrl: newMedia.mImage.replace('\\', '/'),
+                            timer: 1000,   
+                        });
+                    }, function (err) {
+            
+                    });     
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+        }, "image/jpeg", 0.75);
+
+        // console.log(cropper.getCroppedCanvas().toDataURL("image/jpeg", 0.7));
+    }
+
+    $scope.enableAutocomplete = function() {
+        $('#myText').autocomplete('enable');
+    }
+
     $scope.$on('$viewContentLoaded', function(){
         $(function () {
-   
+            // ----------------------------- Alert module
+            var SweetAlert = function() {};
+
+            //examples 
+            // SweetAlert.prototype.init = function() {
+        
+            // $('#sa-image').click(function(){
+            //     swal({   
+            //         title: "Govinda!",   
+            //         text: "Recently joined twitter",   
+            //         imageUrl: "img/empty.jpg",
+            //         timer: 1000,   
+            //     });
+            // });
+        
+            // $('#sa-close').click(function(){
+            //      swal({   
+            //         title: "Auto close alert!",   
+            //         text: "I will close in 2 seconds.",   
+            //         timer: 2000,   
+            //         showConfirmButton: false 
+            //     });
+            // });
+        
+        
+            // },
+            //init
+            $.SweetAlert = new SweetAlert, $.SweetAlert.Constructor = SweetAlert
+            // $.SweetAlert.init()
+
+            // ------------------------------ image crop module
             var console = window.console || { log: function () {} };
             var $image = $('#image');
             var $download = $('#download');
@@ -15,7 +155,7 @@ app.controller('MUploadCtrl', ['$scope', function($scope) {
             var $dataScaleX = $('#dataScaleX');
             var $dataScaleY = $('#dataScaleY');
             var options = {
-                //   aspectRatio: 16 / 9,
+                  aspectRatio: 1 / 1,
                   preview: '.img-preview',
                   crop: function (e) {
                     $dataX.val(Math.round(e.x));
@@ -28,13 +168,12 @@ app.controller('MUploadCtrl', ['$scope', function($scope) {
                   }
                 };
           
-          
             // Tooltip
             $('[data-toggle="tooltip"]').tooltip();
           
           
             // Cropper
-            $image.on({
+            cropperObj = $image.on({
               'build.cropper': function (e) {
                 console.log(e.type);
               },
@@ -101,7 +240,7 @@ app.controller('MUploadCtrl', ['$scope', function($scope) {
                 options[name] = $this.val();
               }
           
-              $image.cropper('destroy').cropper(options);
+              cropperObj = $image.cropper('destroy').cropper(options);
             });
           
           

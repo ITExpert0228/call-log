@@ -31,7 +31,7 @@ app.service('authService', ['$http', '$cookieStore', function ($http, $cookieSto
     auth.register = function(userObj) {
         return $http.post(SIGNUP_ENDPOINT, { user: userObj }).then(function(response, status) {
             console.log(response);
-            if (!response.data.success) return null;
+            if (!response.data) return null;
             auth.user = response.data;
             return auth.user;
         });

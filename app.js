@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var admin = express();
+var uploads = express();
 var routes = require("./server/routes");
 var bodyParser = require('body-parser');
 
@@ -28,7 +29,9 @@ admin.all('/*', function(req, res, next) {
   res.sendFile('index.html', { root: __dirname + '/public/admin' });
 });
 
+uploads.use(express.static(__dirname + '/uploads'));
 app.use(['/admin', '/manager', '/admin/*', '/manager/*'], admin);
+app.use(['/uploads', '/uploads/*'], uploads);
 
 app.set("view options", {layout: false});
 app.use(express.static(__dirname + '/public'));

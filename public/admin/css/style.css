@@ -8219,7 +8219,10 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
 }
 
 .single-media ul li {
-    display: inline-block;
+    /* display: inline-block; */
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 li.name-s {
@@ -8305,4 +8308,8 @@ li.name-s {
 .cropper-view-box {
   outline: #08bb44 solid 1px;
   outline-color: rgba(51,253,155,.75);
+}
+
+.sweet-alert .sa-icon.sa-custom {
+  border-radius: 0;
 }

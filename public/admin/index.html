@@ -26,6 +26,9 @@
 	    <link href="admin/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
 
         <link href="admin/assets/plugins/footable/css/footable.core.css" rel="stylesheet">
+        <link href="admin/assets/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+        <link href="admin/assets/plugins/icheck/skins/all.css" rel="stylesheet">
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
         
         <!-- Custom CSS -->
         <link href="css/page_loading.css" rel="stylesheet">
@@ -148,7 +151,7 @@
                                 <li class="nav-small-cap">Menu</li>
                                 <li ng-if="isUser"> <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-account-box-outline"></i><span class="hide-menu">Votes Edit</span></a>
                                     <ul aria-expanded="false" class="collapse">
-                                        <li><a href="#">Under construction Votes</a></li>
+                                        <li><a href="/manager">Under construction Votes</a></li>
                                         <li><a href="#">Inactive Votes</a></li>
                                         <li><a href="#">Active  Votes</a></li>
                                     </ul>
@@ -199,10 +202,9 @@
         <script src="lib/angular/angular-cookies.min.js"></script>
         
         <script src="admin/modules/app.js"></script>
+
         <script src="admin/modules/dashboard/dashboardCtrl.js"></script>
         <script src="admin/modules/user/userCtrl.js"></script>
-        <script src="admin/modules/user/userService.js"></script>
-        <script src="modules/auth/authService.js"></script>
         <script src="admin/modules/home/homeCtrl.js"></script>        
         <script src="admin/modules/manager/managerCtrl.js"></script>        
         <script src="admin/modules/optio/createCtrl.js"></script>        
@@ -210,6 +212,11 @@
         <script src="admin/modules/optio/manageCtrl.js"></script>        
         <script src="admin/modules/media/mmanageCtrl.js"></script>        
         <script src="admin/modules/media/muploadCtrl.js"></script>        
+
+        <script src="admin/modules/user/userService.js"></script>
+        <script src="admin/modules/optio/categoryService.js"></script>
+        <script src="admin/modules/optio/mediaService.js"></script>
+        <script src="modules/auth/authService.js"></script>
 
         <script src="admin/assets/plugins/jquery/jquery.min.js"></script>
 
@@ -232,9 +239,15 @@
         <script src="admin/assets/plugins/bootstrap-select/bootstrap-select.min.js" type="text/javascript"></script>
         <script src="admin/assets/plugins/chartist-js/dist/chartist.min.js"></script>
         <script src="admin/assets/plugins/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
+
+        <script src="admin/assets/plugins/sweetalert/sweetalert.min.js"></script>
+        <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
         <!--Custom JavaScript -->
         <!-- Image cropper JavaScript -->
         <script src="admin/assets/plugins/cropper/cropper.min.js"></script>
+        <script src="admin/assets/plugins/icheck/icheck.min.js"></script>
+        <!-- <script src="admin/assets/plugins/icheck/icheck.init.js"></script> -->
+
         <script src="admin/js/custom.min.js"></script>
         <script src="admin/js/jasny-bootstrap.js"></script>
         <!-- <script src="js/page_loading.js"></script> -->

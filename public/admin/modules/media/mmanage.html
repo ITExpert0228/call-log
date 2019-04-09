@@ -29,20 +29,18 @@
                     <div class="card">
                         <div class="card-body">
                             <ul class="nav nav-pills m-t-30 m-b-30">
-                                <li class=" nav-item"> <a href="#navpills-1" class="nav-link active" data-toggle="tab" aria-expanded="false">Tab One</a> </li>
-                                <li class="nav-item"> <a href="#navpills-2" class="nav-link" data-toggle="tab" aria-expanded="false">Tab Two</a> </li>
-                                <li class="nav-item"> <a href="#navpills-3" class="nav-link" data-toggle="tab" aria-expanded="true">Tab Three</a> </li>
+                                <li class=" nav-item"> <a href="#navpills-1" class="nav-link active" data-toggle="tab" target="_self" aria-expanded="false">Manage</a> </li>
+                                <li class="nav-item"> <a href="#navpills-2" class="nav-link" data-toggle="tab" target="_self" aria-expanded="false">Analytics</a> </li>
+                                <li class="nav-item"> <a href="#navpills-3" class="nav-link" data-toggle="tab" target="_self" aria-expanded="true">Tools</a> </li>
                             </ul>
                             <div class="tab-content br-n pn">
                                 <div id="navpills-1" class="tab-pane active">
                                    
-                            <h4 class="card-title">Upload Media</h4>
-                                  
-                                   <div class="form-group row">
-                                                <div class="col-md-9">
-                                                    
-                              <div class="search-box-bs"> 
-                            <input type="text" class="form-control" placeholder="Search from Name of Optio"> 
+                                    <h4 class="card-title">Manage Media</h4>
+                                    <div class="form-group row">
+                                        <div class="col-md-6">        
+                                            <div class="search-box-bs"> 
+                            <input type="text" class="form-control" id="myText" placeholder="Search for Uploaded Media" ng-model="searchKey.mName"> 
                                  <button class="btn btn-primary waves-effect waves-light" type="button"><span class="btn-label"><i class="icon-magnifier"></i></span></button>
                                   </div>
                                  
@@ -50,14 +48,38 @@
                                             </div><div class="row">
                          <div class="col-md-4">
                              <div class="left-side-a">
-                                 <ul class="filter-by">
-                                     <li><a href="">By Topic</a></li>
-                                     <li><a href="">By Categories</a></li>
-                                     <li><a href="">By Date of Creation</a></li>
-                                     <li><a href="">By Traffic</a></li>
-                                     <li><a href="">By Favorite</a></li>
-                                 </ul>
-                                 <h4>Currently Using in :</h4>
+                                <div class="skin skin-square">
+                                    <form>
+                                        <div class="form-group">
+                                            <label>Sorted By</label>
+                                            <div class="input-group">
+                                                <ul class="icheck-list">
+                                                    <li>
+                                                        <input type="radio" class="check" id="square-radio-1" name="square-radio" data-radio="iradio_square-green" data-dom="opt1" disabled>
+                                                        <label for="square-radio-1">By Topic</label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" class="check" id="square-radio-2" name="square-radio" data-radio="iradio_square-green" data-dom="opt2">
+                                                        <label for="square-radio-2">By Categories</label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" class="check" id="square-radio-3" name="square-radio" checked data-radio="iradio_square-green" data-dom="opt3">
+                                                        <label for="square-radio-3">By Date of Creation</label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" class="check" id="square-radio-4" name="square-radio" data-radio="iradio_square-green" data-dom="opt4" disabled>
+                                                        <label for="square-radio-4">By Traffic</label>
+                                                    </li>
+                                                    <li>
+                                                        <input type="radio" class="check" id="square-radio-5" name="square-radio" data-radio="iradio_square-green" data-dom="opt5" disabled>
+                                                        <label for="square-radio-5">By Favorite</label>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                 <!-- <h4>Currently Using in :</h4>
                                  <ul class="curent-state">
                                      <li>Topic:  Science and Technology</li>
                                      <li>Category:  Greatest Scientist in history</li>
@@ -68,7 +90,7 @@
                                      <div class="team-s"><img src="admin/assets/images/team-a.jpg" alt=""></div> 
                                      <div class="team-s"><img src="admin/assets/images/team-b.jpg" alt=""></div> 
                                         </a>
-                                 </div>
+                                 </div> -->
                                  <div class="bottom-btns">
                                      <a href="" class="btn btn-primary waves-effect waves-light">Stadistic of Vote</a> 
                                      <a href="" class="btn btn-primary waves-effect waves-light">Traffic of Specific Vote</a>  
@@ -78,72 +100,48 @@
                              
                          </div>
                          <div class="col-md-8">
-                             
-                    <div class="card">
-                        <div class="card-body">
-                            <ul class="nav nav-pills m-t-30 m-b-30">
-                                <li class=" nav-item"> <a href="#navpills-4" class="nav-link active" data-toggle="tab" aria-expanded="false">Tab One</a> </li>
-                                <li class="nav-item"> <a href="#navpills-5" class="nav-link" data-toggle="tab" aria-expanded="false">Tab Two</a> </li>
-                                <li class="nav-item"> <a href="#navpills-6" class="nav-link" data-toggle="tab" aria-expanded="true">Tab Three</a> </li>
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class=" nav-item"> <a href="#navpills-4" class="nav-link active" data-toggle="tab" target="_self" aria-expanded="false">Image</a> </li>
+                                <li class="nav-item"> <a href="#navpills-5" class="nav-link" data-toggle="tab" target="_self" aria-expanded="false">Video</a> </li>
+                                <li class="nav-item"> <a href="#navpills-6" class="nav-link" data-toggle="tab" target="_self" aria-expanded="true">Text</a> </li>
+                                <li class="nav-item"> <a href="#navpills-7" class="nav-link" data-toggle="tab" target="_self" aria-expanded="true">Other</a> </li>
                             </ul>
-                            <div class="tab-content br-n pn">
+                            <div class="tab-content tabcontent-border br-n pn">
                                 <div id="navpills-4" class="tab-pane active">
-                    <nav class="breadcrumb">
-                                <a class="breadcrumb-item" href="#">2019</a>
-                                <a class="breadcrumb-item" href="#">February</a>
-                                <span class="breadcrumb-item active">Albert Einstain</span>
-                            </nav>
+                                    <nav class="breadcrumb" style="background:white">
+                                        <a class="breadcrumb-item" href="#">{{breadObj.year}}</a>
+                                        <a class="breadcrumb-item" href="#">{{breadObj.month}}</a>
+                                        <span class="breadcrumb-item active">{{breadObj.name}}</span>
+                                    </nav>
                               
-                            <h4 class="card-title">Feb 2019</h4>
-                              <div class="media-items-b">
-                                  <div class="single-media">
-                                      <img src="admin/assets/images/team-a.jpg" alt="">
-                                      <ul>
-                                          <li class="name-s">Team A</li>
-                                          <li class="edit-img"><a href="">Edit</a></li>
-                                      </ul>
-                                  </div>
-                                  <div class="single-media">
-                                      <img src="admin/assets/images/team-b.jpg" alt="">
-                                      <ul>
-                                          <li class="name-s">Team A</li>
-                                          <li class="edit-img"><a href="">Edit</a></li>
-                                      </ul>
-                                  </div>
-                                  <div class="single-media">
-                                      <img src="admin/assets/images/team-a.jpg" alt="">
-                                      <ul>
-                                          <li class="name-s">Team A</li>
-                                          <li class="edit-img"><a href="">Edit</a></li>
-                                      </ul>
-                                  </div>
-                                  <div class="single-media">
-                                      <img src="admin/assets/images/team-b.jpg" alt="">
-                                      <ul>
-                                          <li class="name-s">Team A</li>
-                                          <li class="edit-img"><a href="">Edit</a></li>
-                                      </ul>
-                                  </div>
-                              </div>
+                                    <div style="padding:0 1rem 1rem" ng-repeat='group in getGroups()'>
+                                            <h4 class="card-title">{{group}}</h4>
+                                            <div class="media-items-b">
+                                                <div class="single-media" ng-repeat="media in allMedia | groupby:group | filter:searchKey">
+                                                    <img ng-src="{{media.mImage}}" alt="">
+                                                    <ul>
+                                                        <li class="name-s">{{media.mName}}</li>
+                                                        <li class="edit-img"><a href="">Edit</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                    </div>
                               
                                </div>
 
-                                <div id="navpills-5" class="tab-pane">
+                               <div id="navpills-5" class="tab-pane">
                                     <div class="row">
-                                        <div class="col-md-8"> Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
-                                            <p>
-                                                <br/> Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid.</p>
-                                        </div>
-                                        <div class="col-md-4"> <img src="admin/assets/images/big/img3.jpg" class="img-responsive thumbnail mr25"> </div>
+                                        <div class="col-md-12">tab-content5</div>
                                     </div>
                                 </div>
                                 <div id="navpills-6" class="tab-pane">
-                                    <div class="row">
-                                        <div class="col-md-4"> <img src="admin/assets/images/big/img1.jpg" class="img-responsive thumbnail mr25"> </div>
-                                        <div class="col-md-8"> Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
-                                            <p>
-                                                <br/> Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid.</p>
+                                        <div class="row">
+                                            <div class="col-md-12">tab-content6</div>
                                         </div>
+                                    </div>
+                                <div id="navpills-7" class="tab-pane">
+                                    <div class="row">
+                                        <div class="col-md-12">tab-content7</div>
                                     </div>
                                 </div>
                          </div>
@@ -152,26 +150,6 @@
                      </div>
                                </div>
                                </div>
-                                <div id="navpills-2" class="tab-pane">
-                                    <div class="row">
-                                        <div class="col-md-8"> Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
-                                            <p>
-                                                <br/> Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid.</p>
-                                        </div>
-                                        <div class="col-md-4"> <img src="admin/assets/images/big/img3.jpg" class="img-responsive thumbnail mr25"> </div>
-                                    </div>
-                                </div>
-                                <div id="navpills-3" class="tab-pane">
-                                    <div class="row">
-                                        <div class="col-md-4"> <img src="admin/assets/images/big/img1.jpg" class="img-responsive thumbnail mr25"> </div>
-                                        <div class="col-md-8"> Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
-                                            <p>
-                                                <br/> Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

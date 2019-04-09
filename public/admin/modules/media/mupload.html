@@ -61,9 +61,9 @@
                     <div class="card">
                         <div class="card-body">
                             <ul class="nav nav-pills m-t-30 m-b-30">
-                                <li class=" nav-item"> <a href="#navpills-1" class="nav-link active" data-toggle="tab" aria-expanded="false">Manage</a> </li>
-                                <li class="nav-item"> <a href="#navpills-2" class="nav-link" data-toggle="tab" aria-expanded="false">Analytics</a> </li>
-                                <li class="nav-item"> <a href="#navpills-3" class="nav-link" data-toggle="tab" aria-expanded="true">Tools</a> </li>
+                                <li class=" nav-item"> <a href="#navpills-1" class="nav-link active" data-toggle="tab" target="_self" aria-expanded="false">Manage</a> </li>
+                                <li class="nav-item"> <a href="#navpills-2" class="nav-link" data-toggle="tab" target="_self" aria-expanded="false">Analytics</a> </li>
+                                <li class="nav-item"> <a href="#navpills-3" class="nav-link" data-toggle="tab" target="_self" aria-expanded="true">Tools</a> </li>
                             </ul>
                             <div class="tab-content br-n pn">
                                 <div id="navpills-1" class="tab-pane active">
@@ -103,25 +103,25 @@
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">Category</label>
-                                        <select class="form-control custom-select" data-placeholder="Choose a Category" tabindex="1" ng-disabled="newCat">
-                                            <option value="Category 0">Create a Category</option>
+                                        <select class="form-control custom-select" ng-model="selectedCategory" ng-change="categoryChanged()" data-placeholder="Choose a Category" tabindex="1" ng-disabled="newCat">
+                                            <option ng-repeat="x in categorys" value="{{x.id}}">{{x.cName}}</option>
                                         </select>
                                     </div>
-                                    <div class="form-group" ng-if="newCat">
+                                    <div class="form-group" ng-show="newCat">
                                         <label>Create Category</label>
                                         <div class="input-group">
-                                            <input type="text" name="" class="form-control">
-                                            <span class="btn btn-primary waves-effect waves-light"> 
+                                            <input type="text" class="form-control" ng-model="newModel"/>
+                                            <span class="btn btn-primary waves-effect waves-light" ng-click="saveCategory()"> 
                                                 Create
-                                            </span> 
-                                            <a href="#" class="btn btn-danger">Cancel</a>
+                                            </span>
+                                            <a href="#" class="btn btn-danger" ng-click="createCancel()">Cancel</a>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label>Name of the Tag</label>
                                         <div class="input-group">
-                                            <input type="text" name="" class="form-control">
-                                            <span class="btn btn-info"><i class="fa fa-search"></i></span>
+                                            <input type="text" ng-model="tagName" id="myText" class="form-control">
+                                            <span class="btn btn-info" id="enableComplete"><i class="fa fa-search"></i></span>
                                         </div>
                                     </div>
                                     <button type="button" class="btn btn-success btn-md" ng-click="save()">Save</button>
