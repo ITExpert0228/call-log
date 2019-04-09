@@ -24,6 +24,13 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
             }
         });
         if (!$scope.selectedImg) $scope.selectedImg = 'admin/assets/images/select.jpg';
+
+        console.log($scope.selectedImg);
+        // $scope.toDataURL($scope.selectedImg, function(dataUrl) {
+        //   $('#inputImage').val(dataUrl)
+        // });
+        $('#inputImage').trigger('change');
+
         $("#myText").autocomplete({
             source: resData,
             minLength: 1,
@@ -122,35 +129,11 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
         $(function () {
             // ----------------------------- Alert module
             var SweetAlert = function() {};
-
-            //examples 
-            // SweetAlert.prototype.init = function() {
-        
-            // $('#sa-image').click(function(){
-            //     swal({   
-            //         title: "Govinda!",   
-            //         text: "Recently joined twitter",   
-            //         imageUrl: "img/empty.jpg",
-            //         timer: 1000,   
-            //     });
-            // });
-        
-            // $('#sa-close').click(function(){
-            //      swal({   
-            //         title: "Auto close alert!",   
-            //         text: "I will close in 2 seconds.",   
-            //         timer: 2000,   
-            //         showConfirmButton: false 
-            //     });
-            // });
-        
-        
-            // },
             //init
             $.SweetAlert = new SweetAlert, $.SweetAlert.Constructor = SweetAlert
             // $.SweetAlert.init()
 
-            $('.img-container').imagesLoaded(function () {
+            $('.portfolio-container').imagesLoaded(function () {
             // ------------------------------ image crop module
             var console = window.console || { log: function () {} };
             var $image = $('#image');
@@ -388,6 +371,10 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
             }
           
           });
-        })
+
+          
+
+          
+          });
     })
 }]);
