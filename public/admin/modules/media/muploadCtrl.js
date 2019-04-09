@@ -366,7 +366,7 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
               $inputImage.prop('disabled', true).parent().addClass('disabled');
             }
 
-            }, 500);
+            }, 50);
           })
         })
     })
