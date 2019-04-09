@@ -25,11 +25,7 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
         });
         if (!$scope.selectedImg) $scope.selectedImg = 'admin/assets/images/select.jpg';
 
-        console.log($scope.selectedImg);
-        // $scope.toDataURL($scope.selectedImg, function(dataUrl) {
-        //   $('#inputImage').val(dataUrl)
-        // });
-        $('#inputImage').trigger('change');
+        document.getElementById("image").src=$scope.selectedImg;
 
         $("#myText").autocomplete({
             source: resData,
@@ -126,10 +122,9 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
     }
 
     $scope.$on('$viewContentLoaded', function(){
-        $(document).ready(function () {
-            
-          console.log('aaa');
-            
+        // $(document).ready(function () {
+        $('.img-container').imagesLoaded(function () {  
+          console.log('abc');  
             var $image = $('#image');
             var $download = $('#download');
             var $dataX = $('#dataX');
