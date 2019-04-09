@@ -1,10 +1,10 @@
-app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$cookieStore', function($scope, categoryService, mediaService, $cookieStore) {
+app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$cookieStore', '$routeParams', function($scope, categoryService, mediaService, $cookieStore, $routeParams) {
 
     $scope.newCat = false;
     $scope.categorys = [];
     var cropperObj;
     $scope.loggedInUser = $cookieStore.get("user");
-    // $scope.newModel = 'aaaaaab';
+
     categoryService.getAll().then(function(data){
         console.log(data);
         $scope.categorys = data;
@@ -17,7 +17,13 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
         var resData = [];
         angular.forEach(data, function (media) {
             resData.push(media.mName);
+            if (media.id == $routeParams.param) {
+              $scope.tagName = media.mName;
+              $scope.selectedCategory = media.mCategory;
+              $scope.selectedImg = media.mImage;
+            }
         });
+        if (!$scope.selectedImg) $scope.selectedImg = 'admin/assets/images/select.jpg';
         $("#myText").autocomplete({
             source: resData,
             minLength: 1,
@@ -87,6 +93,7 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
                         mImage: res.path,
                         mUser: $scope.loggedInUser.id
                     }
+                    // if ($scope)
                     mediaService.create(mediaObj).then(function(newMedia){
                         swal({   
                             title: "Media Successfully Uploaded!",   

@@ -84,6 +84,17 @@ app.config(function($routeProvider, $locationProvider) {
                 }
             }]
         }
+    }).when('/manager/upload-media/:param', {
+        templateUrl: 'admin/modules/media/mupload.html',
+        controller: 'MUploadCtrl',
+        resolve: {
+            user: ['$cookieStore', '$q', function ($cookieStore, $q) {
+                var user = $cookieStore.get("user")
+                if (!user || user == null) {
+                    window.location.href = '/';
+                }
+            }]
+        }
     }).when('/manager/manage-media', {
         templateUrl: 'admin/modules/media/mmanage.html',
         controller: 'MManageCtrl',

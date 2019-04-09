@@ -38,7 +38,7 @@ app.controller('MManageCtrl', ['$scope', 'categoryService', 'mediaService', '$co
         var	sArr = $filter('filter')($scope.allMedia, $scope.searchKey);
         var nArr = $filter('groupby')(sArr, $scope.getGroups()[0]);
     
-        console.log(sArr);
+        //console.log(sArr);
         $scope.breadObj = {
             year: nArr[0].mYear,
             month: nArr[0].mCMonth,
