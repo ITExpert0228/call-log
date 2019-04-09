@@ -134,7 +134,7 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
             // $.SweetAlert.init()
 
             $('#image').imagesLoaded(function () {
-              setTimeout(function(){
+              // setTimeout(function(){
 
               
             // ------------------------------ image crop module
@@ -366,8 +366,12 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
               $inputImage.prop('disabled', true).parent().addClass('disabled');
             }
 
-            }, 300);
+            // }, 300);
+
+            $('#inputImage').trigger('select-change');
           })
+
+
         })
     })
 }]);
