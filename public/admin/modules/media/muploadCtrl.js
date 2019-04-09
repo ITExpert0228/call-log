@@ -126,19 +126,8 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
     }
 
     $scope.$on('$viewContentLoaded', function(){
-        $(function () {
-            // ----------------------------- Alert module
-            var SweetAlert = function() {};
-            //init
-            $.SweetAlert = new SweetAlert, $.SweetAlert.Constructor = SweetAlert
-            // $.SweetAlert.init()
+        $(document).ready(function () {
 
-            $('#image').imagesLoaded(function () {
-              // setTimeout(function(){
-
-              
-            // ------------------------------ image crop module
-            var console = window.console || { log: function () {} };
             var $image = $('#image');
             var $download = $('#download');
             var $dataX = $('#dataX');
@@ -367,11 +356,14 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
             }
 
             // }, 300);
-
-            $('#inputImage').trigger('select-change');
+            // ----------------------------- Alert module
+            // var SweetAlert = function() {};
+            //init
+            // $.SweetAlert = new SweetAlert, $.SweetAlert.Constructor = SweetAlert
+            // $.SweetAlert.init()
           })
 
 
-        })
+        // })
     })
 }]);
