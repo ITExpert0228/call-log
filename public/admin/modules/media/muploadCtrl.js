@@ -1,5 +1,6 @@
 app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$cookieStore', '$routeParams', function($scope, categoryService, mediaService, $cookieStore, $routeParams) {
 
+  $('#LoadingLoop').show();
     $scope.newCat = false;
     $scope.categorys = [];
     var cropperObj;
@@ -358,6 +359,10 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
             //init
             $.SweetAlert = new SweetAlert, $.SweetAlert.Constructor = SweetAlert
             // $.SweetAlert.init()
+
+            setTimeout(function(){
+                $('#LoadingLoop').hide();
+            }, 500)
           })
 
 
