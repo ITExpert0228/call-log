@@ -127,7 +127,9 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
 
     $scope.$on('$viewContentLoaded', function(){
         $(document).ready(function () {
-
+            
+          console.log('aaa');
+            
             var $image = $('#image');
             var $download = $('#download');
             var $dataX = $('#dataX');
@@ -357,9 +359,9 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
 
             // }, 300);
             // ----------------------------- Alert module
-            // var SweetAlert = function() {};
+            var SweetAlert = function() {};
             //init
-            // $.SweetAlert = new SweetAlert, $.SweetAlert.Constructor = SweetAlert
+            $.SweetAlert = new SweetAlert, $.SweetAlert.Constructor = SweetAlert
             // $.SweetAlert.init()
           })
 
