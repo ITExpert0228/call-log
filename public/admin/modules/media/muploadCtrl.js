@@ -150,6 +150,7 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
             $.SweetAlert = new SweetAlert, $.SweetAlert.Constructor = SweetAlert
             // $.SweetAlert.init()
 
+            $('.img-container').imagesLoaded(function () {
             // ------------------------------ image crop module
             var console = window.console || { log: function () {} };
             var $image = $('#image');
@@ -387,5 +388,6 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
             }
           
           });
+        })
     })
 }]);
