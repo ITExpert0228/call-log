@@ -133,7 +133,7 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
             $.SweetAlert = new SweetAlert, $.SweetAlert.Constructor = SweetAlert
             // $.SweetAlert.init()
 
-            $('.portfolio-container').imagesLoaded(function () {
+            $('#image').imagesLoaded(function () {
             // ------------------------------ image crop module
             var console = window.console || { log: function () {} };
             var $image = $('#image');
