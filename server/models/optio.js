@@ -5,8 +5,8 @@ var ObjectId = Schema.Types.ObjectId;
 var OptioSchema = new Schema({
     oUser: {type: ObjectId, required: true, default: null},
     oCImage:  {type: String, trim: true, default: ''},
-    oLMedia: {type: ObjectId, default: null},
-    oRMedia: {type: ObjectId, default: null},
+    oLMedia: {type: ObjectId, ref: 'Media'},
+    oRMedia: {type: ObjectId, ref: 'Media'},
     // oCategory: {type: ObjectId, default: null},
     oCreate: { type: Date, default: Date.now() }
 });

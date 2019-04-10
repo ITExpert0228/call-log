@@ -826,7 +826,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#02a000', end
 } */
 .vote-status-bar {
   margin: 50px auto;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 80%;
   left: 50%;
@@ -1904,7 +1904,8 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#02a000', end
 }
 h2.title-name {
     font-weight: 600;
-    color: #fff;text-transform: uppercase;
+    color: #ccc;
+    text-transform: uppercase;
     position: absolute;
     top:120px;
     left:50%;
@@ -1915,6 +1916,9 @@ h2.title-name {
   bottom:130px;
   left: 50%;
     transform: translateX(-50%);
+}
+.team-details p {
+  color:white
 }
 .vote-area {
     margin: 50px auto;

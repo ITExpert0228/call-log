@@ -25,10 +25,12 @@ exports.optio_details = function (req, res, next) {
         res.send(optio);
     })
 };
-
+// Story.findOne({ title: 'Casino Royale' }).populate('authors');
 exports.optio_list = function (req, res, next) {
-    Optio.find({}, function (err, optiolist) {
+    Optio.find({}).populate('oLMedia oRMedia').exec(function (err, optiolist) {
+        
         if (err) return next(err);
+        console.log(optiolist);
         res.send(optiolist);
     })
 };

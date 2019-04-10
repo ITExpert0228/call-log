@@ -16,6 +16,9 @@
   cursor: pointer;
 }
 
+.img-container {
+    min-height: 200px!important;
+}
 /* Fixes for IE < 8 */
 @media screen\9 {
   .fileinput-button input {
@@ -79,29 +82,30 @@
                         <div class="card-body">
                             <div class="row">
                                 <!-- .Your image -->
-                                <div class="col-md-6 p-20">
+                                <div class="col-md-4 p-20">
+                                    <div class="form-group">
+                                            <label>Select Image</label>
+                                            <div class="fileinput input-group fileinput-new" data-provides="fileinput">
+                                                <div class="form-control" data-trigger="fileinput"> 
+                                                    <i class="glyphicon glyphicon-file fileinput-exists"></i> 
+                                                    <span class="fileinput-filename"></span>
+                                                </div> 
+                                                <span class="btn btn-primary waves-effect waves-light btn-file"> 
+                                                    <span class="fileinput-new">Select file</span> 
+                                                    <span class="fileinput-exists">Change</span>
+                                                    <input type="hidden" value="" name="...">
+                                                    <input type="file" name="" id="inputImage"> 
+                                                </span> 
+                                                <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Remove</a> 
+                                            </div>
+                                        </div>
                                     <div class="img-container"><img id="image" src="" class="img-responsive" alt="Picture"></div>
                                 </div>
                                 <!-- /.Your image -->
                                 <!-- .Croping image -->
-                                <div class="col-md-6 p-20 custom-btn">
-                                    <div class="form-group">
-                                        <label>Select Image</label>
-                                        <div class="fileinput input-group fileinput-new" data-provides="fileinput">
-                                            <div class="form-control" data-trigger="fileinput"> 
-                                                <i class="glyphicon glyphicon-file fileinput-exists"></i> 
-                                                <span class="fileinput-filename"></span>
-                                            </div> 
-                                            <span class="btn btn-primary waves-effect waves-light btn-file"> 
-                                                <span class="fileinput-new">Select file</span> 
-                                                <span class="fileinput-exists">Change</span>
-                                                <input type="hidden" value="" name="...">
-                                                <input type="file" name="" id="inputImage"> 
-                                            </span> 
-                                            <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Remove</a> 
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
+                                <div class="col-md-4 p-20 custom-btn">
+                                    
+                                    <div class="form-group" style="margin-top:100px">
                                         <label class="control-label">Category</label>
                                         <select class="form-control custom-select" ng-model="selectedCategory" ng-change="categoryChanged()" data-placeholder="Choose a Category" tabindex="1" ng-disabled="newCat">
                                             <option ng-repeat="x in categorys" value="{{x.id}}">{{x.cName}}</option>

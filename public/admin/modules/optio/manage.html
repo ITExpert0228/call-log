@@ -28,26 +28,20 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <ul class="nav nav-pills m-t-30 m-b-30">
-                                <li class=" nav-item"> <a href="#navpills-1" class="nav-link active" data-toggle="tab" aria-expanded="false">Tab One</a> </li>
-                                <li class="nav-item"> <a href="#navpills-2" class="nav-link" data-toggle="tab" aria-expanded="false">Tab Two</a> </li>
-                                <li class="nav-item"> <a href="#navpills-3" class="nav-link" data-toggle="tab" aria-expanded="true">Tab Three</a> </li>
-                            </ul>
-                            <div class="tab-content br-n pn">
-                                <div id="navpills-1" class="tab-pane active">
+                            
                                    
                             <h4 class="card-title">Manage and Edit Optios (Votes)</h4>
-                                    <h6>Search Or Choose from Inventory :</h6>
+                                    <h6  style="margin-top:30px;">Search Or Choose from Inventory :</h6>
                                      <div class="form-group row">
                                                 <div class="col-md-6">
-                                                    
-                                     <div class="search-box-bs"> 
-                            <input type="text" class="form-control" placeholder="Search from Name of Optio"> 
-                                 <button class="btn btn-primary waves-effect waves-light" type="button"><span class="btn-label"><i class="icon-magnifier"></i></span></button>
-                                  </div>
+                                        
+                                                    <div class="input-group">
+                                                        <input type="text" placeholder="Search from Name of Optio" class="form-control">
+                                                        <span class="btn btn-info" id="enableComplete"><i class="fa fa-search"></i></span>
+                                                    </div>
                                                  </div> 
                                                   <div class="col-md-6">
-                                                      
+                                                        <a href="/manager/inventory" class="btn btn-primary waves-effect waves-light" >Go to Inventory</a>
                                                   </div>
                                                    
                                                     
@@ -59,59 +53,22 @@
                             <h4 class="card-title">Search Results for Einstain</h4>
                               <div class="media-items-c">
                              <ul class="search-listing">
-                                 <li>
+                                 <li  ng-repeat="optio in allOptio" style="float:left">
                                   <div class="single-media">
                                       <div class="vote-details-b">
                                     <a href="#">
-                                     <div class="team-s"><img src="admin/assets/images/team-a.jpg" alt=""></div> 
-                                     <div class="team-s"><img src="admin/assets/images/team-b.jpg" alt=""></div> 
+                                            <div class="team-s"><img ng-src="{{optio.oLMedia.mImage}}"></div> 
+                                            <div class="team-s"><img ng-src="{{optio.oRMedia.mImage}}"></div>  
                                         </a>
                                  </div>
-                                      <ul>
+                                      <!-- <ul>
                                           <li class="edit-img"><a href="#">Edit</a></li>
-                                      </ul>
+                                      </ul> -->
                                   </div></li>
-                                  <li>
-                                  <div class="single-media">
-                                      <div class="vote-details-b">
-                                    <a href="#">
-                                     <div class="team-s"><img src="admin/assets/images/team-a.jpg" alt=""></div> 
-                                     <div class="team-s"><img src="admin/assets/images/team-b.jpg" alt=""></div> 
-                                        </a>
-                                 </div>
-                                      <ul>
-                                          <li class="edit-img"><a href="#">Edit</a></li>
-                                      </ul>
-                                  </div></li>
-                                  <li>
-                                  <div class="single-media">
-                                      <div class="vote-details-b">
-                                    <a href="#">
-                                     <div class="team-s"><img src="admin/assets/images/team-a.jpg" alt=""></div> 
-                                     <div class="team-s"><img src="admin/assets/images/team-b.jpg" alt=""></div> 
-                                        </a>
-                                 </div>
-                                      <ul>
-                                          <li class="edit-img"><a href="#">Edit</a></li>
-                                      </ul>
-                                  </div>
-                                  </li>
-                                  <li>
-                                  <div class="single-media">
-                                      <div class="vote-details-b">
-                                    <a href="#">
-                                     <div class="team-s"><img src="admin/assets/images/team-a.jpg" alt=""></div> 
-                                     <div class="team-s"><img src="admin/assets/images/team-b.jpg" alt=""></div> 
-                                        </a>
-                                 </div>
-                                      <ul>
-                                          <li class="edit-img"><a href="#">Edit</a></li>
-                                      </ul>
-                                  </div>
-                                  </li>
+                                  
                                   </ul>
                               </div>
-                              <nav aria-label="Page navigation example" class="m-t-40">
+                              <!-- <nav aria-label="Page navigation example" class="m-t-40">
                                 <ul class="pagination">
                                     <li class="page-item disabled">
                                         <a class="page-link" href="#" tabindex="-1">Previous</a>
@@ -123,30 +80,10 @@
                                         <a class="page-link" href="#">Next</a>
                                     </li>
                                 </ul>
-                            </nav>
+                            </nav> -->
                                </div>
-                               </div>
-                               </div>
-                                <div id="navpills-2" class="tab-pane">
-                                    <div class="row">
-                                        <div class="col-md-8"> Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
-                                            <p>
-                                                <br/> Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid.</p>
-                                        </div>
-                                        <div class="col-md-4"> <img src="admin/assets/images/big/img3.jpg" class="img-responsive thumbnail mr25"> </div>
-                                    </div>
-                                </div>
-                                <div id="navpills-3" class="tab-pane">
-                                    <div class="row">
-                                        <div class="col-md-4"> <img src="admin/assets/images/big/img1.jpg" class="img-responsive thumbnail mr25"> </div>
-                                        <div class="col-md-8"> Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.
-                                            <p>
-                                                <br/> Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid.</p>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
+                        </div><!-- end card-body -->
                     </div>
                 </div>
             </div>
