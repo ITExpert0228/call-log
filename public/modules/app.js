@@ -19,6 +19,9 @@ app.config(function($routeProvider, $locationProvider) {
     }).when('/earn_money', {
         templateUrl: 'modules/earn/earn.html',
         controller: 'EarnCtrl'
+    }).when('/voting/:param', {
+        templateUrl: 'modules/vote/vote.html',
+        controller: 'VoteCtrl'
     }).when('/login', {
         templateUrl: 'modules/auth/login.html',
         resolve: {

@@ -802,7 +802,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#02a000', end
     border-radius: 50%;
     display: inline-block;
 }
-.vs-d:after {
+/* .vs-d:after {
     content: "";
     position: absolute;
     height: 100%;
@@ -823,9 +823,16 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#02a000', end
     bottom: 85px;
     top: auto;
     transform: translate(-50%);
-}
+} */
 .vote-status-bar {
-    margin: 50px auto;
+  margin: 50px auto;
+  position: absolute;
+  bottom: 0;
+  width: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 20px;
+  background: rgba(50, 50, 50, 0.3);
 }
 .progress {
     height: 1.8rem;
@@ -1897,7 +1904,17 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#02a000', end
 }
 h2.title-name {
     font-weight: 600;
-    color: #0caa41;text-transform: uppercase;
+    color: #fff;text-transform: uppercase;
+    position: absolute;
+    top:120px;
+    left:50%;
+    transform: translateX(-50%);
+}
+.team-details {
+  position: absolute;
+  bottom:130px;
+  left: 50%;
+    transform: translateX(-50%);
 }
 .vote-area {
     margin: 50px auto;

@@ -125,7 +125,6 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
     $scope.$on('$viewContentLoaded', function(){
         // $(document).ready(function () {
         $('.img-container').imagesLoaded(function () {  
-          console.log('abc');  
             var $image = $('#image');
             var $download = $('#download');
             var $dataX = $('#dataX');

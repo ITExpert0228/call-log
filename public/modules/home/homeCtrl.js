@@ -1,5 +1,18 @@
-app.controller('HomeCtrl', ['$scope', function($scope) {
+app.controller('HomeCtrl', ['$scope', '$location', function($scope, $location) {
     $scope.name = 'Homepage';
+
+    $scope.voting1 = function(){
+        $location.path('/voting/1')
+    }
+
+    $scope.voting2 = function(){
+        $location.path('/voting/2')
+    }
+
+    $scope.voting3 = function(){
+        $location.path('/voting/3')
+    }
+
     $scope.$on('$viewContentLoaded', function(){
         //Here your view content is fully loaded !!
         var tpj = jQuery;

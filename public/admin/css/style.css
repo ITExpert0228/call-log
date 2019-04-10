@@ -8200,6 +8200,17 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
     box-shadow: 0 0 5px 0 #ccc;
     margin: auto 5px;
 }
+.no-title-media {
+  margin: 10px auto;
+  text-align:center;
+}
+.no-title-media img {
+  height:100px;
+}
+.media-items-d {
+  max-height: 500px;
+  overflow-y:auto;
+}
 .media-items-c .single-media {
     width: auto;    margin-bottom: 15px;
 }
