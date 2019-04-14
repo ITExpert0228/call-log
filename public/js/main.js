@@ -67,6 +67,7 @@
           $('body').removeClass('mobile-nav-active');
           $('.mobile-nav-toggle i').toggleClass('fa-times fa-bars');
           $('.mobile-nav-overly').fadeOut();
+          $('.mobile-nav-toggle').trigger('click');
         }
         return false;
       }

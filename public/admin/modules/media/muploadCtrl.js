@@ -3,16 +3,29 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
   $('#LoadingLoop').show();
     $scope.newCat = false;
     $scope.categorys = [];
+    $scope.categoryTree = [];
     var cropperObj;
     $scope.loggedInUser = $cookieStore.get("user");
 
     categoryService.getAll().then(function(data){
-        console.log(data);
         $scope.categorys = data;
-        $scope.categorys.push({id:'null', cName:'Create a Category'})
+        $scope.categorys.push({id:'null', cName:'Create a Category'});
+        console.log(data);
+        angular.forEach(data, function (category) {
+            if (category.id == 'null') return;
+            category.text = category.cName;
+            category.nodes = [];
+            if (category.cParent == null) {  
+              $scope.categoryTree.push(category);
+            } else {
+              $scope.treeArray($scope.categoryTree, category);
+            }
+        });
+        console.log($scope.categoryTree);
     }, function (err) {
         console.log(err)
     })
+      
 
     mediaService.getAll().then(function(data){
         var resData = [];
@@ -24,7 +37,7 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
               $scope.selectedImg = media.mImage;
             }
         });
-        if (!$scope.selectedImg) $scope.selectedImg = 'admin/assets/images/select.jpg';
+        if (!$scope.selectedImg) $scope.selectedImg = '';///'admin/assets/images/select.jpg';
 
         document.getElementById("image").src=$scope.selectedImg;
 
@@ -44,32 +57,67 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
         console.log(err)
     }) 
 
+    $scope.treeArray = function(arrTree, insertItem) {
+        for (var i=0;i<arrTree.length;i++) {
+          var treeItem = arrTree[i];
+          if (treeItem.id == insertItem.cParent) {
+            treeItem.nodes.push(insertItem); 
+            return;
+          } else if (treeItem.nodes.length > 0) {
+            $scope.treeArray(treeItem.nodes, insertItem);
+          }
+        }
+        
+    }
+
     $scope.categoryChanged = function() {
-        if ($scope.selectedCategory == 'null') $scope.newCat = true;
+        if ($scope.selectedCategory == 'null') $('#newCatModal').modal();
     }
 
     $scope.saveCategory = function() {
-        var categoryObj = {
-            cName: $scope.newModel
-        }
+        var blob = $("#input-file-category")[0].files[0];
+
+        var formData = new FormData();
+        formData.append('category', blob, '1.jpg');
+
+        $.ajax("/api/category/upload", {
+            method: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (res) {
+                var treeViewObject = $('#treeview5').data('treeview');
+                var categoryObj = {
+                    cName: $scope.newModel,
+                    cParent: treeViewObject.getSelected()[0]!=null?treeViewObject.getSelected()[0].id:null,
+                    cImage: res.path
+                }
+                categoryService.create(categoryObj).then(function(newCategory) {
+                    console.log(newCategory);
+                    categoryService.getAll().then(function(data){
+                        // $('#LoadingLoop').hide();
+                        console.log(data);
+                        // $scope.newCat = false;
+                        // $scope.categorys = data;
+                        // $scope.categorys.push({id:'null', cName:'Create a Category'});
+                        // $scope.selectedCategory = newCategory.id;
+                    }, function (err) {
+                        // $('#LoadingLoop').hide();
+                        console.log(err)
+                    });
+                    
+                }, function (err) {
+                    // $('#LoadingLoop').hide();
+                    console.log(err);
+                }) 
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
 
         // $('#LoadingLoop').show();
-        categoryService.create(categoryObj).then(function(newCategory) {
-            categoryService.getAll().then(function(data){
-                // $('#LoadingLoop').hide();
-                $scope.newCat = false;
-                $scope.categorys = data;
-                $scope.categorys.push({id:'null', cName:'Create a Category'});
-                $scope.selectedCategory = newCategory.id;
-            }, function (err) {
-                // $('#LoadingLoop').hide();
-                console.log(err)
-            });
-            
-        }, function (err) {
-            // $('#LoadingLoop').hide();
-            console.log(err);
-        })
+        
     }
 
     $scope.createCancel = function() {
@@ -123,6 +171,17 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
     }
 
     $scope.$on('$viewContentLoaded', function(){
+        $(document).ready(function() {
+          $('.dropify').dropify();
+          
+          $('#treeview5').treeview({
+            expandIcon: 'ti-angle-right',
+            onhoverColor: "rgba(0, 0, 0, 0.05)",
+            selectedBackColor: "#08bb44",
+            collapseIcon: 'ti-angle-down',
+            data: $scope.categoryTree
+          });
+        });
         // $(document).ready(function () {
         $('.img-container').imagesLoaded(function () {  
             var $image = $('#image');

@@ -1,4 +1,5 @@
 var Media = require('../models/media');
+const sharp = require('sharp');
 
 //Simple version, without validation or sanitation
 exports.test = function (req, res) {
@@ -18,14 +19,23 @@ exports.media_create = function (req, res, next) {
     })
 };
 
-exports.media_upload = function (req, res, next) {
+exports.media_upload = async function (req, res, next) {
     const file = req.file
     if (!file) {
         const error = new Error('Please upload a file')
         error.httpStatusCode = 400
         return next(error)
     }
-    res.send(file)
+    const imagePath = 'uploads/';
+    const filename = imagePath + 'm' + Date.now() + '.jpg';
+    const thumbname = imagePath + 'm' + Date.now() + '-thumb.jpg';
+
+    sharp(file.buffer)
+        .toFile(filename, (err, info) => {  });
+    sharp(file.buffer)
+        .resize(100, 100)
+        .toFile(thumbname, (err, info) => {  });
+    return res.end(filename);
 };
 
 exports.media_uploads = function (req, res, next) {

@@ -13,6 +13,9 @@ app.config(function($routeProvider, $locationProvider) {
     }).when('/ranking', {
         templateUrl: 'modules/ranking/ranking.html',
         controller: 'RankingCtrl'
+    }).when('/ranking/:param', {
+        templateUrl: 'modules/ranking/ranking.html',
+        controller: 'RankingCtrl'
     }).when('/who_we_are', {
         templateUrl: 'modules/who/who.html',
         controller: 'WhoCtrl'

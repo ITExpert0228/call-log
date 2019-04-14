@@ -5,7 +5,7 @@ var ObjectId = Schema.Types.ObjectId;
 var CategorySchema = new Schema({
     cName: { type: String, required: true, trim: true, default: '' },
     cParent:  {type: ObjectId, default: null },
-    cImage:  {type: ObjectId, default: null },
+    cImage:  {type: String, default: null },
     cIsTopic: { type: Boolean, default: false }
 });
 

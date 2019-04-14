@@ -1151,9 +1151,14 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#02a000', end
 
 /* Portfolio Section
 --------------------------------*/
-
+/* 
 #portfolio {
   padding: 60px 0;
+} */
+#portfolio .no-top {
+  top:0;
+  left:0;
+  transform: none;
 }
 
 #portfolio #portfolio-flters {

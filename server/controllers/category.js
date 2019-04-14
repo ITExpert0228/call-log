@@ -46,3 +46,24 @@ exports.category_delete = function (req, res, next) {
         res.send('Deleted successfully!');
     })
 };
+
+exports.category_upload = async function (req, res, next) {
+    const file = req.file
+    if (!file) {
+        const error = new Error('Please upload a file')
+        error.httpStatusCode = 400
+        return next(error)
+    }
+    return res.send(file);
+};
+
+exports.category_uploads = function (req, res, next) {
+    const files = req.files
+    if (!files) {
+        const error = new Error('Please choose files')
+        error.httpStatusCode = 400
+        return next(error)
+    }
+ 
+    res.send(files)
+};

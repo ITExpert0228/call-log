@@ -7,7 +7,6 @@ app.controller('AuthCtrl', ['$scope', '$rootScope', '$cookieStore', '$location',
 
         $('#LoadingLoop').show();
         authService.login($scope.credentials.loginEmail, $scope.credentials.password).then(function(data) {
-            $('#LoadingLoop').hide();
             $cookieStore.put('remember_me', $scope.remember_me);
             if ($scope.remember_me) {
                 $cookieStore.put('loginEmail', $scope.credentials.loginEmail);
@@ -43,7 +42,7 @@ app.controller('AuthCtrl', ['$scope', '$rootScope', '$cookieStore', '$location',
                 
             $('#LoadingLoop').hide();
         }).finally(function() {
-            $('#LoadingLoop').hide();
+            // $('#LoadingLoop').hide();
         });
     }
 

@@ -1,6 +1,6 @@
 app.controller('VoteCtrl', ['$scope', '$location', '$routeParams', function($scope, $location, $routeParams) {
     $scope.name = 'Votepage';
-
+	$('#LoadingLoop').show();
     $scope.param = parseInt($routeParams.param);
 
     if ($scope.param == 1) {
@@ -39,7 +39,9 @@ app.controller('VoteCtrl', ['$scope', '$location', '$routeParams', function($sco
     }
 
     $scope.$on('$viewContentLoaded', function(){
- 
+ 		setTimeout(function(){
+            $('#LoadingLoop').hide();
+        }, 500)
     });
 
     

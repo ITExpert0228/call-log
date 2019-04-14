@@ -1,3 +1,91 @@
+<style>
+.single-media {
+    width: auto;
+    position: relative;
+    display: inline-block;
+    padding: 5px 15px;
+    box-shadow: 0 0 5px 0 #ccc;
+    margin: auto 5px;
+}
+.team-s {
+    width: 115px;
+    border: 2px solid #0caa41;
+    float: left;
+}
+.single-media img {
+    width: 100%;
+}
+.single-media li {
+    float:left;
+}
+span.team-b, span.team-a {
+  white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100px;
+    display:inline-block;
+    font-size:15px;
+}
+.vote-list .vs-d {
+    top: -3px;
+}
+div#masonry img {
+    box-sizing: border-box;
+    border: 2px solid #444;
+}
+
+
+a.item {
+   position: relative;
+   float:left;
+}
+a.item p {
+  color:white;
+}
+.content .content-overlay {
+  background: rgba(0,0,0,0.7);
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0;
+  -webkit-transition: all 0.4s ease-in-out 0s;
+  -moz-transition: all 0.4s ease-in-out 0s;
+  transition: all 0.4s ease-in-out 0s;
+}
+
+.content:hover .content-overlay{
+  opacity: 1;
+}
+
+.content-details {
+  position: absolute;
+  text-align: center;
+  padding-left: 1em;
+  padding-right: 1em;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  opacity: 0;
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  -webkit-transition: all 0.3s ease-in-out 0s;
+  -moz-transition: all 0.3s ease-in-out 0s;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.content:hover .content-details{
+  top: 50%;
+  left: 50%;
+  opacity: 1;
+}
+
+.fadeIn-bottom{
+  top: 80%;
+}
+</style>
 <section id="portfolio" class="clearfix mt-150">
         <div class="container-fluid">
   <div class="row">
@@ -5,38 +93,22 @@
   <div class=" left-side">
       <h3 class="m-title">Most Voted Optios</h3>
       <div class="vote-list">
-          <ol>
-              <li><a href=""><ul>
-                  <li><img src="img/team-a.jpg" alt=""></li>
-                  <li><span class="team-a">Team A</span></li>
-              </ul> <div class="vs-d">
-            VS
-        </div> <ul>
-            <li><img src="img/team-b.jpg" alt=""></li>
-            <li><span class="team-b">Team B</span></li>
-        </ul></a>
-              </li>
-              <li><a href=""><ul>
-                  <li><img src="img/team-a.jpg" alt=""></li>
-                  <li><span class="team-a">Team A</span></li>
-              </ul> <div class="vs-d">
-            VS
-        </div> <ul>
-            <li><img src="img/team-b.jpg" alt=""></li>
-            <li><span class="team-b">Team B</span></li>
-        </ul></a>
-              </li>
-              <li><a href=""><ul>
-                  <li><img src="img/team-a.jpg" alt=""></li>
-                  <li><span class="team-a">Team A</span></li>
-              </ul> <div class="vs-d">
-            VS
-        </div> <ul>
-            <li><img src="img/team-b.jpg" alt=""></li>
-            <li><span class="team-b">Team B</span></li>
-        </ul></a>
-              </li>
-          </ol>
+        <ol>
+          <li ng-repeat="optio in allOptio">
+            <a href="">
+              <ul>
+                <li><img ng-src="{{optio.oLMedia.mImage}}" alt=""></li>
+                <li><span class="team-a">{{optio.oLMedia.mName}}</span></li>
+              </ul> 
+              <div class="vs-d">VS</div> 
+              <ul>
+                <li><img ng-src="{{optio.oRMedia.mImage}}" alt=""></li>
+                <li><span class="team-b">{{optio.oRMedia.mName}}</span></li>
+              </ul>
+            </a>
+          </li>
+          
+      </ol>
       </div>
   </div>
   </div>
@@ -44,147 +116,21 @@
           <div class="row">
             <div class="col-lg-12">
              
-          <header class="section-header text-center">
-            <h2 class="title-name">Categories and Topics</h2>
-          </header>
-              <ul id="portfolio-flters">
-                <li data-filter="*" class="filter-active">All</li>
-                <li data-filter=".filter-app">App</li>
-                <li data-filter=".filter-card">Card</li>
-                <li data-filter=".filter-web">Web</li>
-              </ul>
+              <header class="section-header text-center">
+                <h2 class="m-title no-top">Categories and Topics</h2>
+              </header>
+              <div id="masonry" class="i-container">
+                <a class="item content" href="{{category.href}}" ng-repeat="category in categorys">
+                  <div class="content-overlay"></div>
+                  <img ng-src="{{category.cImage}}" width="{{category.width}}" height="200"/>
+                  <div class="content-details fadeIn-top">  
+                   <p>{{category.cName}}</p>  
+                  </div>  
+                </a>
+              </div>
             </div>
           </div>
-  
-          <div class="row portfolio-container">
-  
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-              <div class="portfolio-wrap">
-                <img src="img/portfolio/app1.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4><a href="sub-cat-a.php">App 1</a></h4>
-                  <p>App</p>
-                  <div>
-                    <a href="img/portfolio/app1.jpg" data-lightbox="portfolio" data-title="App 1" class="link-preview" title="Preview"><i class="ion ion-eye"></i></a>
-                    <a href="sub-cat-a.php" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web" data-wow-delay="0.1s">
-              <div class="portfolio-wrap">
-                <img src="img/portfolio/web3.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4><a href="#">Web 3</a></h4>
-                  <p>Web</p>
-                  <div>
-                    <a href="img/portfolio/web3.jpg" class="link-preview" data-lightbox="portfolio" data-title="Web 3" title="Preview"><i class="ion ion-eye"></i></a>
-                    <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app" data-wow-delay="0.2s">
-              <div class="portfolio-wrap">
-                <img src="img/portfolio/app2.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4><a href="#">App 2</a></h4>
-                  <p>App</p>
-                  <div>
-                    <a href="img/portfolio/app2.jpg" class="link-preview" data-lightbox="portfolio" data-title="App 2" title="Preview"><i class="ion ion-eye"></i></a>
-                    <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-              <div class="portfolio-wrap">
-                <img src="img/portfolio/card2.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4><a href="#">Card 2</a></h4>
-                  <p>Card</p>
-                  <div>
-                    <a href="img/portfolio/card2.jpg" class="link-preview" data-lightbox="portfolio" data-title="Card 2" title="Preview"><i class="ion ion-eye"></i></a>
-                    <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web" data-wow-delay="0.1s">
-              <div class="portfolio-wrap">
-                <img src="img/portfolio/web2.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4><a href="#">Web 2</a></h4>
-                  <p>Web</p>
-                  <div>
-                    <a href="img/portfolio/web2.jpg" class="link-preview" data-lightbox="portfolio" data-title="Web 2" title="Preview"><i class="ion ion-eye"></i></a>
-                    <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-lg-4 col-md-6 portfolio-item filter-app" data-wow-delay="0.2s">
-              <div class="portfolio-wrap">
-                <img src="img/portfolio/app3.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4><a href="#">App 3</a></h4>
-                  <p>App</p>
-                  <div>
-                    <a href="img/portfolio/app3.jpg" class="link-preview" data-lightbox="portfolio" data-title="App 3" title="Preview"><i class="ion ion-eye"></i></a>
-                    <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-              <div class="portfolio-wrap">
-                <img src="img/portfolio/card1.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4><a href="#">Card 1</a></h4>
-                  <p>Card</p>
-                  <div>
-                    <a href="img/portfolio/card1.jpg" class="link-preview" data-lightbox="portfolio" data-title="Card 1" title="Preview"><i class="ion ion-eye"></i></a>
-                    <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-lg-4 col-md-6 portfolio-item filter-card" data-wow-delay="0.1s">
-              <div class="portfolio-wrap">
-                <img src="img/portfolio/card3.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4><a href="#">Card 3</a></h4>
-                  <p>Card</p>
-                  <div>
-                    <a href="img/portfolio/card3.jpg" class="link-preview" data-lightbox="portfolio" data-title="Card 3" title="Preview"><i class="ion ion-eye"></i></a>
-                    <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <div class="col-lg-4 col-md-6 portfolio-item filter-web" data-wow-delay="0.2s">
-              <div class="portfolio-wrap">
-                <img src="img/portfolio/web1.jpg" class="img-fluid" alt="">
-                <div class="portfolio-info">
-                  <h4><a href="#">Web 1</a></h4>
-                  <p>Web</p>
-                  <div>
-                    <a href="img/portfolio/web1.jpg" class="link-preview" data-lightbox="portfolio" data-title="Web 1" title="Preview"><i class="ion ion-eye"></i></a>
-                    <a href="#" class="link-details" title="More Details"><i class="ion ion-android-open"></i></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-          </div>
+
   </div>
         </div>
         </div>
