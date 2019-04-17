@@ -1,0 +1,84 @@
+<style>
+     .single-area {
+          position:absolute;
+          top:0;
+          bottom:0;
+          width:50%;
+          padding:0;
+     }
+     .team-a {
+          left:0;
+     }
+     .team-b {
+          right:0;
+     }
+     .vs-d {
+          position:absolute;
+          left: 50%;
+          /* transform: ; */
+          top:50%;
+          transform: translateX(-50%) translateY(-50%);
+          z-index:10;
+     }
+</style>
+<section class="voting-area" style="margin-top:60px;">
+     <div class="container">
+             <!-- Nav tabs -->
+
+          <!-- <div id="home" class="container tab-pane active"><br> -->
+           <div class="single-area-outter">
+            <div class="single-area team-a">
+                <h2 class="title-name">{{teamA.name}}</h2>
+                <div class="img-box"><img ng-src="{{teamA.src}}" alt=""></div>
+                <div class="team-details">
+                    <p>{{teamA.detail}}</p>
+                    <a class="btn btn-success" href="/statistic">View Statics</a>
+               </div>
+                
+            </div>
+                <div class="vs-d">
+                VS
+            </div>
+            <div class="single-area team-b">
+                
+               <h2 class="title-name">{{teamB.name}}</h2>
+               <div class="img-box"><img ng-src="{{teamB.src}}" alt=""></div>
+               <div class="team-details">
+                    <p>{{teamB.detail}}</p>
+                    <a class="btn btn-success" href="/statistic">View Statics</a>
+               </div>
+                
+            </div>
+            </div>
+            <br>
+            <div class="vote-area">
+               <!-- <h2 class="title-name text-center">Vote</h2> -->
+               <div class="vote-status-bar">
+                    <div class="progress">
+                         <div class="progress-bar bg-success" style="width:70%">
+                         70%  Yes 
+                         </div>
+                         <div class="progress-bar bg-danger" style="width:30%">
+                         30% No
+                         </div>
+                    </div>
+               </div>
+                 
+               <!-- <div class="create-vote">
+                         <div class="progress">
+                    <div class="progress-bar bg-success" style="width:70%">
+                    70%  Yes 
+                    </div>
+                    <div class="progress-bar bg-danger" style="width:30%">
+                    30% No
+                    </div>
+               </div> -->
+                 <!-- <br>
+                  <div class="text-center">
+                      <a  href="create_vote.php" class="btn btn-success"><i class="fas fa-plus"></i> Create Own Vote</a>
+                  </div> -->
+               </div>   
+        </div>
+     </div>
+</section>
+     

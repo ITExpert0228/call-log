@@ -1,0 +1,135 @@
+<div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="row page-titles">
+            <div class="col-md-5 align-self-center">
+                <h3 class="text-themecolor">User Manage</h3>
+            </div>
+            <div class="col-md-7 align-self-center">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                    <li class="breadcrumb-item active">User Manage</li>
+                </ol>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid" ng-controller="UserCtrl" ng-init="getUserList()">
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Registered User list</h4>
+                            <h6 class="card-subtitle"></h6>
+                            <div class="table-responsive">
+                                <table id="demo-foo-addrow" class="table m-t-30 table-hover contact-list" data-page-size="10">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Sex</th>
+                                            <th>Role</th>
+                                            <th>Birthday</th>
+                                            <th>Country</th>
+                                            <th>City</th>
+                                            <th>Job</th>
+                                            <th>Registered At</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat = "user in users">
+                                            <td>{{$index+1}}</td>
+                                            <td>
+                                                <a href="javascript:void(0)"><img ng-src="{{user.avatarUrl==''?'img/empty.jpg':user.avatarUrl}}" alt="user" width="40" class="img-circle" /> &nbsp;&nbsp;{{user.firstName+' '+user.lastName}}</a>
+                                            </td>
+                                            <td>{{user.loginEmail}}</td>
+                                            <td>{{user.gender}}</td>
+                                            <td><span class="label label-danger" ng-show="user.role == 'admin'">Administrator</span><span class="label label-info" ng-show="user.role != 'admin'">Voter</span></td>
+                                            <td>{{user.birthday}}</td>
+                                            <td>{{user.country}}</td>
+                                            <td>{{user.city}}</td>
+                                            <td>{{user.job}}</td>
+                                            <td>{{user.registeredAt}}</td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="2">
+                                                <button type="button" class="btn btn-info btn-rounded" data-toggle="modal" data-target="#add-contact">Add New User</button>
+                                            </td>
+                                            <div id="add-contact" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                            <h4 class="modal-title" id="myModalLabel">Add New Contact</h4> </div>
+                                                        <div class="modal-body">
+                                                            <from class="form-horizontal form-material">
+                                                                <div class="form-group">
+                                                                    <div class="col-md-12 m-b-20">
+                                                                        <input type="text" class="form-control" placeholder="Type name"> </div>
+                                                                    <div class="col-md-12 m-b-20">
+                                                                        <input type="text" class="form-control" placeholder="Email"> </div>
+                                                                    <div class="col-md-12 m-b-20">
+                                                                        <input type="text" class="form-control" placeholder="Phone"> </div>
+                                                                    <div class="col-md-12 m-b-20">
+                                                                        <input type="text" class="form-control" placeholder="Designation"> </div>
+                                                                    <div class="col-md-12 m-b-20">
+                                                                        <input type="text" class="form-control" placeholder="Age"> </div>
+                                                                    <div class="col-md-12 m-b-20">
+                                                                        <input type="text" class="form-control" placeholder="Date of joining"> </div>
+                                                                    <div class="col-md-12 m-b-20">
+                                                                        <input type="text" class="form-control" placeholder="Salary"> </div>
+                                                                    <div class="col-md-12 m-b-20">
+                                                                        <div class="fileupload btn btn-danger btn-rounded waves-effect waves-light"><span><i class="ion-upload m-r-5"></i>Upload Contact Image</span>
+                                                                            <input type="file" class="upload"> </div>
+                                                                    </div>
+                                                                </div>
+                                                            </from>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-info waves-effect" data-dismiss="modal">Save</button>
+                                                            <button type="button" class="btn btn-default waves-effect" data-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                    <!-- /.modal-content -->
+                                                </div>
+                                                <!-- /.modal-dialog -->
+                                            </div>
+                                            <td colspan="7">
+                                                <div class="text-right">
+                                                    <ul class="pagination"> </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End PAge Content -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Container fluid  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <!-- ============================================================== -->
+        <footer class="footer">  © 2019 Optio All rights reserved.  </footer>
+        <!-- ============================================================== -->
+        <!-- End footer -->
+        <!-- ============================================================== -->
+    </div>
