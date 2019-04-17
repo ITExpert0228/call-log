@@ -47,7 +47,7 @@ exports.category_delete = function (req, res, next) {
     })
 };
 
-exports.category_upload = function (req, res, next) {
+exports.category_upload = async function (req, res, next) {
     const file = req.file
     if (!file) {
         const error = new Error('Please upload a file')
