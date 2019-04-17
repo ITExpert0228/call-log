@@ -3,8 +3,8 @@
                
             <div class="search-bar">
                    <div class="searchbar">
-                 <input class="search_input" type="text" name="" placeholder="Search for a topic or Category ">
-                 <a href="#" class="search_icon"><i class="fa fa-search"></i></a>
+                 <input class="search_input" type="text" ng-model="ranking_skey" name="" placeholder="Search for a topic or Category ">
+                 <a href="#" class="search_icon" ng-click="searchRanking()"><i class="fa fa-search"></i></a>
                </div>
             </div>
                <div id="rev_slider_1014_1_wrapper" class="rev_slider_wrapper fullscreen-container" data-alias="typewriter-effect" data-source="gallery" style="background-color:transparent;padding:0px;">
@@ -61,7 +61,7 @@
                             data-paddingleft="[0,0,0,0]"
        
                             style="z-index: 8; white-space: nowrap; font-weight: 400; color: rgba(255, 255, 255, 1.00);border-width:0px;">
-                            Don’t Let others tell you what you like, who you are or how to think …..
+                            Don’t Let others tell you what you like,<br> who you are or how to think …..
                        </div>
        
                        <!-- LAYER NR. 5 -->
@@ -83,7 +83,7 @@
                             data-paddingright="[50,50,50,50]"
                             data-paddingbottom="[0,0,0,0]"
                             data-paddingleft="[50,50,50,50]"
-       
+                            ng-click="goToRankingDetail(1)"
                             style="z-index: 9; white-space: nowrap; font-size: 15px; line-height: 46px; color: rgba(255, 255, 255, 1.00);background-color:rgba(0, 0, 0, 0);border-color:rgba(255, 255, 255, 1);border-style:solid;border-width:2px;border-radius:30px;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;">Rankings
                        </div>
        
@@ -180,7 +180,7 @@
                             data-paddingright="[50,50,50,50]"
                             data-paddingbottom="[0,0,0,0]"
                             data-paddingleft="[50,50,50,50]"
-       
+                            ng-click="goToRankingDetail(2)"
                             style="z-index: 9; white-space: nowrap; font-size: 15px; line-height: 46px; color: rgba(255, 255, 255, 1.00);background-color:rgba(0, 0, 0, 0);border-color:rgba(255, 255, 255, 1);border-style:solid;border-width:2px;border-radius:30px;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;">Rankings
                        </div>
        
@@ -257,7 +257,7 @@
                             data-paddingleft="[0,0,0,0]"
        
                             style="z-index: 8; white-space: nowrap; font-weight: 400; color: rgba(255, 255, 255, 1.00);border-width:0px;">
-                            Don’t Let others tell you what you like, who you are or how to think …..
+                            Don’t Let others tell you what you like,<br> who you are or how to think …..
                        </div>
        
                        <!-- LAYER NR. 5 -->
@@ -279,7 +279,7 @@
                             data-paddingright="[50,50,50,50]"
                             data-paddingbottom="[0,0,0,0]"
                             data-paddingleft="[50,50,50,50]"
-       
+                            ng-click="goToRankingDetail(3)"
                             style="z-index: 9; white-space: nowrap; font-size: 15px; line-height: 46px; color: rgba(255, 255, 255, 1.00);background-color:rgba(0, 0, 0, 0);border-color:rgba(255, 255, 255, 1);border-style:solid;border-width:2px;border-radius:30px;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;">Go to Rankings
                        </div>
        

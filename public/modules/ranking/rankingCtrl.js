@@ -6,17 +6,19 @@ app.controller('RankingCtrl', ['$scope', 'categoryService', 'mediaService', 'opt
         angular.forEach(data, function (optio) {
             $scope.allOptio.push(optio);
         });
-        console.log($scope.allOptio);
+        // console.log($scope.allOptio);
     }, function (err) {
         console.log(err)
     });
 
+    console.log('param');
+    console.log($routeParams.type+':'+$routeParams.param);
     $scope.categorys = [];
     $scope.categoryShow = [];
     categoryService.getAll().then(function(data){
         angular.forEach(data, function (category) {
             if ($routeParams.param == category.cParent) {
-                category.width = $scope.getRandomInt(200, 300);
+                category.width = $scope.getRandomInt(180, 250);
                 category.href = '/ranking/'+category.id;
                 // category.height = $scope.getRandomInt(250, 350);    
                 $scope.categorys.push(category);

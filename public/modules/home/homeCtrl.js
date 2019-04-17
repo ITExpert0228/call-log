@@ -13,6 +13,16 @@ app.controller('HomeCtrl', ['$scope', '$location', function($scope, $location) {
         $location.path('/voting/3')
     }
 
+    $scope.searchRanking = function() {
+        $location.path('/ranking/s/'+$scope.ranking_skey);
+    }
+
+    $scope.goToRankingDetail = function(d) {
+        if (d == 3) $location.path('/ranking/d/5cb1c0ab723ed91428e3f534');
+        else if (d == 2) $location.path('/ranking/d/5cb1c0ab723ed91428e3f574');
+        else $location.path('/ranking/d/5cb1c0ab723ed91428e3f524');
+    }
+
     $scope.$on('$viewContentLoaded', function(){
         //Here your view content is fully loaded !!
         var tpj = jQuery;
