@@ -19,7 +19,7 @@ exports.media_create = function (req, res, next) {
     })
 };
 
-exports.media_upload = async function (req, res, next) {
+exports.media_upload = function (req, res, next) {
     const file = req.file
     if (!file) {
         const error = new Error('Please upload a file')
