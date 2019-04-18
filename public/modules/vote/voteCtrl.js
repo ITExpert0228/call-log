@@ -1,9 +1,9 @@
 app.controller('VoteCtrl', ['$scope', '$location', '$routeParams', function($scope, $location, $routeParams) {
     $scope.name = 'Votepage';
 	$('#LoadingLoop').show();
-    $scope.param = parseInt($routeParams.param);
+    $scope.param = $routeParams.param;
 
-    if ($scope.param == 1) {
+    if ($scope.param == '5cacfe0f1071b942d8108b1a') {
         $scope.teamA = {
             name:'Nancy Pelosi',
             src:'img/vote/1l.jpg',
@@ -14,7 +14,7 @@ app.controller('VoteCtrl', ['$scope', '$location', '$routeParams', function($sco
             src:'img/vote/1r.jpg',
             detail:'Simple Explanation of the Tag'
         }
-    } else if ($scope.param == 2) {
+    } else if ($scope.param == '5cacfe0f1071b942d8108b1b') {
         $scope.teamA = {
             name:'Jeff Bezos',
             src:'img/vote/2l.jpg',

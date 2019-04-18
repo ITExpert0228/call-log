@@ -5,7 +5,7 @@ app.service('optioService', ['$http', '$cookieStore', function ($http, $cookieSt
 
     optio.getAll = function() {
         return $http.get(OPTIO_ENDPOINT).then(function(response, status) {
-            console.log(response);
+            // console.log(response);
             if (response.data == null) return null;
             return response.data;
         });
@@ -13,7 +13,7 @@ app.service('optioService', ['$http', '$cookieStore', function ($http, $cookieSt
 
     optio.create = function(optioObj) {
         return $http.post(OPTIO_NEW_ENDPOINT, { optio: optioObj }).then(function(response, status) {
-            console.log(response);
+            // console.log(response);
             if (!response.data) return null;
             return response.data;
         });

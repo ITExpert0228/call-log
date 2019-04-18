@@ -98,7 +98,7 @@ a.item p {
   <div class="col-md-4 col-lg-3">
   <div class=" left-side">
       <img ng-show="mostImage" class="mostImage" ng-src="{{mostImage}}"/>
-      <h5 class="m-title">{{mostTitle}}</h5>
+      <h5 class="m-title">{{considerCategory.cName?considerCategory.cName:'Most Voted Optios'}}</h5>
       <div class="vote-list">
         <ol>
           <li ng-repeat="optio in allOptio">

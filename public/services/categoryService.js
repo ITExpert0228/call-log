@@ -5,7 +5,7 @@ app.service('categoryService', ['$http', '$cookieStore', function ($http, $cooki
 
     category.getAll = function() {
         return $http.get(CATEGORY_ENDPOINT).then(function(response, status) {
-            console.log(response);
+            // console.log(response);
             if (response.data == null) return null;
             return response.data;
         });
@@ -13,7 +13,7 @@ app.service('categoryService', ['$http', '$cookieStore', function ($http, $cooki
 
     category.create = function(categoryObj) {
         return $http.post(CATEGORY_NEW_ENDPOINT, { category: categoryObj }).then(function(response, status) {
-            console.log(response);
+            // console.log(response);
             if (!response.data) return null;
             return response.data;
         });

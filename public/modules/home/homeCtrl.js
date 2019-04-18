@@ -2,15 +2,15 @@ app.controller('HomeCtrl', ['$scope', '$location', function($scope, $location) {
     $scope.name = 'Homepage';
 
     $scope.voting1 = function(){
-        $location.path('/voting/1')
+        $location.path('/voting/5cacfe0f1071b942d8108b1a')
     }
 
     $scope.voting2 = function(){
-        $location.path('/voting/2')
+        $location.path('/voting/5cacfe0f1071b942d8108b1b')
     }
 
     $scope.voting3 = function(){
-        $location.path('/voting/3')
+        $location.path('/voting/5cacfe0f1071b942d8108b1c')
     }
 
     $scope.searchRanking = function(e) {
