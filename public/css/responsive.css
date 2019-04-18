@@ -34,12 +34,6 @@
 #portfolio .m-title {
     font-size: 18px;
 }
-.pace-progress {
-    top: 60px;
-}
-.pace:before {
-    top: 60px;
-}
 .loop_container {
     width:100%;
 }

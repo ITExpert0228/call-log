@@ -85,13 +85,20 @@ a.item p {
 .fadeIn-bottom{
   top: 80%;
 }
+
+.mostImage {
+  display: block;
+    margin: auto;
+    max-width: 130px;
+}
 </style>
 <section id="portfolio" class="clearfix mt-150">
         <div class="container-fluid">
   <div class="row">
   <div class="col-md-4 col-lg-3">
   <div class=" left-side">
-      <h3 class="m-title">Most Voted Optios</h3>
+      <img ng-show="mostImage" class="mostImage" ng-src="{{mostImage}}"/>
+      <h5 class="m-title">{{mostTitle}}</h5>
       <div class="vote-list">
         <ol>
           <li ng-repeat="optio in allOptio">

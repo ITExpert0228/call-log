@@ -1,12 +1,11 @@
 app.controller('RankingCtrl', ['$scope', 'categoryService', 'mediaService', 'optioService', '$cookieStore', '$filter', '$routeParams', function($scope, categoryService, mediaService, optioService, $cookieStore, $filter, $routeParams) {
     $scope.name = 'Products';
-
+    $scope.mostTitle = 'Most Voted Optios';
     $scope.allOptio = [];
     optioService.getAll().then(function(data){
         angular.forEach(data, function (optio) {
             $scope.allOptio.push(optio);
         });
-        console.log($scope.allOptio);
     }, function (err) {
         console.log(err)
     });
@@ -16,12 +15,18 @@ app.controller('RankingCtrl', ['$scope', 'categoryService', 'mediaService', 'opt
     categoryService.getAll().then(function(data){
         angular.forEach(data, function (category) {
             if ($routeParams.param == category.cParent) {
-                category.width = $scope.getRandomInt(200, 300);
+                category.width = $scope.getRandomInt(180, 250);
                 category.href = '/ranking/'+category.id;
                 // category.height = $scope.getRandomInt(250, 350);    
                 $scope.categorys.push(category);
             }
         });
+
+        if ($routeParams.param && $scope.categorys[0]) {
+            $scope.mostImage = $scope.categorys[0].cImage;
+            $scope.mostTitle = "Most Voted Optios in "+$scope.categorys[0].cName;
+        }
+        
     }, function (err) {
         console.log(err)
     });

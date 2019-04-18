@@ -13,6 +13,22 @@ app.controller('HomeCtrl', ['$scope', '$location', function($scope, $location) {
         $location.path('/voting/3')
     }
 
+    $scope.searchRanking = function(e) {
+        if (e == null || e.keyCode === 13) {
+            $location.path('/ranking/s/'+ $scope.searchKey);
+        }
+    }
+
+    $scope.goRanking = function(d) {
+        if (d == 1) {
+            $location.path('/ranking/d/5cacfe0f1071b942d8108b1b');
+        } else if (d == 2) {
+            $location.path('/ranking/d/5cacfe0f1071b942d8108b1c');
+        } else {
+            $location.path('/ranking/d/5cacfe0f1071b942d8108b1a');
+        }
+    }
+
     $scope.$on('$viewContentLoaded', function(){
         //Here your view content is fully loaded !!
         var tpj = jQuery;
