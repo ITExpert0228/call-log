@@ -1,15 +1,10 @@
 var Product = require('../models/product');
-const userIP = require('user-ip');
-const cookie = require('cookie');
+var consts = require('../consts');
 
 //Simple version, without validation or sanitation
 exports.test = function (req, res) {
 
-    console.log(userIP(req));
-    var cookies = cookie.parse(req.headers.cookie || '');
-    console.log(cookies.userip);
-
-    console.log(userIP(req)+':::'+cookies.userip);
+    console.log(consts.IP+'---'+consts.LOCALIP);
 
     res.send('Greetings from the Test controller!');
 };

@@ -4,6 +4,9 @@ var admin = express();
 var uploads = express();
 var routes = require("./server/routes");
 var bodyParser = require('body-parser');
+const cookie = require('cookie');
+const userIP = require('user-ip');
+var consts = require('./server/consts');
 
 // Set up mongoose connection
 var mongoose = require('mongoose');
@@ -37,6 +40,9 @@ app.set("view options", {layout: false});
 app.use(express.static(__dirname + '/public'));
 
 app.all('/*', function(req, res, next) {
+  consts.IP = userIP(req);
+  var cookies = cookie.parse(req.headers.cookie || '');
+  consts.LOCALIP = cookies.userip;
   res.sendFile('index.html', { root: __dirname + '/public' });
 });
 
