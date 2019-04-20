@@ -135,23 +135,23 @@ span.team-b, span.team-a {
                       <div class="status-b">
                         <table>
                           <tr>
-                            <td>Ranking within Science</td>
-                            <td><strong>1</strong></td>
-                            <td>out of 356  </td>
+                            <td>Ranking within {{currentCategory.cName}}</td>
+                            <td><strong>{{optio.rank}}</strong></td>
+                            <td>out of {{optio.rankCount}}  </td>
                           </tr>
                           <tr>
-                            <td>Ranking within Science</td>
-                            <td><strong>5,689</strong></td>
-                            <td>out of 1,089,789</td>
+                            <td>Ranking out of All</td>
+                            <td><strong>{{optio.rankAll}}</strong></td>
+                            <td>out of {{optio.rankAllCount}}</td>
                           </tr>
                         </table>
                           <div class="vote-status-bar">
                               <div class="progress">
-                        <div class="progress-bar bg-success" style="width:70%">
-                        70%  Yes 
+                        <div class="progress-bar bg-success" style="width:{{optio.percentage}}%">
+                        {{optio.percentage}}%  Yes 
                         </div>
-                        <div class="progress-bar bg-danger" style="width:30%">
-                          30% No
+                        <div class="progress-bar bg-danger" style="width:{{100-optio.percentage}}%">
+                          {{100-optio.percentage}}% No
                         </div>
                       </div>
                           </div>

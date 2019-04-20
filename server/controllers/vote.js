@@ -1,10 +1,12 @@
 var Vote = require('../models/vote');
+var consts = require('../consts');
 
 exports.vote_create = function (req, res, next) {
+    var reqVote = req.body.vote;
+    reqVote.vUserIP = consts.IP+"-"+consts.LOCALIP;
     var vote = new Vote(
-        req.body.vote
+        reqVote
     );
-
     vote.save(function (err, newCat) {
         if (err) {
             return next(err);
@@ -14,9 +16,9 @@ exports.vote_create = function (req, res, next) {
 };
 
 exports.vote_details = function (req, res, next) {
-    Vote.findById(req.params.id).populate('oLMedia oRMedia').exec(function (err, vote) {
+    Vote.find({vOptio: req.params.id}).exec(function (err, voteList) {
         if (err) return next(err);
-        res.send(vote);
+        res.send(voteList);
     })
 };
 

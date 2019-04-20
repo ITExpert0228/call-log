@@ -45,12 +45,21 @@ app.controller('RankingCtrl', ['$scope', 'categoryService', 'mediaService', 'opt
             } 
         });
 
+        $scope.random = function (min, max) {
+            return Math.floor(Math.random() * (+max - +min)) + +min; 
+        }
+
         optioService.getAll().then(function(data){
             angular.forEach(data, function (optio) {
                 $scope.allOptio.push(optio);
                 if ($routeParams.param != null) {
                     for (var i=0; i<$scope.includeCategoryIDs.length; i++) {
                         if (optio.oLMedia.mCategory == $scope.includeCategoryIDs[i] || optio.oRMedia.mCategory == $scope.includeCategoryIDs[i]) {
+                            optio.percentage = $scope.random(32, 81);
+                            optio.rank = $scope.random(2, 11);
+                            optio.rankCount = $scope.random(4, 5);
+                            optio.rankAll = $scope.random(3, 11);
+                            optio.rankAllCount = $scope.random(12, 13);
                             $scope.categoryOptio.push(optio);
                             break;
                         }

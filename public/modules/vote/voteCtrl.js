@@ -2,26 +2,66 @@ app.controller('VoteCtrl', ['$scope', '$rootScope', '$location', '$routeParams',
     $scope.name = 'Votepage';
 	$('#LoadingLoop').show();
     $scope.param = $routeParams.param;
-    optioService.getOptio($scope.param).then(function(data){
+
+    $scope.voteList = {};
+    
+
+    $scope.init = function(refresh) {
+        optioService.getOptio($scope.param).then(function(data){
         
-        data.percentage1 = $scope.getRandomPercentage();
-        data.percentage2 = $scope.getRandomPercentage();
-        data.percentage3 = $scope.getRandomPercentage();
-        data.percentage4 = $scope.getRandomPercentage();
-        $scope.optio = data;
-        console.log(data);
+            voteService.getVote($scope.param).then(function(data){
+                angular.forEach(data, function (vote) {
+                    if ($scope.voteList[vote.vKey] == null) $scope.voteList[vote.vKey] = [];
+                    $scope.voteList[vote.vKey].push(vote);
+                });
+    
+                $scope.percentage_yes = $scope.getVotePercentage('yes');
+                $scope.percentage_love = $scope.getVotePercentage('love');
+                $scope.percentage_good = $scope.getVotePercentage('good');
+                $scope.percentage_smart = $scope.getVotePercentage('smart');
+    
+                if (refresh) {
+                    // setTimeout(function(){
+                        $scope.animateProgress('.type-yes', $scope.percentage_yes);
+                        $scope.animateProgress('.type-love', $scope.percentage_love);
+                        $scope.animateProgress('.type-good', $scope.percentage_good);
+                        $scope.animateProgress('.type-smart', $scope.percentage_smart);
+                    // }, 700);
+                } else {
+                    setTimeout(function(){
+                        $scope.animateProgress('.type-yes', $scope.percentage_yes);
+                    }, 700);
+                }
+                console.log($scope.percentage_yes);
+            }, function(err) {
+                console.log(err);
+            });
+    
+            $scope.optio = data;
+            console.log(data);
+        }, function (err) {
+            console.log(err)
+        });
+    }
 
-        setTimeout(function(){
-            $scope.animateProgress('.type-yes', $scope.optio.percentage1);
-        }, 700);
-    }, function (err) {
-        console.log(err)
-    });
+    $scope.init();
 
-    $scope.getRandomPercentage = function() {
-        var min=20; 
-        var max=70;  
-        return Math.floor(Math.random() * (+max - +min)) + +min; 
+    $scope.getVotePercentage = function(key) {
+        var tmpArr = $scope.voteList[key];
+        if (tmpArr == null) return 50;
+        var left = 0;
+        var right = 0;
+        for (var i=0; i<tmpArr.length; i++) {
+            if (tmpArr[i].vMedia == $scope.optio.oLMedia.id) {
+                if (tmpArr[i].vValue == true) left ++;
+                else right ++; 
+            } else {
+                if (tmpArr[i].vValue == true) right ++;
+                else left ++; 
+            }
+        }
+
+        return Math.round(left / (left + right) *100); 
     }
 
     $scope.toggleStatus = function() {
@@ -44,13 +84,21 @@ app.controller('VoteCtrl', ['$scope', '$rootScope', '$location', '$routeParams',
             $('.vote-status-bar').addClass('active');
             $('#additional-options').fadeIn('slow');
 
-            $scope.animateProgress('.type-love', $scope.optio.percentage2);
-            $scope.animateProgress('.type-good', $scope.optio.percentage3);
-            $scope.animateProgress('.type-smart', $scope.optio.percentage4);
+            $scope.animateProgress('.type-love', $scope.percentage_love);
+            $scope.animateProgress('.type-good', $scope.percentage_good);
+            $scope.animateProgress('.type-smart', $scope.percentage_smart);
         }
     }
 
     $scope.animateProgress = function (id, percentage) {
+        if (percentage > 80) {
+            $(id+ " span.float-right").hide();
+            $(id+ " span.float-left").show();
+        } else if (percentage < 20) {
+            $(id+ " span.float-right").show();
+            $(id+ " span.float-left").hide();
+        }
+
         $(id+ " div.bg-success").animate({
             width: percentage + "%"
         }, {
@@ -141,6 +189,7 @@ app.controller('VoteCtrl', ['$scope', '$rootScope', '$location', '$routeParams',
             console.log(data);
             if ($('.team-b').hasClass('active')) $scope.voteSelect(1);
             else $scope.voteSelect(0);
+            $scope.init(true);
         });
     }
 }]);
