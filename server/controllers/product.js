@@ -1,27 +1,15 @@
 var Product = require('../models/product');
-const ipInfo = require("ipinfo");
-var myip = require('quick-local-ip');
-const requestIp = require('request-ip');
-const ipdetails = require("node-ip-details");
-
-const http = require('http');
 const userIP = require('user-ip');
+const cookie = require('cookie');
 
 //Simple version, without validation or sanitation
 exports.test = function (req, res) {
-    ipInfo((err, cLoc) => {
-        console.log("-------ipinfo");
-        console.log(err || cLoc);
-    });
-    console.log("-------myip");
-    console.log(myip.getLocalIP4());
-    // console.log(myip.getLocalIP6());
-    const clientIp = requestIp.getClientIp(req); 
-    console.log("-------request-ip");
-    console.log(clientIp);
-    
-    console.log("-------userIP");
+
     console.log(userIP(req));
+    var cookies = cookie.parse(req.headers.cookie || '');
+    console.log(cookies.userip);
+
+    console.log(userIP(req)+':::'+cookies.userip);
 
     res.send('Greetings from the Test controller!');
 };

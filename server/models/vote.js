@@ -8,6 +8,7 @@ var VoteSchema = new Schema({
     vKey: {type: String, default: 'yes'},
     vValue: {type: Boolean, default: false},
     vUser: {type: ObjectId, ref: 'User', default: null},
+    vUserIP: {type: String, default: null},
     vCreate: { type: Date, default: Date.now() }
 });
 
