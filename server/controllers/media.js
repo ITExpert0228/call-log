@@ -7,6 +7,7 @@ exports.test = function (req, res) {
 };
 
 exports.media_create = function (req, res, next) {
+    console.log(req.body);
     var media = new Media(
         req.body.media
     );
@@ -26,16 +27,15 @@ exports.media_upload = async function (req, res, next) {
         error.httpStatusCode = 400
         return next(error)
     }
-    const imagePath = 'uploads/';
-    const filename = imagePath + 'm' + Date.now() + '.jpg';
-    const thumbname = imagePath + 'm' + Date.now() + '-thumb.jpg';
+    const filename = Date.now() + '.jpg';
+    const thumbname = 'thumb-' + filename;
 
     sharp(file.buffer)
-        .toFile(filename, (err, info) => {  });
+        .toFile('uploads/'+filename, (err, info) => {  });
     sharp(file.buffer)
         .resize(100, 100)
-        .toFile(thumbname, (err, info) => {  });
-    return res.end(filename);
+        .toFile('uploads/'+thumbname, (err, info) => {  });
+    return res.send(filename);
 };
 
 exports.media_uploads = function (req, res, next) {

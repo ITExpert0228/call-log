@@ -142,7 +142,7 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
                     var mediaObj = {
                         mName: $scope.tagName,
                         mCategory: $scope.selectedCategory,
-                        mImage: res.path,
+                        mImage: res,
                         mUser: $scope.loggedInUser.id
                     }
                     // if ($scope)

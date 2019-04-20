@@ -20,7 +20,7 @@ exports.optio_create = function (req, res, next) {
 };
 
 exports.optio_details = function (req, res, next) {
-    Optio.findById(req.params.id, function (err, optio) {
+    Optio.findById(req.params.id).populate('oLMedia oRMedia').exec(function (err, optio) {
         if (err) return next(err);
         res.send(optio);
     })

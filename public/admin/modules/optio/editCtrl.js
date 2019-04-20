@@ -1,4 +1,4 @@
-app.controller('CreateCtrl', ['$scope', 'categoryService', 'mediaService', 'optioService', '$cookieStore', '$routeParams', function($scope, categoryService, mediaService, optioService, $cookieStore, $routeParams) {
+app.controller('EditCtrl', ['$scope', 'categoryService', 'mediaService', 'optioService', '$cookieStore', '$routeParams', function($scope, categoryService, mediaService, optioService, $cookieStore, $routeParams) {
     
     $scope.categorys = [];
     $scope.loggedInUser = $cookieStore.get("user");

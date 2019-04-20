@@ -118,7 +118,7 @@
                                             <h4 class="card-title">{{group}}</h4>
                                             <div class="media-items-b">
                                                 <div class="single-media" ng-repeat="media in allMedia | groupby:group | filter:searchKey">
-                                                    <img ng-src="{{media.mImage}}" alt="">
+                                                    <img ng-src="uploads/thumb-{{media.mImage}}" alt="">
                                                     <ul>
                                                         <li class="name-s">{{media.mName}}</li>
                                                         <li class="edit-img"><a href="/manager/upload-media/{{media.id}}">Edit</a></li>

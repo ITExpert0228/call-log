@@ -20,6 +20,74 @@
           transform: translateX(-50%) translateY(-50%);
           z-index:10;
      }
+     /* .vote-status-bar {
+          transform: rotateX(90deg) translateX(-50%);
+          transition-delay: 1s;
+          transition-duration: 2s;
+     }
+     .vote-status-bar.active {
+          transform: rotateX(0deg) translateX(-50%);
+     } */
+     .progress-box {
+          color: #fff;
+     }
+     .progress-box span {
+          position:absolute;
+          font-weight: bolder;
+     }
+     .bg-success span {
+          text-align: left;
+          left:50px;
+     }
+     .bg-danger span {
+          text-align:right;
+          right:50px;
+     }
+     .progress-box.bg-success {
+          text-align:right;
+          padding-right:10px;
+     }
+     .progress-box.bg-danger {
+          text-align: left;
+          padding-left:10px;
+     }
+     .progress, div.text-center {
+          margin-bottom:35px;
+     }
+.vote-status-bar {
+  margin: 0px auto;
+  position: fixed;
+  z-index:1000;
+  bottom: 0;
+  width: 30%;
+  left: 50%;
+  height:128px;
+  transform: translateX(-50%);
+  padding: 10px 25px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.vote-status-bar h5 {
+     text-align:center;
+     color:#aaa;
+}
+.btn-slide {
+     display:block;
+     text-align:center;
+     padding-top:10px
+}
+
+.btn-slide {
+     left: 50%;
+    transform: translateX(-50%);
+}
+.voteBtn {
+     position:absolute;
+     padding-right:60px;
+     padding-left:10px;
+     width:100%;
+     color:white;
+}
 </style>
 <section class="voting-area" style="margin-top:60px;">
      <div class="container">
@@ -28,11 +96,11 @@
           <!-- <div id="home" class="container tab-pane active"><br> -->
            <div class="single-area-outter">
             <div class="single-area team-a">
-                <h2 class="title-name">{{teamA.name}}</h2>
-                <div class="img-box"><img ng-src="{{teamA.src}}" alt=""></div>
+                <h2 class="title-name">{{optio.oLMedia.mName}}</h2>
+                <div class="img-box"><img ng-src="uploads/{{optio.oLMedia.mImage}}" alt=""></div>
                 <div class="team-details">
-                    <p>{{teamA.detail}}</p>
-                    <a class="btn btn-success" href="/statistic">View Statics</a>
+                    <!-- <p>{{teamA.detail}}</p> -->
+                    <a class="btn btn-success" href="/statistic/{{optio.id}}">View Statics</a>
                </div>
                 
             </div>
@@ -41,11 +109,11 @@
             </div>
             <div class="single-area team-b">
                 
-               <h2 class="title-name">{{teamB.name}}</h2>
-               <div class="img-box"><img ng-src="{{teamB.src}}" alt=""></div>
+               <h2 class="title-name">{{optio.oRMedia.mName}}</h2>
+               <div class="img-box"><img ng-src="uploads/{{optio.oRMedia.mImage}}" alt=""></div>
                <div class="team-details">
-                    <p>{{teamB.detail}}</p>
-                    <a class="btn btn-success" href="/statistic">View Statics</a>
+                    <!-- <p>{{teamB.detail}}</p> -->
+                    <a class="btn btn-success" href="/statistic/{{optio.id}}">View Statics</a>
                </div>
                 
             </div>
@@ -54,14 +122,49 @@
             <div class="vote-area">
                <!-- <h2 class="title-name text-center">Vote</h2> -->
                <div class="vote-status-bar">
-                    <div class="progress">
-                         <div class="progress-bar bg-success" style="width:70%">
-                         70%  Yes 
+                    <h5>Vote</h5>
+                    <div class="progress type-yes">
+                         <div class="progress-box bg-success" style="width:50%">
+                         50%
                          </div>
-                         <div class="progress-bar bg-danger" style="width:30%">
-                         30% No
+                         <div class="progress-box bg-danger" style="width:50%">
+                         50%
+                         </div>
+                         <div class="voteBtn"><span class="float-left">Yes</span><span class="float-right">No</span></div>
+                    </div>
+                    <div id="additional-options" style="display:none">
+                         <div class="progress type-love">
+                              <div class="progress-box bg-success" style="width:50%">
+                              50%
+                              </div>
+                              <div class="progress-box bg-danger" style="width:50%">
+                              50%
+                              </div>
+                              <div class="voteBtn"><span class="float-left">Love</span><span class="float-right">Hate</span></div>
+                         </div>
+                         <div class="progress type-good">
+                              <div class="progress-box bg-success" style="width:50%">
+                              50%
+                              </div>
+                              <div class="progress-box bg-danger" style="width:50%">
+                              50%
+                              </div>
+                              <div class="voteBtn"><span class="float-left">Good</span><span class="float-right">Bad</span></div>
+                         </div>
+                         <div class="text-center">
+                              <a class="btn btn-success" href="">Create Own Vote</a>
+                         </div>                      
+                         <div class="progress type-smart">
+                              <div class="progress-box bg-success" style="width:50%">
+                              50%
+                              </div>
+                              <div class="progress-box bg-danger" style="width:50%">
+                              50%
+                              </div>
+                              <div class="voteBtn"><span class="float-left">Smart</span><span class="float-right">Dumb</span></div>
                          </div>
                     </div>
+                    <a class='btn-slide' href='' style="position:fixed;bottom:10px" ng-click="toggleStatus()"><img src="img/icon-up.png" width="30" height="30"></a>
                </div>
                  
                <!-- <div class="create-vote">
@@ -81,4 +184,3 @@
         </div>
      </div>
 </section>
-     

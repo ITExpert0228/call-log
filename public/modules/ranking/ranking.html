@@ -22,68 +22,15 @@ span.team-b, span.team-a {
   white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    max-width: 100px;
+    max-width: 85px;
     display:inline-block;
     font-size:15px;
 }
 .vote-list .vs-d {
     top: -3px;
 }
-div#masonry img {
-    box-sizing: border-box;
-    border: 2px solid #444;
-}
-
-
-a.item {
-   position: relative;
-   float:left;
-}
-a.item p {
-  color:white;
-}
-.content .content-overlay {
-  background: rgba(0,0,0,0.7);
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  opacity: 0;
-  -webkit-transition: all 0.4s ease-in-out 0s;
-  -moz-transition: all 0.4s ease-in-out 0s;
-  transition: all 0.4s ease-in-out 0s;
-}
-
-.content:hover .content-overlay{
-  opacity: 1;
-}
-
-.content-details {
-  position: absolute;
-  text-align: center;
-  padding-left: 1em;
-  padding-right: 1em;
-  width: 100%;
-  top: 50%;
-  left: 50%;
-  opacity: 0;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  -webkit-transition: all 0.3s ease-in-out 0s;
-  -moz-transition: all 0.3s ease-in-out 0s;
-  transition: all 0.3s ease-in-out 0s;
-}
-
-.content:hover .content-details{
-  top: 50%;
-  left: 50%;
-  opacity: 1;
-}
-
-.fadeIn-bottom{
-  top: 80%;
+.portfolio-wrap {
+  cursor:pointer;
 }
 
 .mostImage {
@@ -91,54 +38,133 @@ a.item p {
     margin: auto;
     max-width: 130px;
 }
+
+.status-b {
+    width: 70%;
+}
+
+.vote-list ul {
+    width: 100px;
+}
+
+.cate-area span.team-a, .cate-area span.team-b {
+    max-width: 100px;
+}
+
+.cate-area .status-b {
+  float:right;
+  padding-top:27px;
+}
+.left-side .vote-list {
+  max-height:550px;
+  overflow-y:scroll;
+}
 </style>
 <section id="portfolio" class="clearfix mt-150">
-        <div class="container-fluid">
-  <div class="row">
-  <div class="col-md-4 col-lg-3">
-  <div class=" left-side">
-      <img ng-show="mostImage" class="mostImage" ng-src="{{mostImage}}"/>
-      <h5 class="m-title">{{considerCategory.cName?considerCategory.cName:'Most Voted Optios'}}</h5>
-      <div class="vote-list">
-        <ol>
-          <li ng-repeat="optio in allOptio">
-            <a href="">
-              <ul>
-                <li><img ng-src="{{optio.oLMedia.mImage}}" alt=""></li>
-                <li><span class="team-a">{{optio.oLMedia.mName}}</span></li>
-              </ul> 
-              <div class="vs-d">VS</div> 
-              <ul>
-                <li><img ng-src="{{optio.oRMedia.mImage}}" alt=""></li>
-                <li><span class="team-b">{{optio.oRMedia.mName}}</span></li>
-              </ul>
-            </a>
-          </li>
-          
-      </ol>
+<div class="container-fluid">
+  <div class="row" ng-show="categorys.length>0">
+    <div class="col-md-4 col-lg-3">
+      <div class=" left-side">
+        <img ng-show="currentCategory.cImage" class="mostImage" ng-src="{{currentCategory.cImage}}"/>
+        <h5 class="m-title">{{currentCategory.cName?currentCategory.cFName:'Most Voted Optios'}}</h5>
+        <div class="vote-list">
+          <ol>
+            <li ng-repeat="optio in categoryOptio">
+              <a href="/voting/{{optio.id}}">
+                <ul>
+                  <li><img ng-src="uploads/thumb-{{optio.oLMedia.mImage}}" alt=""></li>
+                  <li><span class="team-a">{{optio.oLMedia.mName}}</span></li>
+                </ul> 
+                <div class="vs-d">VS</div> 
+                <ul>
+                  <li><img ng-src="uploads/thumb-{{optio.oRMedia.mImage}}" alt=""></li>
+                  <li><span class="team-b">{{optio.oRMedia.mName}}</span></li>
+                </ul>
+              </a>
+            </li>
+          </ol>
+        </div>
       </div>
-  </div>
-  </div>
-  <div class="col-md-8 col-lg-9">
-          <div class="row">
-            <div class="col-lg-12">
-             
-              <header class="section-header text-center">
-                <h2 class="m-title no-top">Categories and Topics</h2>
-              </header>
-              <div id="masonry" class="i-container">
-                <a class="item content" href="{{category.href}}" ng-repeat="category in categorys">
-                  <div class="content-overlay"></div>
-                  <img ng-src="{{category.cImage}}" width="{{category.width}}" height="200"/>
-                  <div class="content-details fadeIn-top">  
-                   <p>{{category.cName}}</p>  
-                  </div>  
-                </a>
+    </div>
+    <div class="col-md-8 col-lg-9">
+      <div class="row">
+        <div class="col-lg-12">     
+          <header class="section-header text-center">
+            <h3 class="title-name">Categories and Topics</h3>
+          </header>    
+        </div>
+      </div>
+      <div class="row portfolio-container">
+          <div class="col-md-3 portfolio-item filter-app" ng-repeat="category in categorys">
+            <div class="portfolio-wrap">
+              <img ng-src="{{category.cImage}}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4><a href="{{category.href}}">{{category.cName}}</a></h4>
+                <p>Category</p>
               </div>
             </div>
           </div>
-
+      </div>
+    </div>
   </div>
-        </div>
-        </div>
-      </section><!-- #portfolio -->
+  <div class="row" ng-show="categorys.length==0">
+      <section class="cate-area" style="width:100%;">
+          <div class="container">
+           <div class="row">
+               <div class="col-md-12">
+                   <h3 class="m-title">Most Voted Optios In:  <a href="ranking/{{routes[0].id}}">{{routes[0].cName}}</a> / {{currentCategory.cName}}</h3>
+               </div>
+           </div>
+            <div class="row">  
+      
+                <div class="col-md-12">
+                    <div class="card mb-3">
+                       
+                      <div class="vote-list">
+                          <ol>
+                              <li ng-repeat="optio in categoryOptio"><a href="/voting/{{optio.id}}"><ul>
+                                  <li><img ng-src="uploads/thumb-{{optio.oLMedia.mImage}}"></li>
+                                  <li><span class="team-a">{{optio.oLMedia.mName}}</span></li>
+                              </ul> <div class="vs-d">
+                            VS
+                        </div> <ul>
+                            <li><img ng-src="uploads/thumb-{{optio.oRMedia.mImage}}"></li>
+                            <li><span class="team-b">{{optio.oRMedia.mName}}</span></li>
+                        </ul></a>
+                            
+                      <div class="status-b">
+                        <table>
+                          <tr>
+                            <td>Ranking within Science</td>
+                            <td><strong>1</strong></td>
+                            <td>out of 356  </td>
+                          </tr>
+                          <tr>
+                            <td>Ranking within Science</td>
+                            <td><strong>5,689</strong></td>
+                            <td>out of 1,089,789</td>
+                          </tr>
+                        </table>
+                          <div class="vote-status-bar">
+                              <div class="progress">
+                        <div class="progress-bar bg-success" style="width:70%">
+                        70%  Yes 
+                        </div>
+                        <div class="progress-bar bg-danger" style="width:30%">
+                          30% No
+                        </div>
+                      </div>
+                          </div>
+                      </div>
+                  </li>
+                 
+              </ol>
+          </div>
+      </div>
+                </div>
+            </div>
+      </div>
+        </section>
+  </div>
+</div>
+</section><!-- #portfolio -->

@@ -28,6 +28,10 @@
     .custom-btn .btn {
         border-radius: 0;
     }
+
+    .active label.control-label {
+        color: #0caa41!important
+    }
     
     </style>
     <div class="page-wrapper">
@@ -73,6 +77,20 @@
                                                             </div>
                                                             <div class="col-md-1"></div>
                                                         </div>
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                            <div class="form-group img-select">
+                                                                <label for="LImage" class="control-label">Left Image Name:</label>
+                                                                <input type="text" class="form-control" id="LImage" ng-model="LImage">
+                                                            </div>
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                            <div class="form-group img-select">
+                                                                <label for="RImage" class="control-label">Right Image Name:</label>
+                                                                <input type="text" class="form-control" id="RImage" ng-model="RImage">
+                                                            </div>
+                                                            </div>
+                                                        </div>
                                                         <!-- <div class="form-group p-30">
                                                             <label>Select Cover Image</label>
                                                             <div class="fileinput input-group fileinput-new" data-provides="fileinput">
@@ -101,7 +119,7 @@
                                                         </div>
                                                         <div class="media-items-d">
                                                             <div class="no-title-media" ng-repeat="media in allUserMedia">
-                                                                <img ng-src="{{media.mImage}}" title="{{media.mName}}">
+                                                                <img ng-click="mediaSelect(media.id)" data-ng-src="uploads/thumb-{{media.mImage}}" alt="{{media.mName}}" />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -119,3 +137,11 @@
             </div>
             <footer class="footer"> © 2019 Optio All rights reserved. </footer>
         </div>
+        <script>
+            $(document).ready(function(){
+                $('.img-select input').on('focus', function(){
+                    $('.img-select').removeClass('active');
+                    $(this).parent().addClass('active');
+                });
+            });
+        </script>

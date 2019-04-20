@@ -6,7 +6,7 @@ var OptioSchema = new Schema({
     oUser: {type: ObjectId, required: true, default: null},
     oLMedia: {type: ObjectId, ref: 'Media'},
     oRMedia: {type: ObjectId, ref: 'Media'},
-    oCategory: {type: ObjectId, ref: 'Category'},
+    // oCategory: {type: ObjectId, ref: 'Category'},
     oCreate: { type: Date, default: Date.now() }
 });
 

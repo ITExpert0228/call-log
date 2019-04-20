@@ -2,15 +2,15 @@ app.controller('HomeCtrl', ['$scope', '$location', function($scope, $location) {
     $scope.name = 'Homepage';
 
     $scope.voting1 = function(){
-        $location.path('/voting/5cacfe0f1071b942d8108b1a')
+        $location.path('/voting/5cb8a1080637181438c6be69')
     }
 
     $scope.voting2 = function(){
-        $location.path('/voting/5cacfe0f1071b942d8108b1b')
+        $location.path('/voting/5cb8a1140637181438c6be6a')
     }
 
     $scope.voting3 = function(){
-        $location.path('/voting/5cacfe0f1071b942d8108b1c')
+        $location.path('/voting/5cb8a1460637181438c6be6b')
     }
 
     $scope.searchRanking = function(e) {
@@ -21,11 +21,11 @@ app.controller('HomeCtrl', ['$scope', '$location', function($scope, $location) {
 
     $scope.goRanking = function(d) {
         if (d == 1) {
-            $location.path('/ranking/d/5cacfe0f1071b942d8108b1b');
+            $location.path('/ranking/d/5cb1c58e723ed91428e3f535');
         } else if (d == 2) {
-            $location.path('/ranking/d/5cacfe0f1071b942d8108b1c');
+            $location.path('/ranking/d/5cb1c5bd723ed91428e3f536');
         } else {
-            $location.path('/ranking/d/5cacfe0f1071b942d8108b1a');
+            $location.path('/ranking/d/5cb1c58e723ed91428e3f535');
         }
     }
 

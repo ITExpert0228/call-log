@@ -1,35 +1,71 @@
 app.controller('RankingCtrl', ['$scope', 'categoryService', 'mediaService', 'optioService', '$cookieStore', '$filter', '$routeParams', function($scope, categoryService, mediaService, optioService, $cookieStore, $filter, $routeParams) {
-    $scope.name = 'Products';
-    $scope.mostTitle = 'Most Voted Optios';
-    $scope.considerCategory = null;
-    $scope.allOptio = [];
-    optioService.getAll().then(function(data){
-        angular.forEach(data, function (optio) {
-            $scope.allOptio.push(optio);
-        });
-    }, function (err) {
-        console.log(err)
-    });
 
+    $scope.currentCategory = null;
+    $scope.includeCategoryIDs = [];
     $scope.categorys = [];
-    $scope.categoryShow = [];
+    $scope.allOptio = [];
+    $scope.categoryOptio = [];
+    $scope.routes = [];
+    
     categoryService.getAll().then(function(data){
         angular.forEach(data, function (category) {
-            if ($routeParams.param == category.cParent) {
-                category.width = $scope.getRandomInt(180, 250);
-                category.href = '/ranking/'+category.id;
-                // category.height = $scope.getRandomInt(250, 350);    
-                $scope.categorys.push(category);
-            } else if ($routeParams.param == category.id) {
-                category.cName = "Most Voted Optios in "+category.cName;
-                $scope.considerCategory = category;
-            }
+            if ($routeParams.type == 's' && $routeParams.param != null) {
+                if (category.cName.toLowerCase().search($routeParams.param.toLowerCase()) > -1) {
+                    category.href = '/ranking/'+category.id;
+                    $scope.categorys.push(category);        
+                }
+            } else if ($routeParams.type == 'd' && $routeParams.param != null) {
+                console.log('aaa');
+                if ($routeParams.param == category.id) {
+                    $scope.currentCategory = category;
+                    $scope.includeCategoryIDs.push(category.id);
+                    for (var i=0; i<data.length; i++) {
+                        var tmp = data[i];
+                        if (tmp.cParent != null && tmp.cParent == category.id) $scope.includeCategoryIDs.push(tmp.id);
+                        if (tmp.id == category.cParent) $scope.routes.push(tmp);
+                    }
+                    console.log($scope.currentCategory);
+                }
+            } else {
+                if ($routeParams.param == category.cParent) {
+                    // category.width = $scope.getRandomInt(180, 250);
+                    category.href = '/ranking/'+category.id;
+                    // category.height = $scope.getRandomInt(250, 350);    
+                    $scope.categorys.push(category);
+                } else if ($routeParams.param == category.id) {
+                    category.cFName = "Most Voted Optios in "+category.cName;
+                    $scope.currentCategory = category;
+                    $scope.includeCategoryIDs.push(category.id);
+                    for (var i=0; i<data.length; i++) {
+                        var tmp = data[i];
+                        if (tmp.cParent != null && tmp.cParent == category.id) $scope.includeCategoryIDs.push(tmp.id);
+                        if (tmp.id == category.cParent) $scope.routes.push(tmp);
+                    }
+                }
+            } 
         });
 
-        // if ($routeParams.param && $scope.categorys[0]) {
-        //     $scope.mostImage = $scope.categorys[0].cImage;
-        //     $scope.mostTitle = "Most Voted Optios in "+$scope.categorys[0].cName;
-        // }
+        optioService.getAll().then(function(data){
+            angular.forEach(data, function (optio) {
+                $scope.allOptio.push(optio);
+                if ($routeParams.param != null) {
+                    for (var i=0; i<$scope.includeCategoryIDs.length; i++) {
+                        if (optio.oLMedia.mCategory == $scope.includeCategoryIDs[i] || optio.oRMedia.mCategory == $scope.includeCategoryIDs[i]) {
+                            $scope.categoryOptio.push(optio);
+                            break;
+                        }
+                    }
+                    
+                } else $scope.categoryOptio.push(optio);
+                
+            });
+
+            if ($scope.currentCategory != null && $scope.categorys.length == 0) {
+
+            }
+        }, function (err) {
+            console.log(err)
+        });
         
     }, function (err) {
         console.log(err)
@@ -43,16 +79,8 @@ app.controller('RankingCtrl', ['$scope', 'categoryService', 'mediaService', 'opt
 
     $scope.$on('$viewContentLoaded', function(){
         if ($('body').hasClass('mobile-nav-active')) {
-          // $('body').removeClass('mobile-nav-active');
-          // $('.mobile-nav-toggle i').toggleClass('fa-times fa-bars');
-          // $('.mobile-nav-overly').fadeOut();
           $('.mobile-nav-toggle').trigger('click');
         }
-        document.addEventListener('DOMContentLoaded', function(){
-          /* Start rowGrid.js */
-          var container = document.getElementsByClassName('i-container')[0];
-          rowGrid(container, {itemSelector: '.item', minMargin: 10, maxMargin: 25, firstItemClass: 'first-item', lastRowClass: 'last-row', minWidth: 500});
-        });
 
         $('.portfolio-container').imagesLoaded(function () {
             var portfolioIsotope = $('.portfolio-container').isotope({

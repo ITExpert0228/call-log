@@ -22,7 +22,14 @@ app.controller('CreateCtrl', ['$scope', 'categoryService', 'mediaService', 'opti
         console.log(err)
     }) 
 
+    $scope.mediaSelect = function(id) {
+        if ($('#RImage').parent().hasClass('active')) {
+            $scope.RImage = id;
+        } else $scope.LImage = id;
+    }
+
     $scope.createVote = function(){
+    
         // var formData = new FormData();
         // var data = document.getElementById('inputCImage').files[0];
         // formData.append('optio', data);
@@ -34,12 +41,11 @@ app.controller('CreateCtrl', ['$scope', 'categoryService', 'mediaService', 'opti
         //     success: function (res) {
         //         console.log(res)
                 var optioObj = {
-                    oLeft: $scope.loggedInUser.id,
-                    oRight: $scope.loggedInUser.id,
-                    oCImage: '',
+                    oLMedia: $scope.LImage,
+                    oRMedia: $scope.RImage,
                     oUser: $scope.loggedInUser.id
                 }
-                // if ($scope)
+                if ($scope)
                 optioService.create(optioObj).then(function(newOptio){
                     console.log(newOptio);
                     swal({   

@@ -5,7 +5,13 @@ app.service('optioService', ['$http', '$cookieStore', function ($http, $cookieSt
 
     optio.getAll = function() {
         return $http.get(OPTIO_ENDPOINT).then(function(response, status) {
-            // console.log(response);
+            if (response.data == null) return null;
+            return response.data;
+        });
+    }
+
+    optio.getOptio = function(id) {
+        return $http.get(OPTIO_ENDPOINT+'/'+id).then(function(response, status) {
             if (response.data == null) return null;
             return response.data;
         });
