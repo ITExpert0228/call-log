@@ -1,4 +1,4 @@
-app.controller('VoteCtrl', ['$scope', '$location', '$routeParams', 'optioService', function($scope, $location, $routeParams, optioService) {
+app.controller('VoteCtrl', ['$scope', '$rootScope', '$location', '$routeParams', 'optioService', 'voteService', function($scope, $rootScope, $location, $routeParams, optioService, voteService) {
     $scope.name = 'Votepage';
 	$('#LoadingLoop').show();
     $scope.param = $routeParams.param;
@@ -71,11 +71,76 @@ app.controller('VoteCtrl', ['$scope', '$location', '$routeParams', 'optioService
         });
     }
 
+    $scope.voteSelect = function(team) {
+        if (team == 1) {
+            if ($('.team-b').hasClass('active')) {
+                $('.team-b').animate({
+                    width: "50%"
+                });
+                $('.team-b').removeClass('active');
+                $('.team-a').fadeIn('show');
+                $('.vote-status-bar').fadeIn();
+                $('.vote-bar').fadeOut();
+                $('.team-details').fadeIn();
+                $('.vs-d').fadeIn();
+            } else {
+                $('.team-b').animate({
+                    width: "100%"
+                });
+                $('.team-b').addClass('active');
+                $('.team-a').fadeOut('slow');
+                $('.vote-status-bar').fadeOut();
+                $('.vote-bar').fadeIn();
+                $('.team-details').fadeOut();
+                $('.vs-d').fadeOut();
+            }
+            $scope.selectedMedia = $scope.optio.oRMedia;
+        } else {
+            if ($('.team-a').hasClass('active')) {
+                $('.team-a').animate({
+                    width: "50%"
+                });
+                $('.team-a').removeClass('active');
+                $('.team-b').fadeIn('show');
+                $('.vote-status-bar').fadeIn();
+                $('.vote-bar').fadeOut();
+                $('.team-details').fadeIn();
+                $('.vs-d').fadeIn();
+            } else {
+                $('.team-a').animate({
+                    width: "100%"
+                });
+                $('.team-a').addClass('active');
+                $('.team-b').fadeOut('slow');
+                $('.vote-status-bar').fadeOut();
+                $('.vote-bar').fadeIn();
+                $('.team-details').fadeOut();
+                $('.vs-d').fadeOut();
+            }
+            $scope.selectedMedia = $scope.optio.oLMedia;
+        }
+    }
+
     $scope.$on('$viewContentLoaded', function(){
  		setTimeout(function(){
             $('#LoadingLoop').hide();
         }, 500);
     });
 
-    
+    $scope.vote = function(type, value) {
+        console.log(type+'::'+value);
+        var voteObj = {
+            vOptio: $scope.optio.id,
+            vMedia: $scope.selectedMedia.id,
+            vKey: type,
+            vValue: value,
+            vUser: $rootScope.currentUser
+        }
+
+        voteService.create(voteObj).then(function(data){
+            console.log(data);
+            if ($('.team-b').hasClass('active')) $scope.voteSelect(1);
+            else $scope.voteSelect(0);
+        });
+    }
 }]);

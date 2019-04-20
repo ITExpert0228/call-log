@@ -6,7 +6,6 @@ exports.test = function (req, res) {
 };
 
 exports.category_create = function (req, res, next) {
-    console.log(req.body)
     var category = new Category(
         req.body.category
     );

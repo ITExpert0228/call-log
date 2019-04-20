@@ -19,7 +19,6 @@ exports.user_register = function (req, res, next) {
                 res.send(newUser)
             })
         } else {
-            console.log(obj);
             var duplicatedLoginNameErr = new Error("DUPLICATED");
             duplicatedLoginNameErr.status = 427; duplicatedLoginNameErr.statusText = "user exists";
             return next(duplicatedLoginNameErr);

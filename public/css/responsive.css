@@ -63,6 +63,8 @@
 .loop_content {
     width: 100%;
 }
+.vote-status-bar {
+    width: 100%!important;
 }
 /* Mobile Layout: 320px. */
 @media only screen and (max-width: 479px) { 
@@ -136,5 +138,8 @@ h2.title-name {
 }
 .loop_content {
     width: 100%;
+}
+.vote-status-bar {
+    width: 100%!important;
 }
 } 

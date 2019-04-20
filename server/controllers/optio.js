@@ -6,7 +6,6 @@ exports.test = function (req, res) {
 };
 
 exports.optio_create = function (req, res, next) {
-    // console.log(req.body)
     var optio = new Optio(
         req.body.optio
     );
@@ -30,7 +29,6 @@ exports.optio_list = function (req, res, next) {
     Optio.find({}).populate('oLMedia oRMedia').exec(function (err, optiolist) {
         
         if (err) return next(err);
-        console.log(optiolist);
         res.send(optiolist);
     })
 };
@@ -57,7 +55,6 @@ exports.optio_upload = function (req, res, next) {
         return next(error)
     }
     res.send(file);
-    console.log(file)
 };
 
 exports.optio_uploads = function (req, res, next) {

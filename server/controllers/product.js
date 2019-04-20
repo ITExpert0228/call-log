@@ -2,6 +2,8 @@ var Product = require('../models/product');
 
 //Simple version, without validation or sanitation
 exports.test = function (req, res) {
+    console.log('my ip address:');
+    console.log(req.socket.address().address);
     res.send('Greetings from the Test controller!');
 };
 

@@ -7,7 +7,6 @@ exports.test = function (req, res) {
 };
 
 exports.media_create = function (req, res, next) {
-    console.log(req.body);
     var media = new Media(
         req.body.media
     );
