@@ -1,9 +1,14 @@
 var Product = require('../models/product');
+const ipInfo = require("ipinfo");
+var myip = require('quick-local-ip');
 
 //Simple version, without validation or sanitation
 exports.test = function (req, res) {
-    console.log('my ip address:');
-    console.log(req.socket.address().address);
+    ipInfo((err, cLoc) => {
+        console.log(err || cLoc);
+    });
+    console.log(myip.getLocalIP4());
+    // console.log(myip.getLocalIP6());
     res.send('Greetings from the Test controller!');
 };
 
