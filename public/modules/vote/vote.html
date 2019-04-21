@@ -79,9 +79,10 @@
 }
 .voteBtn {
      position:absolute;
-     padding-right:60px;
-     padding-left:10px;
-     width:100%;
+     padding-right:30px;
+     padding-left:30px;
+     left:0;
+     right:0;
      color:white;
 }
 .vote-bar {
@@ -112,9 +113,53 @@
      width: 100px;
 }
 @media only screen and (max-width: 767px) {
-     .vote-status-bar, .vote-bar {
-          width:100%;
-     }
+.vote-status-bar, .vote-bar, .statistic-bar {
+     position: absolute;
+     left:0;
+     right:0;
+     top: 54%;
+     margin: 0;
+     background: #333;
+     bottom: 0;
+     height: auto;
+     transform:none;
+     width:auto;
+}
+.btn-slide {
+     display:none;
+}
+.progress, div.text-center {
+    margin-bottom: 20px;
+}
+#additional-options {
+     display:block!important;
+}
+.img-box {
+     height:100%;
+}
+.img-box img {
+     height:50%;
+     object-fit: cover;
+}
+h2.title-name {
+    top:1%;
+    font-size: 20px;
+    width: 90%;
+}
+.vs-d {
+    top: 25%;
+    font-size: 15px;
+    padding: 10px 12px;
+    transform: translateX(-50%);
+}
+.team-details {
+    position: absolute;
+    bottom: 50%;
+    width: 100%;
+}
+.statistic-bar .row div {
+    height: 180px;
+}
 }
 </style>
 <section class="voting-area" style="margin-top:60px;">
@@ -145,8 +190,6 @@
                </div>
                 
             </div>
-            </div>
-            <br>
             <div class="vote-area">
                <div class="vote-bar" style="display:none;">
                          <h5>Vote</h5>
@@ -159,15 +202,15 @@
                </div>
                <div class="vote-status-bar">
                     <h5>Vote</h5>
-                    <div class="progress type-yes">
-                         <div class="progress-box bg-success" style="width:50%">
-                         50%
+                         <div class="progress type-yes">
+                              <div class="progress-box bg-success" style="width:50%">
+                              50%
+                              </div>
+                              <div class="progress-box bg-danger" style="width:50%">
+                              50%
+                              </div>
+                              <div class="voteBtn"><span class="float-left">Yes</span><span class="float-right">No</span></div>
                          </div>
-                         <div class="progress-box bg-danger" style="width:50%">
-                         50%
-                         </div>
-                         <div class="voteBtn"><span class="float-left">Yes</span><span class="float-right">No</span></div>
-                    </div>
                     <div id="additional-options" style="display:none">
                          <div class="progress type-love">
                               <div class="progress-box bg-success" style="width:50%">
@@ -204,13 +247,13 @@
                </div>
                <div class="statistic-bar" style="display:none;">
                     <div class="row">
-                         <div class="col-md-6" id="chart1" style="background:rgba(255, 0, 0, 0)">a</div>
-                         <div class="col-md-6" id="chart2" style="background:rgba(0, 255, 0, 0)">b</div>
-                         <div class="col-md-6" id="chart3" style="background:rgba(255, 0, 255, 0)">c</div>
-                         <div class="col-md-6" id="chart4" style="background:rgba(255, 255, 0, 0)">d</div>
+                         <div class="col-6" id="chart1" style="background:rgba(255, 0, 0, 0)">a</div>
+                         <div class="col-6" id="chart2" style="background:rgba(0, 255, 0, 0)">b</div>
+                         <div class="col-6" id="chart3" style="background:rgba(255, 0, 255, 0)">c</div>
+                         <div class="col-6" id="chart4" style="background:rgba(255, 255, 0, 0)">d</div>
                     </div>
-               </div>
-            </div>   
+               </div>  
+            </div>
         </div>
      </div>
 </section>
