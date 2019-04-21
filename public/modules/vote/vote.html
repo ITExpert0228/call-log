@@ -88,6 +88,14 @@
      height:300px;
      padding: 20px 30px;
 }
+
+.statistic-bar {
+     margin-top:200px
+}
+
+.statistic-bar .row div {
+     height:250px;
+}
 .vote-bar ol {
      margin: 0;
      padding: 0;
@@ -120,7 +128,7 @@
                 <div class="img-box"><img ng-src="uploads/{{optio.oLMedia.mImage}}" alt=""></div>
                 <div class="team-details">
                     <!-- <p>{{teamA.detail}}</p> -->
-                    <a class="btn btn-success" href="/statistic/{{optio.id}}">View Statics</a>
+                    <a class="btn btn-success" href="" ng-click="showStatistic($event, 0)">View Statistics</a>
                </div>
                 
             </div>
@@ -133,7 +141,7 @@
                <div class="img-box"><img ng-src="uploads/{{optio.oRMedia.mImage}}" alt=""></div>
                <div class="team-details">
                     <!-- <p>{{teamB.detail}}</p> -->
-                    <a class="btn btn-success" href="/statistic/{{optio.id}}">View Statics</a>
+                    <a class="btn btn-success" href="" ng-click="showStatistic($event, 1)">View Statistics</a>
                </div>
                 
             </div>
@@ -194,21 +202,15 @@
                     </div>
                     <a class='btn-slide' href='' style="position:fixed;bottom:10px" ng-click="toggleStatus()"><img src="img/icon-up.png" width="30" height="30"></a>
                </div>
-                 
-               <!-- <div class="create-vote">
-                         <div class="progress">
-                    <div class="progress-bar bg-success" style="width:70%">
-                    70%  Yes 
+               <div class="statistic-bar" style="display:none;">
+                    <div class="row">
+                         <div class="col-md-6" id="chart1" style="background:rgba(255, 0, 0, 0)">a</div>
+                         <div class="col-md-6" id="chart2" style="background:rgba(0, 255, 0, 0)">b</div>
+                         <div class="col-md-6" id="chart3" style="background:rgba(255, 0, 255, 0)">c</div>
+                         <div class="col-md-6" id="chart4" style="background:rgba(255, 255, 0, 0)">d</div>
                     </div>
-                    <div class="progress-bar bg-danger" style="width:30%">
-                    30% No
-                    </div>
-               </div> -->
-                 <!-- <br>
-                  <div class="text-center">
-                      <a  href="create_vote.php" class="btn btn-success"><i class="fas fa-plus"></i> Create Own Vote</a>
-                  </div> -->
-               </div>   
+               </div>
+            </div>   
         </div>
      </div>
 </section>
