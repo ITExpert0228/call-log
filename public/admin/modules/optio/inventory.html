@@ -37,7 +37,7 @@
                                         <div class="col-md-9">
                                                     
                                             <div class="search-box-bs"> 
-                                                <input type="text" class="form-control" placeholder="Search from Name of Optio"> 
+                                                <input type="text" ng-model="searchTag" ng-change="search()" class="form-control" placeholder="Search from Name of Optio"> 
                                                 <button class="btn btn-primary waves-effect waves-light" type="button"><span class="btn-label"><i class="icon-magnifier"></i></span></button>
                                             </div> 
                                  
@@ -143,18 +143,18 @@
                                                             <a class="breadcrumb-item" href="#">Greatest Scientist in History</a>
                                                             <span class="breadcrumb-item active">Albert Einstain VS Nikola Tesla</span>
                                                         </nav>
-                                                        <div  style="padding:0 1rem 1rem">
+                                                        <div  style="padding:0 1rem 1rem; max-height:500px;overflow-y:scroll">
                                                             <h4 class="card-title">Greatest Scientist in history</h4>
                                                             <div class="media-items-c">
-                                                                <div class="single-media" ng-repeat="optio in allOptio">
+                                                                <div class="single-media" ng-repeat="optio in searchOptio">
                                                                     <div class="vote-details-b">
-                                                                        <a href="#">
-                                                                            <div class="team-s"><img ng-src="uploads/thumb-{{optio.oLMedia.mImage}}"></div> 
-                                                                            <div class="team-s"><img ng-src="uploads/thumb-{{optio.oRMedia.mImage}}"></div> 
+                                                                        <a href="/manager/edit/{{optio.id}}">
+                                                                            <div class="team-s"><img ng-src="uploads/thumb-{{optio.oLImage?optio.oLImage:optio.oLMedia.mImage}}"></div> 
+                                                                            <div class="team-s"><img ng-src="uploads/thumb-{{optio.oRImage?optio.oRImage:optio.oRMedia.mImage}}"></div> 
                                                                         </a>
                                                                     </div>
                                                                     <ul>
-                                                                        <li class="edit-img"><a href="#">Edit</a></li>
+                                                                        <li class="edit-img"><a href="/manager/edit/{{optio.id}}">Edit</a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>

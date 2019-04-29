@@ -51,6 +51,17 @@ app.config(function($routeProvider, $locationProvider) {
                 }
             }]
         }
+    }).when('/manager/edit/:param', {
+        templateUrl: 'admin/modules/optio/create.html',
+        controller: 'CreateCtrl',
+        resolve: {
+            user: ['$cookieStore', '$q', function ($cookieStore, $q) {
+                var user = $cookieStore.get("user")
+                if (!user || user == null) {
+                    window.location.href = '/';
+                }
+            }]
+        }
     }).when('/manager/inventory', {
         templateUrl: 'admin/modules/optio/inventory.html',
         controller: 'InventoryCtrl',

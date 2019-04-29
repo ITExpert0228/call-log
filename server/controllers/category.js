@@ -26,7 +26,14 @@ exports.category_details = function (req, res, next) {
 };
 
 exports.category_list = function (req, res, next) {
-    Category.find({}, function (err, categorylist) {
+    Category.find({cIsTopic: false}, function (err, categorylist) {
+        if (err) return next(err);
+        res.send(categorylist);
+    })
+};
+
+exports.topic_list = function (req, res, next) {
+    Category.find({cIsTopic: true}, function (err, categorylist) {
         if (err) return next(err);
         res.send(categorylist);
     })

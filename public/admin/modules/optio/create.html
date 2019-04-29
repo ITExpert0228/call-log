@@ -1,39 +1,139 @@
 <style>
-    @charset "UTF-8";
-    /* .fileinput-button {
-      position: relative;
-      overflow: hidden;
-      display: inline-block;
-    } */
-    .fileinput-button input {
-      position: absolute;
-      top: 0;
-      right: 0;
-      margin: 0;
-      opacity: 0;
-      font-size: 200px !important;
-      direction: ltr;
-      cursor: pointer;
-    }
-    
-    /* Fixes for IE < 8 */
-    @media screen\9 {
-      .fileinput-button input {
-        filter: alpha(opacity=0);
-        font-size: 100%;
-        height: 100%;
-      }
-    }
-    
-    .custom-btn .btn {
-        border-radius: 0;
-    }
+@charset "UTF-8";
+/* .fileinput-button {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+} */
+.cropper-viewer {
+    outline:none;
+}
+/* .cropper-container {
+    left:0!important;
+} */
+.cropper-point {
+    width:7px!important;
+    height:7px!important;
+    background-color: #fff;
+    border: solid 1px #000;
+    filter: alpha(opacity=50)!important;
+    opacity: 0.5!important;
+}
+.cropper-line.line-n {
+    background: url(lib/jcrop/css/Jcrop.gif) repeat-x left bottom;
+    opacity: 0.5!important;
+    top: 0;
+    left: 0;
+    height: 1px;
+    cursor: n-resize;
+}
+.cropper-line.line-s {
+    background: url(lib/jcrop/css/Jcrop.gif) repeat-x left bottom;
+    opacity: 0.5!important;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    cursor: n-resize;
+}
+.cropper-line.line-e {
+    background: url(lib/jcrop/css/Jcrop.gif) repeat-y left bottom;
+    opacity: 0.5!important;
+    right: 0;
+    top: 0;
+    width: 1px;
+    cursor: n-resize;
+}
 
-    .active label.control-label {
-        color: #0caa41!important
+.cropper-line.line-w {
+    background: url(lib/jcrop/css/Jcrop.gif) repeat-y left bottom;
+    opacity: 0.5!important;
+    left: 0;
+    top: 0;
+    width: 1px;
+    cursor: n-resize;
+}
+
+.fileinput-button input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    opacity: 0;
+    font-size: 200px !important;
+    direction: ltr;
+    cursor: pointer;
+}
+
+.media-container {
+    border: 2px solid #fff;
+}
+.active .media-container {
+    border: 2px solid #0caa41;
+}
+.cropper-container {
+    left: 0!important;
+}
+
+/* Fixes for IE < 8 */
+@media screen\9 {
+    .fileinput-button input {
+    filter: alpha(opacity=0);
+    font-size: 100%;
+    height: 100%;
     }
-    
-    </style>
+}
+
+.custom-btn .btn {
+    border-radius: 0;
+}
+
+.active label.control-label {
+    color: #0caa41!important
+}
+
+.edit-bar {
+    height:32px;
+    margin-bottom:15px;
+}
+.edit-bar .btn {
+    float: left;
+    width:32px;
+    height:32px;
+    margin: 0 8px 0 0;
+    padding:4px;
+    font-weight:bolder;
+    background: #f1f1f1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 16px;
+    color: #72777c;
+    border-color: #ccc;
+    box-shadow: 0 1px 0 #ccc;
+    font-size: 19px;
+    padding: 5px 4px;
+}
+.cropper-label {
+    display:block;
+    text-align: center;
+    font-weight: 900;
+    margin-top:8px;
+}
+img.img-responsive, img#exchange {
+    cursor:pointer;
+}
+img#exchange {
+    display:block;
+    margin:165px auto 0;
+}
+.no-title-media {
+    padding: 1px;
+    margin:0;
+}
+.no-title-media img {
+    width:100%;
+    height:auto;
+}
+</style>
     <div class="page-wrapper">
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
@@ -62,66 +162,96 @@
                                                     <div class="col-md-9" style="padding: 0 20px 20px">
                                                         <div class="row">
                                                             <div class="col-md-1"></div>
-                                                            <div class="col-md-4">
-                                                                <!-- <div class="form-group">
-                                                                    <label>Select Cover Image</label>
-                                                                </div> -->
-                                                                <div><img id="imageL" src="admin/assets/images/select.jpg" class="img-responsive" alt="Picture"></div>
+                                                            <div class="col-md-4" id="left-media">
+                                                                <div class="edit-bar">
+                                                                    <span class="btn" id="ledit-rotate-left"><i class="mdi mdi-rotate-left-variant"></i></span>
+                                                                    <span class="btn" id="ledit-rotate-right"><i class="mdi mdi-rotate-right-variant"></i></span>
+                                                                    <span class="btn" id="ledit-flip-h"><i class="mdi mdi-format-horizontal-align-center"></i></span>
+                                                                    <span class="btn" id="ledit-flip-v"><i class="mdi mdi-format-vertical-align-center"></i></span>
+                                                                    <span class="btn" id="ledit-zoom-plus"><i class="fa fa-search-plus"></i></span>
+                                                                    <span class="btn" id="ledit-zoom-minus"><i class="fa fa-search-minus"></i></span>
+                                                                </div>
+                                                                <div class="media-container"><img id="imageL" src="admin/assets/images/select.jpg" ng-click="selectMedia(0)" class="img-responsive" alt="Picture"></div>
+                                                                <div><label class="cropper-label">Left Position</label></div>
                                                             </div>
-                                                            <div class="col-md-2"></div>
-                                                            <div class="col-md-4">
-                                                                <!-- <div class="form-group">
-                                                                    <label>Select Cover Image</label>
-                                                                </div> -->
-                                                                <div><img id="imageR" src="admin/assets/images/select.jpg" class="img-responsive" alt="Picture"></div>
+                                                            <div class="col-md-2">
+                                                                <img id="exchange" class="" src="admin/assets/images/exchange.png" ng-click="selectMedia(2)" width="50" alt="Picture">
+                                                            </div>
+                                                            <div class="col-md-4" id="right-media">
+                                                                    <div class="edit-bar">
+                                                                        <span class="btn" id="redit-rotate-left"><i class="mdi mdi-rotate-left-variant"></i></span>
+                                                                        <span class="btn" id="redit-rotate-right"><i class="mdi mdi-rotate-right-variant"></i></span>
+                                                                        <span class="btn" id="redit-flip-h"><i class="mdi mdi-format-horizontal-align-center"></i></span>
+                                                                        <span class="btn" id="redit-flip-v"><i class="mdi mdi-format-vertical-align-center"></i></span>
+                                                                        <span class="btn" id="redit-zoom-plus"><i class="fa fa-search-plus"></i></span>
+                                                                        <span class="btn" id="redit-zoom-minus"><i class="fa fa-search-minus"></i></span>
+                                                                    </div>
+                                                                <div class="media-container"><img id="imageR" src="admin/assets/images/selectR.jpg" ng-click="selectMedia(1)" class="img-responsive" alt="Picture"></div>
+                                                                <div><label class="cropper-label">Right Position</label></div>
                                                             </div>
                                                             <div class="col-md-1"></div>
                                                         </div>
                                                         <div class="row">
-                                                            <div class="col-md-6">
-                                                            <div class="form-group img-select">
-                                                                <label for="LImage" class="control-label">Left Image Name:</label>
-                                                                <input type="text" class="form-control" id="LImage" ng-model="LImage">
+                                                            <div class="col-md-1"></div>
+                                                            <div class="col-md-10">
+                                                                <!-- <div class="form-group img-select">
+                                                                    <label for="oTopic" class="control-label">Optio Topic:</label>
+                                                                    <input type="text" class="form-control" id="oTopic" ng-model="oTopic">
+                                                                </div> -->
+                                                                <div class="form-group">
+                                                                    <label class="control-label">Select Optio Topic</label>
+                                                                    <select class="form-control custom-select select2" ng-model="selectedCategory" ng-change="categoryChanged()" data-placeholder="Choose a Topic" tabindex="1" ng-disabled="newCat">
+                                                                        <option ng-repeat="x in topics" value="{{x.id}}">{{x.cName}}</option>
+                                                                    </select>
+                                                                </div>
+                                                                <div class="form-group" ng-show="newCat">
+                                                                    <label>New Topic Name</label>
+                                                                    <div class="input-group">
+                                                                        <input type="text" ng-model="tagName" id="myText" class="form-control">
+                                                                        <span class="btn btn-info" id="iedit-" ng-click="saveNewTopic()"><i class="fa fa-save"></i>&nbsp;&nbsp;Save</span>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                            <div class="form-group img-select">
-                                                                <label for="RImage" class="control-label">Right Image Name:</label>
-                                                                <input type="text" class="form-control" id="RImage" ng-model="RImage">
-                                                            </div>
-                                                            </div>
+                                                            <div class="col-md-1"></div>
                                                         </div>
-                                                        <!-- <div class="form-group p-30">
-                                                            <label>Select Cover Image</label>
-                                                            <div class="fileinput input-group fileinput-new" data-provides="fileinput">
-                                                                <div class="form-control" data-trigger="fileinput"> 
-                                                                    <i class="glyphicon glyphicon-file fileinput-exists"></i> 
-                                                                    <span class="fileinput-filename"></span>
-                                                                </div> 
-                                                                <span class="btn btn-primary waves-effect waves-light btn-file"> 
-                                                                    <span class="fileinput-new">Select file</span> 
-                                                                    <span class="fileinput-exists">Change</span>
-                                                                    <input type="hidden" value="" name="...">
-                                                                    <input type="file" name="" id="inputCImage"> 
-                                                                </span> 
-                                                                <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Remove</a> 
+                                                        <div class="row">
+                                                            <div class="col-md-1"></div>
+                                                            <div class="col-md-10">
+                                                                <a href="" class="btn btn-primary waves-effect waves-light pull-right" ng-click="createVote()">Create New Vote</a> 
                                                             </div>
-                                                        </div> -->
-                                                        <div class="bottom-btns p-30 pull-right">
-                                                            <a href="" class="btn btn-primary waves-effect waves-light" ng-click="createVote()">Create New Vote</a> 
+                                                            <div class="col-md-1"></div>
                                                         </div>
                                                     </div>
                                                     <!-- /.Your image -->
                                                     <!-- .Croping image -->
-                                                    <div class="col-md-3 p-20 custom-btn" style="background:#eee">
-                                                        <div class="form-group">
+                                                    <div class="col-md-3">
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                Select from Own Media
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div class="row media-items-d">
+                                                                    <div class="col-4 no-title-media" ng-repeat="media in allUserMedia | filter: searchTag">
+                                                                        <img ng-click="mediaSelect(media.id, media.mImage, media.mName)" title="{{media.mName}}" data-ng-src="uploads/thumb-{{media.mImage}}" alt="{{media.mName}}" />
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-footer">
+                                                                <div class="input-group">
+                                                                    <input type="text" placeholder="Search Media" ng-model="searchTag.mName" id="myText" class="form-control">
+                                                                    <span class="btn btn-info" id="iedit-"><i class="fa fa-search"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                        <!-- <div class="form-group">
                                                             <label>Search from Own Media</label>
                                                         </div>
                                                         <div class="media-items-d">
                                                             <div class="no-title-media" ng-repeat="media in allUserMedia">
                                                                 <img ng-click="mediaSelect(media.id)" data-ng-src="uploads/thumb-{{media.mImage}}" alt="{{media.mName}}" />
                                                             </div>
-                                                        </div>
+                                                        </div> -->
                                                     </div>
                                                     <!-- /.Croping of image -->
                                                 </div>

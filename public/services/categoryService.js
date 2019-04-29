@@ -1,10 +1,19 @@
 app.service('categoryService', ['$http', '$cookieStore', function ($http, $cookieStore) {
     const CATEGORY_ENDPOINT   = '/api/category';
+    const CATEGORY_TOPIC_ENDPOINT   = '/api/category/topic/all';
     const CATEGORY_NEW_ENDPOINT   = '/api/category/create';
     var category = {};
 
     category.getAll = function() {
         return $http.get(CATEGORY_ENDPOINT).then(function(response, status) {
+            // console.log(response);
+            if (response.data == null) return null;
+            return response.data;
+        });
+    }
+
+    category.getTopics = function() {
+        return $http.get(CATEGORY_TOPIC_ENDPOINT).then(function(response, status) {
             // console.log(response);
             if (response.data == null) return null;
             return response.data;

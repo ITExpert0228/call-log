@@ -8181,6 +8181,14 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
     float: left;
 }
 
+.team-s:first-child {
+    border-right:1px solid #0caa41;
+}
+
+.team-s:nth-child(2) {
+  border-left:1px solid #0caa41;
+}
+
 .team-s img {width: 100%;}
 
 .vote-details-b {
@@ -8208,7 +8216,7 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
   height:100px;
 }
 .media-items-d {
-  max-height: 500px;
+  max-height: 400px;
   overflow-y:auto;
 }
 .media-items-c .single-media {
@@ -8323,4 +8331,34 @@ li.name-s {
 
 .sweet-alert .sa-icon.sa-custom {
   border-radius: 0;
+}
+
+.cropper-point.point-ne {
+  top: 0;
+  right: 0;
+}
+.cropper-point.point-nw {
+  top: 0;
+  left: 0;
+}
+.cropper-point.point-sw {
+  bottom: 0;
+  left: 0;
+}
+.cropper-point.point-se {
+  bottom: 0;
+  right: 0;
+}
+
+.cropper-point.point-e {
+  right: 0;
+}
+.cropper-point.point-n {
+  top: 0;
+}
+.cropper-point.point-w {
+  left: 0;
+}
+.cropper-point.point-s {
+  bottom: 0;
 }

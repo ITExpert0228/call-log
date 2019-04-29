@@ -19,6 +19,9 @@
 .img-container {
     min-height: 200px!important;
 }
+.dropzone .dz-message {
+    padding: 20% 0;
+}
 /* Fixes for IE < 8 */
 @media screen\9 {
   .fileinput-button input {
@@ -30,6 +33,95 @@
 
 .custom-btn .btn {
     border-radius: 0;
+}
+
+form#my-dropzone-container {
+    position: relative;
+    min-height:300px;
+}
+
+form#my-dropzone-container img {
+    object-fit: contain;
+    width:100%;
+    height:100%;
+}
+.edit-bar {
+    height:32px;
+    margin-bottom:15px;
+}
+.edit-bar .btn {
+    float: left;
+    width:32px;
+    height:32px;
+    margin: 0 8px 0 0;
+    padding:4px;
+    font-weight:bolder;
+    background: #f1f1f1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 16px;
+    color: #72777c;
+    border-color: #ccc;
+    box-shadow: 0 1px 0 #ccc;
+    font-size: 19px;
+    padding: 5px 4px;
+}
+
+.rotated {
+  transform: rotate(90deg);
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -moz-transform: rotate(90deg); /* Firefox */
+  -webkit-transform: rotate(90deg); /* Safari and Chrome */
+  -o-transform: rotate(90deg); /* Opera */
+}
+
+.cropper-viewer {
+    outline:none;
+}
+/* .cropper-container {
+    left:0!important;
+} */
+.cropper-point {
+    width:7px!important;
+    height:7px!important;
+    background-color: #fff;
+    border: solid 1px #000;
+    filter: alpha(opacity=50)!important;
+    opacity: 0.5!important;
+}
+
+.cropper-line.line-n {
+    background: url(lib/jcrop/css/Jcrop.gif) repeat-x left bottom;
+    opacity: 0.5!important;
+    top: 0;
+    left: 0;
+    height: 1px;
+    cursor: n-resize;
+}
+.cropper-line.line-s {
+    background: url(lib/jcrop/css/Jcrop.gif) repeat-x left bottom;
+    opacity: 0.5!important;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    cursor: n-resize;
+}
+.cropper-line.line-e {
+    background: url(lib/jcrop/css/Jcrop.gif) repeat-y left bottom;
+    opacity: 0.5!important;
+    right: 0;
+    top: 0;
+    width: 1px;
+    cursor: n-resize;
+}
+
+.cropper-line.line-w {
+    background: url(lib/jcrop/css/Jcrop.gif) repeat-y left bottom;
+    opacity: 0.5!important;
+    left: 0;
+    top: 0;
+    width: 1px;
+    cursor: n-resize;
 }
 
 </style>
@@ -84,7 +176,17 @@
                                 <!-- .Your image -->
                                 <div class="col-md-4 p-20">
                                     <div class="form-group">
-                                            <label>Select Image</label>
+                                        <div class="edit-bar">
+                                            <!-- <span class="btn" id="iedit-crop"><i class="fa fa-crop"></i></span> -->
+                                            <span class="btn" id="iedit-rotate-left"><i class="mdi mdi-rotate-left-variant"></i></span>
+                                            <span class="btn" id="iedit-rotate-right"><i class="mdi mdi-rotate-right-variant"></i></span>
+                                            <span class="btn" id="iedit-flip-h"><i class="mdi mdi-format-horizontal-align-center"></i></span>
+                                            <span class="btn" id="iedit-flip-v"><i class="mdi mdi-format-vertical-align-center"></i></span>
+                                            <span class="btn" id="iedit-zoom-plus"><i class="fa fa-search-plus"></i></span>
+                                            <span class="btn" id="iedit-zoom-minus"><i class="fa fa-search-minus"></i></span>
+                                            <span class="btn" id="iedit-camera-change" style="margin-left:10px"><i class="mdi mdi-camera-party-mode"></i></span>
+                                        </div>
+                                            <!-- <label>Select Image</label>
                                             <div class="fileinput input-group fileinput-new" data-provides="fileinput">
                                                 <div class="form-control" data-trigger="fileinput"> 
                                                     <i class="glyphicon glyphicon-file fileinput-exists"></i> 
@@ -97,30 +199,38 @@
                                                     <input type="file" name="" id="inputImage"> 
                                                 </span> 
                                                 <a href="#" class="btn btn-danger fileinput-exists" data-dismiss="fileinput">Remove</a> 
+                                            </div> -->
+                                        <form action="#" class="dropzone" id="my-dropzone-container">
+                                            <div class="dz-message" data-dz-message><span>Drop Files here</span><br><span>or</span><br><span class="btn btn-secondary" ng-click="">Select File</span></div>
+                                            <div class="fallback">
+                                                <input name="file" type="file" multiple />
                                             </div>
-                                        </div>
-                                    <div class="img-container"><img id="image" class="img-responsive" alt="Picture"></div>
+                                        </form>
+                                    </div>
+                                    <!-- <div class="img-container"><img id="image" class="img-responsive" alt="Picture"></div> -->
                                 </div>
                                 <!-- /.Your image -->
+                                <!-- <div class="col-md-4 p-20">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                Media Properties
+                                            </div>
+                                            <div class="card-body">
+                                                <h4 class="card-title"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Special title treatment</font></font></h4>
+                                                <p class="card-text"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">With supporting text below as a natural lead-in to additional content.</font></font></p>
+                                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                                            </div>
+                                        </div>
+                                </div> -->
                                 <!-- .Croping image -->
-                                <div class="col-md-4 p-20 custom-btn">
+                                <div class="col-md-4 p-20 custom-btn" style="margin-top:45px;">
                                     
-                                    <div class="form-group" style="margin-top:100px">
+                                    <div class="form-group">
                                         <label class="control-label">Category</label>
                                         <select class="form-control custom-select" ng-model="selectedCategory" ng-change="categoryChanged()" data-placeholder="Choose a Category" tabindex="1" ng-disabled="newCat">
                                             <option ng-repeat="x in categorys" value="{{x.id}}">{{x.cName}}</option>
                                         </select>
                                     </div>
-                                    <!-- <div class="form-group" ng-show="newCat">
-                                        <label>Create Category</label>
-                                        <div class="input-group">
-                                            <input type="text" class="form-control" ng-model="newModel"/>
-                                            <span class="btn btn-primary waves-effect waves-light" ng-click="saveCategory()"> 
-                                                Create
-                                            </span>
-                                            <a href="#" class="btn btn-danger" ng-click="createCancel()">Cancel</a>
-                                        </div>
-                                    </div> -->
                                     <div class="modal fade" id="newCatModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" style="display: none;">
                                         <div class="modal-dialog modal-lg">
                                             <div class="modal-content">
@@ -159,10 +269,10 @@
                                         <label>Name of the Tag</label>
                                         <div class="input-group">
                                             <input type="text" ng-model="tagName" id="myText" class="form-control">
-                                            <span class="btn btn-info" id="enableComplete"><i class="fa fa-search"></i></span>
+                                            <span class="btn btn-info" id="iedit-"><i class="fa fa-search"></i></span>
                                         </div>
                                     </div>
-                                    <button type="button" class="btn btn-success btn-md" ng-click="save()">Save</button>
+                                    <button type="button" class="btn btn-success" ng-click="save()">Save</button>
                                 </div>
                                 <!-- /.Croping of image -->
                             </div>
@@ -196,21 +306,6 @@
                     </div>
                 </div>
             </div>
-            <!-- row -->
-            <!-- ============================================================== -->
-            <!-- End PAge Content -->
-            <!-- ============================================================== -->
         </div>
-        <!-- ============================================================== -->
-        <!-- End Container fluid  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- footer -->
-        <!-- ============================================================== -->
         <footer class="footer"> © 2019 Optio All rights reserved. </footer>
-        <!-- ============================================================== -->
-        <!-- End footer -->
-        <!-- ============================================================== -->
     </div>
-
-    <!-- <script src="admin/assets/plugins/cropper/cropper-init.js"></script> -->

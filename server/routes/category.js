@@ -28,6 +28,7 @@ router.post('/create', categoryCtrl.category_create);
 router.get('/:id', categoryCtrl.category_details);
 
 router.get('/?', categoryCtrl.category_list);
+router.get('/topic/all?', categoryCtrl.topic_list);
 
 router.put('/:id/update', categoryCtrl.category_update);
 
