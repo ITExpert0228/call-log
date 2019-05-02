@@ -13,7 +13,7 @@ var UserSchema = new Schema({
     birthday: { type: Date, default: Date.now() },
     country: { type: String, trim: true, default: '' },
     city: { type: String, trim: true, default: '' },
-    job: { type: String, trim: true, default: '' },
+    // job: { type: String, trim: true, default: '' },
     subscribe: { type: Boolean, default: false },
     registeredAt: { type: Date, default: Date.now() },
     lastLoginAt: { type: Date, default: Date.now() },

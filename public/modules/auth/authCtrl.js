@@ -60,8 +60,7 @@ app.controller('AuthCtrl', ['$scope', '$rootScope', '$cookieStore', '$location',
             birthday:$scope.birthday,
             role: "user",
             country:$scope.country,
-            city:$scope.city,
-            job:$scope.job
+            city:$scope.city
         };
         
         $('#LoadingLoop').show();

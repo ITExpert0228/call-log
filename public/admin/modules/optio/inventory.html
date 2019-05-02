@@ -1,7 +1,12 @@
+<style>
+.single-media {
+    border:2px solid transparent;
+}
+.single-media.active {
+    border:2px solid green;
+}
+</style>
 <div class="page-wrapper">
-        <!-- ============================================================== -->
-        <!-- Bread crumb and right sidebar toggle -->
-        <!-- ============================================================== -->
         <div class="row page-titles">
             <div class="col-md-5 align-self-center">
                 <h3 class="text-themecolor">Inventory</h3>
@@ -13,17 +18,7 @@
                 </ol>
             </div>
         </div>
-        <!-- ============================================================== -->
-        <!-- End Bread crumb and right sidebar toggle -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- Container fluid  -->
-        <!-- ============================================================== -->
         <div class="container-fluid">
-            <!-- ============================================================== -->
-            <!-- Start Page Content -->
-            <!-- ============================================================== -->
-            <!-- row -->
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
@@ -34,15 +29,15 @@
                                     <h4 class="card-title">Inventory of all Optios (Votes)</h4>
                                   
                                     <div class="form-group row">
-                                        <div class="col-md-9">
-                                                    
+                                        <div class="col-md-6">
                                             <div class="search-box-bs"> 
                                                 <input type="text" ng-model="searchTag" ng-change="search()" class="form-control" placeholder="Search from Name of Optio"> 
                                                 <button class="btn btn-primary waves-effect waves-light" type="button"><span class="btn-label"><i class="icon-magnifier"></i></span></button>
                                             </div> 
-                                 
                                         </div>
-                                                 
+                                        <div class="col-md-6">
+                                                <a class="btn btn-info pull-right" href="/manager/create"><span class="btn-label"><i class="fa fa-plus"></i>  New Optio</span></a>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-4">
@@ -54,7 +49,7 @@
                                                                     <div class="input-group">
                                                                         <ul class="icheck-list">
                                                                             <li>
-                                                                                <input type="radio" class="check" id="square-radio-1" name="square-radio" data-radio="iradio_square-green" data-dom="opt1" disabled>
+                                                                                <input type="radio" class="check" id="square-radio-1" name="square-radio" checked data-radio="iradio_square-green" data-dom="opt1">
                                                                                 <label for="square-radio-1">By Topic</label>
                                                                             </li>
                                                                             <li>
@@ -62,7 +57,7 @@
                                                                                 <label for="square-radio-2">By Categories</label>
                                                                             </li>
                                                                             <li>
-                                                                                <input type="radio" class="check" id="square-radio-3" name="square-radio" checked data-radio="iradio_square-green" data-dom="opt3">
+                                                                                <input type="radio" class="check" id="square-radio-3" name="square-radio" data-radio="iradio_square-green" data-dom="opt3">
                                                                                 <label for="square-radio-3">By Date of Creation</label>
                                                                             </li>
                                                                             <li>
@@ -87,12 +82,12 @@
                                                             <table class="table">
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td>Ranking Owned Optios <br><small>out of 356</small></td>
-                                                                        <td>1</td>
+                                                                        <td>Ranking Owned Optios <br><small>out of {{rankingInfo.ownOut}}</small></td>
+                                                                        <td>{{rankingInfo.ownRank}}</td>
                                                                     </tr>
                                                                     <tr>      
-                                                                        <td>Ranking out of Live <br><small>out of 1,089,789</small></td>
-                                                                        <td>5,689</td>
+                                                                        <td>Ranking out of Live <br><small>out of {{rankingInfo.allOut}}</small></td>
+                                                                        <td>{{rankingInfo.allRank}}</td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
@@ -111,7 +106,7 @@
                                                                     </tr>
                                                                     <tr>    
                                                                         <td>Earnings for the Period <br><small>From Jan 2019 to Feburary 2019 <a href="#">Choose period</a></small></td>
-                                                                        <td>$25</td>
+                                                                        <td>$0</td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
@@ -127,28 +122,26 @@
                              
                                         </div>
                                         <div class="col-md-8">
-                             
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <ul class="nav nav-tabs" role="tablist">
-                                                    <li class=" nav-item"> <a href="#navpills-4" class="nav-link active" data-toggle="tab" target="_self" aria-expanded="false">Image</a> </li>
-                                                    <li class="nav-item"> <a href="#navpills-5" class="nav-link" data-toggle="tab" target="_self" aria-expanded="false">Video</a> </li>
-                                                    <li class="nav-item"> <a href="#navpills-6" class="nav-link" data-toggle="tab" target="_self" aria-expanded="true">Text</a> </li>
-                                                    <li class="nav-item"> <a href="#navpills-7" class="nav-link" data-toggle="tab" target="_self" aria-expanded="true">Other</a> </li>
-                                                </ul>
-                                                <div class="tab-content tabcontent-border br-n pn">
-                                                    <div id="navpills-4" class="tab-pane active">
-                                                        <nav class="breadcrumb" style="background:white"    >
-                                                            <a class="breadcrumb-item" href="#">Science and Technology</a>
-                                                            <a class="breadcrumb-item" href="#">Greatest Scientist in History</a>
-                                                            <span class="breadcrumb-item active">Albert Einstain VS Nikola Tesla</span>
-                                                        </nav>
-                                                        <div  style="padding:0 1rem 1rem; max-height:500px;overflow-y:scroll">
-                                                            <h4 class="card-title">Greatest Scientist in history</h4>
+                                            <ul class="nav nav-tabs" role="tablist">
+                                                <li class=" nav-item"> <a href="#navpills-4" class="nav-link active" data-toggle="tab" target="_self" aria-expanded="false">Image</a> </li>
+                                                <li class="nav-item"> <a href="#navpills-5" class="nav-link" data-toggle="tab" target="_self" aria-expanded="false">Video</a> </li>
+                                                <li class="nav-item"> <a href="#navpills-6" class="nav-link" data-toggle="tab" target="_self" aria-expanded="true">Music</a> </li>
+                                                <li class="nav-item"> <a href="#navpills-7" class="nav-link" data-toggle="tab" target="_self" aria-expanded="true">Other</a> </li>
+                                            </ul>
+                                            <div class="tab-content tabcontent-border br-n pn">
+                                                <div id="navpills-4" class="tab-pane active">
+                                                    <nav class="breadcrumb" style="background:white"    >
+                                                        <a class="breadcrumb-item" href="#">{{selectedCategory}}</a>
+                                                        <a class="breadcrumb-item" href="#">{{selectedTopic}}</a>
+                                                        <span class="breadcrumb-item active">{{selectedOptioTitle}}</span>
+                                                    </nav>
+                                                    <div style="padding:0 1rem 1rem; max-height:500px;overflow-y:scroll">
+                                                        <div ng-repeat="group in groups">
+                                                            <h4 class="card-title">{{group}}</h4>
                                                             <div class="media-items-c">
-                                                                <div class="single-media" ng-repeat="optio in searchOptio">
+                                                                <div class="single-media {{optio.active?'active':''}}" ng-click="search(optio.id)" ng-repeat="optio in searchOptio" ng-if="optio.filter == group">
                                                                     <div class="vote-details-b">
-                                                                        <a href="/manager/edit/{{optio.id}}">
+                                                                        <a href="#" title="{{optio.oLMedia.mName+' VS '+optio.oRMedia.mName}}">
                                                                             <div class="team-s"><img ng-src="uploads/thumb-{{optio.oLImage?optio.oLImage:optio.oLMedia.mImage}}"></div> 
                                                                             <div class="team-s"><img ng-src="uploads/thumb-{{optio.oRImage?optio.oRImage:optio.oRMedia.mImage}}"></div> 
                                                                         </a>
@@ -160,25 +153,24 @@
                                                             </div>
                                                         </div>
                                                     </div>
-
-                                                    <div id="navpills-5" class="tab-pane">
-                                                            <div class="row">
-                                                                <div class="col-md-12" style="height:300px">tab-content5</div>
-                                                            </div>
-                                                        </div>
-                                                        <div id="navpills-6" class="tab-pane">
-                                                                <div class="row">
-                                                                    <div class="col-md-12" style="height:300px">tab-content6</div>
-                                                                </div>
-                                                            </div>
-                                                        <div id="navpills-7" class="tab-pane">
-                                                            <div class="row">
-                                                                <div class="col-md-12" style="height:300px">tab-content7</div>
-                                                            </div>
-                                                        </div>
                                                 </div>
+
+                                                <div id="navpills-5" class="tab-pane">
+                                                        <div class="row">
+                                                            <div class="col-md-12" style="height:300px">tab-content5</div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="navpills-6" class="tab-pane">
+                                                            <div class="row">
+                                                                <div class="col-md-12" style="height:300px">tab-content6</div>
+                                                            </div>
+                                                        </div>
+                                                    <div id="navpills-7" class="tab-pane">
+                                                        <div class="row">
+                                                            <div class="col-md-12" style="height:300px">tab-content7</div>
+                                                        </div>
+                                                    </div>
                                             </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -186,18 +178,6 @@
                     </div>
                 </div>
             </div>
-            <!-- row -->
-            <!-- ============================================================== -->
-            <!-- End PAge Content -->
         </div>
-        <!-- ============================================================== -->
-        <!-- End Container fluid  -->
-        <!-- ============================================================== -->
-        <!-- ============================================================== -->
-        <!-- footer -->
-        <!-- ============================================================== -->
         <footer class="footer"> © 2019 Optio All rights reserved. </footer>
-        <!-- ============================================================== -->
-        <!-- End footer -->
-        <!-- ============================================================== -->
     </div>

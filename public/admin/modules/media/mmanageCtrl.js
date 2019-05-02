@@ -10,77 +10,110 @@ app.controller('MManageCtrl', ['$scope', 'categoryService', 'mediaService', '$co
 
     $scope.breadObj;
 
-    $scope.getGroups = function () {
-        var groupArray = [];
-        angular.forEach($scope.allMedia, function (item, idx) {
-            if (groupArray.indexOf(item.mMonth + ' ' + item.mYear) == -1) {
-                groupArray.push(item.mMonth + ' ' + item.mYear);
-            }
-        });
-        return groupArray;
-    }
+    // $scope.getGroups = function () {
+    //     var groupArray = [];
+    //     angular.forEach($scope.allMedia, function (item, idx) {
+    //         if (groupArray.indexOf(item.mMonth + ' ' + item.mYear) == -1) {
+    //             groupArray.push(item.mMonth + ' ' + item.mYear);
+    //         }
+    //     });
+    //     return groupArray;
+    // }
+
+    $scope.searchMedia = [];
+    $scope.groups = [];
         
     mediaService.getAll().then(function(data){
         var mediaTxt = [];
+        console.log(data);
         angular.forEach(data, function (media) {
             var date = new Date(media.mCreate);
             media.mYear = date.getFullYear();
             media.mMonth = monthNames[date.getMonth()];
-            media.mCMonth = monthCNames[date.getMonth()];
+            // media.mCMonth = monthCNames[date.getMonth()];
 
             if (media.mUser == $scope.loggedInUser.id) {
                 $scope.allMedia.push(media);
-                mediaTxt.push(media.mName);
-                $scope.storeAll.push(media);
+                $scope.searchMedia.push(media);
             }
         });
 
-        var	sArr = $filter('filter')($scope.allMedia, $scope.searchKey);
-        var nArr = $filter('groupby')(sArr, $scope.getGroups()[0]);
-    
-        //console.log(sArr);
-        $scope.breadObj = {
-            year: nArr[0].mYear,
-            month: nArr[0].mCMonth,
-            name: nArr[0].mName
-        }
-
-        $("#myText").autocomplete({
-            source: mediaTxt,
-            minLength: 1,
-            change: function() {
-                // $("#myText").val("").css("display", 2);
-            }
-        });
-
-        $("#enableComplete").click(function(){
-            
-        });
+        $scope.search();
     }, function (err) {
         console.log(err)
     }) 
 
-    $scope.breadObj;
-    $scope.updateSearch = function() {
-        $scope.allMedia = [];
-        
-        angular.forEach($scope.storeAll, function (media) {
-            var date = new Date(media.mCreate);
-            media.mYear = date.getFullYear();
-            media.mMonth = monthNames[date.getMonth()];
-            media.mCMonth = monthNames[date.getMonth()];
-            if (media.mName.search($scope.searchKey) >= 0) {
-                $scope.allMedia.push(media);
+    $scope.search = function(selected_id) {
+        console.log('aaaa');
+        $scope.searchMedia = [];
+        $scope.groups = [];
+        if ($scope.searchTag == null) $scope.searchTag = '';
+        var activeSelected = false;
+        angular.forEach($scope.allMedia, function (media) {
+            media.active = false;
+            if (media.mName.toLowerCase().search($scope.searchTag.toLowerCase()) > -1) {
+                media.filter = 'Others';
+                if ($scope.filterType == 3 || $scope.filterType == 4) {
+
+                } else if ($scope.filterType == 2) {
+                    var date = new Date(media.mCreate);
+                    media.mYear = date.getFullYear();
+                    media.mMonth = monthNames[date.getMonth()];
+                    var val = media.mMonth+' '+media.mYear;
+                    if (!$scope.groups.includes(val)) $scope.groups.push(val);
+                    media.filter = val;
+                } else if ($scope.filterType == 1) {
+                    console.log('a');
+                    if (!$scope.groups.includes(media.mCategory.cName)) $scope.groups.push(media.mCategory.cName);
+                    media.filter = media.mCategory.cName;
+                } else {
+                    // if (optio.oCategory && !$scope.groups.includes(optio.oCategory.cName)) {
+                    //     $scope.groups.push(optio.oCategory.cName);
+                    // }
+                    // optio.filter = optio.oCategory?optio.oCategory.cName:'Others';
+                }
+                $scope.searchMedia.push(media);
             }
+            // if (selected_id && selected_id == optio.id) {
+            //     optio.active = true;
+            //     activeSelected = true;
+            //     for (var i=0; i<$scope.categorys.length; i++) {
+            //         if (optio.oLMedia && $scope.categorys[i].id == optio.oLMedia.mCategory) {
+            //             $scope.selectedCategory = $scope.categorys[i].cName;
+            //             break;
+            //         }
+            //     }
+            //     $scope.selectedTopic = optio.oCategory?optio.oCategory.cName:'No Topic';
+            //     $scope.selectedOptioTitle = optio.oLMedia.mName + ' VS ' + optio.oRMedia.mName;
+
+            //     voteService.getVoteRank(selected_id).then(function(data){
+            //         $scope.rankingInfo = data
+            //     }, function (err) {
+            //         console.log(err)
+            //     }) 
+            // } else if (!selected_id && !optio.active && !activeSelected && optio.filter == $scope.groups[0]) {
+            //     optio.active = true;
+            //     activeSelected = true;
+            //     for (var i=0; i<$scope.categorys.length; i++) {
+            //         if (optio.oLMedia && $scope.categorys[i].id == optio.oLMedia.mCategory) {
+            //             $scope.selectedCategory = $scope.categorys[i].cName;
+            //             break;
+            //         }
+            //     }
+            //     $scope.selectedTopic = optio.oCategory?optio.oCategory.cName:'No Topic';
+            //     $scope.selectedOptioTitle = optio.oLMedia.mName + ' VS ' + optio.oRMedia.mName;
+            //     voteService.getVoteRank(optio.id).then(function(data){
+            //         $scope.rankingInfo = data
+            //     }, function (err) {
+            //         console.log(err)
+            //     })
+            // }
+            
         });
-        if ($scope.allMedia.length > 0) {
-            $scope.canShowBreadcrumb = true;
-            $scope.breadObj = {
-                year: $scope.allMedia[0].mYear,
-                month: $scope.allMedia[0].mCMonth,
-                name: $scope.allMedia[0].mName
-            }
-        }
+        $scope.groups.push('Others');
+        setTimeout(function() {
+            $scope.$apply();
+        }, 100);
     }
 
     $scope.$on('$viewContentLoaded', function(){
@@ -180,21 +213,21 @@ app.controller('MManageCtrl', ['$scope', 'categoryService', 'mediaService', '$co
             $('input').on('ifChecked', function(event){
                 switch ($(this).data('dom')) {
                     case 'opt1':
-                        $scope.filterType = 1;
+                        $scope.filterType = 0;
                         break;
                     case 'opt2':
-                        $scope.filterType = 2;
+                        $scope.filterType = 1;
                         break;
                     case 'opt3':
-                        $scope.filterType = 3;
+                        $scope.filterType = 2;
                         break;
                     case 'opt4':
-                        $scope.filterType = 4;
+                        $scope.filterType = 3;
                         break;
                     default:
-                        $scope.filterType = 5;
+                        $scope.filterType = 4;
                 }
-                $scope.updateSearch();
+                $scope.search();
             });
         })
         

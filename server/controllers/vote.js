@@ -22,6 +22,28 @@ exports.vote_details = function (req, res, next) {
     })
 };
 
+exports.vote_rank = function (req, res, next) {
+    Vote.find({}).populate('oLMedia oRMedia').exec(function (err, votelist) {
+        var currentCount = 0;
+        var currentOwnRank = 0;
+        var currentAllCount = votelist.length;
+        for (var i=0; i<votelist.length; i++) {
+            if (votelist[i].vOptio == req.params.id) {
+                currentCount ++;
+                currentOwnRank ++;
+            }
+        }      
+        if (err) return next(err);
+        var resData = {
+            ownOut: currentCount,
+            ownRank:currentOwnRank,
+            allOut:currentAllCount,
+            allRank: currentAllCount
+        }
+        res.send(votelist);
+    })
+};
+
 exports.vote_list = function (req, res, next) {
     Vote.find({}).populate('oLMedia oRMedia').exec(function (err, votelist) {
         

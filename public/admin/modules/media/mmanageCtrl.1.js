@@ -1,27 +1,89 @@
-app.controller('InventoryCtrl', ['$scope', 'categoryService', 'mediaService', 'optioService', 'voteService', '$cookieStore', '$filter', function($scope, categoryService, mediaService, optioService, voteService, $cookieStore, $filter) {
+app.controller('MManageCtrl', ['$scope', 'categoryService', 'mediaService', '$cookieStore', '$filter', function($scope, categoryService, mediaService, $cookieStore, $filter) {
 
-    $scope.allOptio = [];
-    $scope.searchOptio = [];
-    $scope.groups = [];
-
+    $scope.allMedia = [];
+    $scope.storeAll = [];
+    $scope.loggedInUser = $cookieStore.get("user");
+    $scope.filterType = 3;
+    $scope.canShowBreadcrumb = false;
     var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     var monthCNames = ['January', 'Febrary', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-    categoryService.getAll().then(function(data){
-        $scope.categorys = data;
-    }, function (err) {
-        console.log(err)
-    });
-    optioService.getAll().then(function(data){
-        angular.forEach(data, function (optio) {
-            $scope.allOptio.push(optio);
-            $scope.searchOptio.push(optio);
+    $scope.breadObj;
+
+    // $scope.getGroups = function () {
+    //     var groupArray = [];
+    //     angular.forEach($scope.allMedia, function (item, idx) {
+    //         if (groupArray.indexOf(item.mMonth + ' ' + item.mYear) == -1) {
+    //             groupArray.push(item.mMonth + ' ' + item.mYear);
+    //         }
+    //     });
+    //     return groupArray;
+    // }
+
+    $scope.searchMedia = [];
+    $scope.groups = [];
+        
+    mediaService.getAll().then(function(data){
+        var mediaTxt = [];
+        angular.forEach(data, function (media) {
+            var date = new Date(media.mCreate);
+            media.mYear = date.getFullYear();
+            media.mMonth = monthNames[date.getMonth()];
+            // media.mCMonth = monthCNames[date.getMonth()];
+
+            if (media.mUser == $scope.loggedInUser.id) {
+                $scope.allMedia.push(media);
+                $scope.searchMedia.push(media);
+            }
         });
 
-        $scope.search();
+        var	sArr = $filter('filter')($scope.allMedia, $scope.searchKey);
+        var nArr = $filter('groupby')(sArr, $scope.getGroups()[0]);
+    
+        //console.log(sArr);
+        $scope.breadObj = {
+            year: nArr[0].mYear,
+            month: nArr[0].mCMonth,
+            name: nArr[0].mName
+        }
+
+        $("#myText").autocomplete({
+            source: mediaTxt,
+            minLength: 1,
+            change: function() {
+                // $("#myText").val("").css("display", 2);
+            }
+        });
+
+        $("#enableComplete").click(function(){
+            
+        });
     }, function (err) {
         console.log(err)
     }) 
+
+    $scope.breadObj;
+    $scope.updateSearch = function() {
+        $scope.allMedia = [];
+        
+        angular.forEach($scope.storeAll, function (media) {
+            var date = new Date(media.mCreate);
+            media.mYear = date.getFullYear();
+            media.mMonth = monthNames[date.getMonth()];
+            media.mCMonth = monthNames[date.getMonth()];
+            if (media.mName.search($scope.searchKey) >= 0) {
+                $scope.allMedia.push(media);
+            }
+        });
+        if ($scope.allMedia.length > 0) {
+            $scope.canShowBreadcrumb = true;
+            $scope.breadObj = {
+                year: $scope.allMedia[0].mYear,
+                month: $scope.allMedia[0].mCMonth,
+                name: $scope.allMedia[0].mName
+            }
+        }
+    }
 
     $scope.search = function(selected_id) {
         $scope.searchOptio = [];
@@ -196,22 +258,31 @@ app.controller('InventoryCtrl', ['$scope', 'categoryService', 'mediaService', 'o
             $('input').on('ifChecked', function(event){
                 switch ($(this).data('dom')) {
                     case 'opt1':
-                        $scope.filterType = 0;
-                        break;
-                    case 'opt2':
                         $scope.filterType = 1;
                         break;
-                    case 'opt3':
+                    case 'opt2':
                         $scope.filterType = 2;
                         break;
-                    case 'opt4':
+                    case 'opt3':
                         $scope.filterType = 3;
                         break;
-                    default:
+                    case 'opt4':
                         $scope.filterType = 4;
+                        break;
+                    default:
+                        $scope.filterType = 5;
                 }
                 $scope.search();
             });
         })
+        
     })
 }]);
+
+app.filter('groupby', function(){
+    return function(items,group){       
+       return items.filter(function(element, index, array) {
+            return (element.mMonth + ' ' + element.mYear)==group;
+        });        
+    }        
+}) ; 

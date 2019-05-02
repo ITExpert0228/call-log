@@ -56,7 +56,7 @@ exports.media_details = function (req, res, next) {
 };
 
 exports.media_list = function (req, res, next) {
-    Media.find({}, function (err, medialist) {
+    Media.find({}).populate('mCategory').exec(function (err, medialist) {
         if (err) return next(err);
         res.send(medialist);
     })

@@ -10,6 +10,8 @@ router.post('/create', voteCtrl.vote_create);
 
 router.get('/:id', voteCtrl.vote_details);
 
+router.get('/rank/:id', voteCtrl.vote_rank);
+
 router.get('/?', voteCtrl.vote_list);
 
 router.put('/:id/update', voteCtrl.vote_update);
