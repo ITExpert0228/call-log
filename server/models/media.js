@@ -6,7 +6,8 @@ var MediaSchema = new Schema({
     mName: { type: String, required: true, trim: true, default: ''},
     mUser: {type: ObjectId, required: true, default: null},
     mImage:  {type: String, trim: true, default: ''},
-    mCategory: {type: ObjectId, ref: 'Category'},
+    mType: {type: Number, default: 0},
+    mSrc: {type: String, trim: true, default: ''},
     mCreate: { type: Date, default: Date.now() }
 });
 

@@ -259,6 +259,24 @@ Margin
 html body .m-0 {
   margin: 0px; }
 
+html body .m-5 {
+  margin: 5px; }
+
+html body .m-10 {
+  margin: 10px; }
+
+html body .m-15 {
+  margin: 15px; }
+
+html body .m-20 {
+  margin: 20px; }
+
+html body .m-30 {
+  margin: 30px; }
+
+html body .m-40 {
+  margin: 40px; }
+  
 html body .m-l-5 {
   margin-left: 5px; }
 
@@ -8372,3 +8390,14 @@ li.name-s {
 .page-titles .breadcrumb {
   margin-bottom:0!important;
 }
+
+.nav-tabs .nav-link.text-success {
+  color: #088b04 !important;
+}
+
+.nav-tabs .nav-link.active {
+  color: #495057!important;
+  background-color: #fff!important;
+  border-color: #dee2e6 #dee2e6 #fff!important;
+}
+

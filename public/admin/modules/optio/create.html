@@ -151,115 +151,117 @@ img#exchange {
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-body">
-                                
-                                <h4 class="card-title">Select your Media</h4>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="card">
-                                            <div class="card-body">
+                                <ul class="nav nav-tabs m-t-30">
+                                    <li class="nav-item"> <a href="#navpills-1" class="text-success nav-link active" data-toggle="tab" target="_self" aria-expanded="false">Image</a> </li>
+                                    <li class="nav-item"> <a href="#navpills-2" class="text-success nav-link" data-toggle="tab" target="_self" aria-expanded="false">Video</a> </li>
+                                    <li class="nav-item"> <a href="#navpills-3" class="text-success nav-link" data-toggle="tab" target="_self" aria-expanded="true">Music</a> </li>
+                                    <li class="nav-item"> <a href="#navpills-4" class="text-success nav-link" data-toggle="tab" target="_self" aria-expanded="true">Other</a> </li>
+                                </ul>
+                                <div class="tab-content tabcontent-border br-n pn p-10 p-t-30">
+                                    <div id="navpills-1" class="tab-pane active">
+                                        <div class="row">
+                                            <!-- .Your image -->
+                                            <div class="col-md-9" style="padding: 0 20px 20px">
                                                 <div class="row">
-                                                    <!-- .Your image -->
-                                                    <div class="col-md-9" style="padding: 0 20px 20px">
-                                                        <div class="row">
-                                                            <div class="col-md-1"></div>
-                                                            <div class="col-md-4" id="left-media">
-                                                                <div class="edit-bar">
-                                                                    <span class="btn" id="ledit-rotate-left"><i class="mdi mdi-rotate-left-variant"></i></span>
-                                                                    <span class="btn" id="ledit-rotate-right"><i class="mdi mdi-rotate-right-variant"></i></span>
-                                                                    <span class="btn" id="ledit-flip-h"><i class="mdi mdi-format-horizontal-align-center"></i></span>
-                                                                    <span class="btn" id="ledit-flip-v"><i class="mdi mdi-format-vertical-align-center"></i></span>
-                                                                    <span class="btn" id="ledit-zoom-plus"><i class="fa fa-search-plus"></i></span>
-                                                                    <span class="btn" id="ledit-zoom-minus"><i class="fa fa-search-minus"></i></span>
-                                                                </div>
-                                                                <div class="media-container"><img id="imageL" src="admin/assets/images/select.jpg" ng-click="selectMedia(0)" class="img-responsive" alt="Picture"></div>
-                                                                <div><label class="cropper-label">Left Position</label></div>
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <img id="exchange" class="" src="admin/assets/images/exchange.png" ng-click="selectMedia(2)" width="50" alt="Picture">
-                                                            </div>
-                                                            <div class="col-md-4" id="right-media">
-                                                                    <div class="edit-bar">
-                                                                        <span class="btn" id="redit-rotate-left"><i class="mdi mdi-rotate-left-variant"></i></span>
-                                                                        <span class="btn" id="redit-rotate-right"><i class="mdi mdi-rotate-right-variant"></i></span>
-                                                                        <span class="btn" id="redit-flip-h"><i class="mdi mdi-format-horizontal-align-center"></i></span>
-                                                                        <span class="btn" id="redit-flip-v"><i class="mdi mdi-format-vertical-align-center"></i></span>
-                                                                        <span class="btn" id="redit-zoom-plus"><i class="fa fa-search-plus"></i></span>
-                                                                        <span class="btn" id="redit-zoom-minus"><i class="fa fa-search-minus"></i></span>
-                                                                    </div>
-                                                                <div class="media-container"><img id="imageR" src="admin/assets/images/selectR.jpg" ng-click="selectMedia(1)" class="img-responsive" alt="Picture"></div>
-                                                                <div><label class="cropper-label">Right Position</label></div>
-                                                            </div>
-                                                            <div class="col-md-1"></div>
+                                                    <div class="col-md-4" id="left-media">
+                                                        <div class="edit-bar">
+                                                            <span class="btn" id="ledit-rotate-left"><i class="mdi mdi-rotate-left-variant"></i></span>
+                                                            <span class="btn" id="ledit-rotate-right"><i class="mdi mdi-rotate-right-variant"></i></span>
+                                                            <span class="btn" id="ledit-flip-h"><i class="mdi mdi-format-horizontal-align-center"></i></span>
+                                                            <span class="btn" id="ledit-flip-v"><i class="mdi mdi-format-vertical-align-center"></i></span>
+                                                            <span class="btn" id="ledit-zoom-plus"><i class="fa fa-search-plus"></i></span>
+                                                            <span class="btn" id="ledit-zoom-minus"><i class="fa fa-search-minus"></i></span>
                                                         </div>
-                                                        <div class="row">
-                                                            <div class="col-md-1"></div>
-                                                            <div class="col-md-10">
-                                                                <!-- <div class="form-group img-select">
-                                                                    <label for="oTopic" class="control-label">Optio Topic:</label>
-                                                                    <input type="text" class="form-control" id="oTopic" ng-model="oTopic">
-                                                                </div> -->
-                                                                <div class="form-group">
-                                                                    <label class="control-label">Select Optio Topic</label>
-                                                                    <select class="form-control custom-select select2" ng-model="selectedCategory" ng-change="categoryChanged()" data-placeholder="Choose a Topic" tabindex="1" ng-disabled="newCat">
-                                                                        <option ng-repeat="x in topics" value="{{x.id}}">{{x.cName}}</option>
-                                                                    </select>
-                                                                </div>
-                                                                <div class="form-group" ng-show="newCat">
-                                                                    <label>New Topic Name</label>
-                                                                    <div class="input-group">
-                                                                        <input type="text" ng-model="tagName" id="myText" class="form-control">
-                                                                        <span class="btn btn-info" id="iedit-" ng-click="saveNewTopic()"><i class="fa fa-save"></i>&nbsp;&nbsp;Save</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-1"></div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-1"></div>
-                                                            <div class="col-md-10">
-                                                                <a href="" class="btn btn-primary waves-effect waves-light pull-right" ng-click="createVote()">Create New Vote</a> 
-                                                            </div>
-                                                            <div class="col-md-1"></div>
-                                                        </div>
+                                                        <div class="media-container"><img id="imageL" src="admin/assets/images/select.jpg" ng-click="selectMedia(0)" class="img-responsive" alt="Picture"></div>
+                                                        <div><label class="cropper-label">Left Position</label></div>
                                                     </div>
-                                                    <!-- /.Your image -->
-                                                    <!-- .Croping image -->
-                                                    <div class="col-md-3">
-                                                        <div class="card">
-                                                            <div class="card-header">
-                                                                Select from Own Media
+                                                    <div class="col-md-2">
+                                                        <img id="exchange" class="" src="admin/assets/images/exchange.png" ng-click="selectMedia(2)" width="50" alt="Picture">
+                                                    </div>
+                                                    <div class="col-md-4" id="right-media">
+                                                            <div class="edit-bar">
+                                                                <span class="btn" id="redit-rotate-left"><i class="mdi mdi-rotate-left-variant"></i></span>
+                                                                <span class="btn" id="redit-rotate-right"><i class="mdi mdi-rotate-right-variant"></i></span>
+                                                                <span class="btn" id="redit-flip-h"><i class="mdi mdi-format-horizontal-align-center"></i></span>
+                                                                <span class="btn" id="redit-flip-v"><i class="mdi mdi-format-vertical-align-center"></i></span>
+                                                                <span class="btn" id="redit-zoom-plus"><i class="fa fa-search-plus"></i></span>
+                                                                <span class="btn" id="redit-zoom-minus"><i class="fa fa-search-minus"></i></span>
                                                             </div>
-                                                            <div class="card-body">
-                                                                <div class="row media-items-d">
-                                                                    <div class="col-4 no-title-media" ng-repeat="media in allUserMedia | filter: searchTag">
-                                                                        <img ng-click="mediaSelect(media.id, media.mImage, media.mName)" title="{{media.mName}}" data-ng-src="uploads/thumb-{{media.mImage}}" alt="{{media.mName}}" />
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card-footer">
-                                                                <div class="input-group">
-                                                                    <input type="text" placeholder="Search Media" ng-model="searchTag.mName" id="myText" class="form-control">
-                                                                    <span class="btn btn-info" id="iedit-"><i class="fa fa-search"></i></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <!-- <div class="form-group">
-                                                            <label>Search from Own Media</label>
-                                                        </div>
-                                                        <div class="media-items-d">
-                                                            <div class="no-title-media" ng-repeat="media in allUserMedia">
-                                                                <img ng-click="mediaSelect(media.id)" data-ng-src="uploads/thumb-{{media.mImage}}" alt="{{media.mName}}" />
-                                                            </div>
+                                                        <div class="media-container"><img id="imageR" src="admin/assets/images/selectR.jpg" ng-click="selectMedia(1)" class="img-responsive" alt="Picture"></div>
+                                                        <div><label class="cropper-label">Right Position</label></div>
+                                                    </div>
+                                                    <div class="col-md-1"></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                        <!-- <div class="form-group img-select">
+                                                            <label for="oTopic" class="control-label">Optio Topic:</label>
+                                                            <input type="text" class="form-control" id="oTopic" ng-model="oTopic">
                                                         </div> -->
+                                                        <div class="form-group">
+                                                            <label class="control-label">Select Optio Topic</label>
+                                                            <select class="form-control custom-select select2" ng-model="selectedCategory" ng-change="categoryChanged()" data-placeholder="Choose a Topic" tabindex="1" ng-disabled="newCat">
+                                                                <option ng-repeat="x in topics" value="{{x.id}}">{{x.cName}}</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group" ng-show="newCat">
+                                                            <label>New Topic Name</label>
+                                                            <div class="input-group">
+                                                                <input type="text" ng-model="tagName" id="myText" class="form-control">
+                                                                <span class="btn btn-info" id="iedit-" ng-click="saveNewTopic()"><i class="fa fa-save"></i>&nbsp;&nbsp;Save</span>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <!-- /.Croping of image -->
+                                                    <div class="col-md-1"></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-10">
+                                                        <a href="" class="btn btn-primary waves-effect waves-light pull-right" ng-click="createVote()">Create New Vote</a> 
+                                                    </div>
+                                                    <div class="col-md-1"></div>
                                                 </div>
                                             </div>
+                                            <!-- /.Your image -->
+                                            <!-- .Croping image -->
+                                            <div class="col-md-3">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        Select from Own Media
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="row media-items-d">
+                                                            <div class="col-4 no-title-media" ng-repeat="media in allUserMedia | filter: searchTag">
+                                                                <img ng-click="mediaSelect(media.id, media.mImage, media.mName)" title="{{media.mName}}" data-ng-src="uploads/thumb-{{media.mImage}}" alt="{{media.mName}}" />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <div class="input-group">
+                                                            <input type="text" placeholder="Search Media" ng-model="searchTag.mName" id="myText" class="form-control">
+                                                            <span class="btn btn-info" id="iedit-"><i class="fa fa-search"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <!-- <div class="form-group">
+                                                    <label>Search from Own Media</label>
+                                                </div>
+                                                <div class="media-items-d">
+                                                    <div class="no-title-media" ng-repeat="media in allUserMedia">
+                                                        <img ng-click="mediaSelect(media.id)" data-ng-src="uploads/thumb-{{media.mImage}}" alt="{{media.mName}}" />
+                                                    </div>
+                                                </div> -->
+                                            </div>
+                                            <!-- /.Croping of image -->
                                         </div>
                                     </div>
+                                    <div id="navpills-2" class="tab-pane">
+                                    </div>
+                                    <div id="navpills-3" class="tab-pane">
+                                    </div>
+                                    <div id="navpills-4" class="tab-pane">
+                                    </div>
                                 </div>
-                        
                             </div>
                         </div>
                     </div>

@@ -41,17 +41,17 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
 
         // document.getElementById("image").src=$scope.selectedImg;
 
-        $("#myText").autocomplete({
+        $(".tagText").autocomplete({
             source: resData,
             minLength: 1,
             change: function() {
-                // $("#myText").val("").css("display", 2);
+                // $(".tagText").val("").css("display", 2);
             }
         });
 
         $("#enableComplete").click(function(){
-            $('#myText').autocomplete('option', 'minLength', 0);
-            $('#myText').autocomplete('search', $('#myText').val());
+            $('.tagText').autocomplete('option', 'minLength', 0);
+            $('.tagText').autocomplete('search', $('.tagText').val());
         });
     }, function (err) {
         console.log(err)
@@ -68,6 +68,10 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
           }
         }
         
+    }
+
+    $scope.setType = function(type) {
+
     }
 
     $scope.categoryChanged = function() {
@@ -125,10 +129,43 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
         $scope.selectedCategory = '';
     }
 
-    $scope.save = function() {
-        var $image = $('#jcrop_editor img');
-        var cropper = $image.data('cropper');
-        cropper.getCroppedCanvas().toBlob((blob) => {
+    function dataURItoBlob(dataURI) {
+        // convert base64 to raw binary data held in a string
+        // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this
+        var byteString = atob(dataURI.split(',')[1]);
+      
+        // separate out the mime component
+        var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0]
+      
+        // write the bytes of the string to an ArrayBuffer
+        var ab = new ArrayBuffer(byteString.length);
+      
+        // create a view into the buffer
+        var ia = new Uint8Array(ab);
+      
+        // set the bytes of the buffer to the correct values
+        for (var i = 0; i < byteString.length; i++) {
+            ia[i] = byteString.charCodeAt(i);
+        }
+      
+        // write the ArrayBuffer to a blob, and you're done
+        var blob = new Blob([ab], {type: mimeString});
+        return blob;
+      
+    }
+
+    $scope.save = function(type) {
+        if (type == 1) {
+
+        } else if (type == 2) {
+
+        } else if (type == 3) {
+
+        } else {
+            var $image = $('#jcrop_img');
+            var dataURL = $image.cropper("getDataURL", "image/jpeg");
+            var blob = dataURItoBlob(dataURL);
+
             var formData = new FormData();
             formData.append('media', blob, '1.jpg');
             $.ajax("/api/media/upload", {
@@ -140,11 +177,10 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
                     console.log(res);
                     var mediaObj = {
                         mName: $scope.tagName,
-                        mCategory: $scope.selectedCategory,
+                        mType: type,
                         mImage: res,
                         mUser: $scope.loggedInUser.id
                     }
-                    // if ($scope)
                     mediaService.create(mediaObj).then(function(newMedia){
                         $.toast({
                             heading: 'Media Successfully created!',
@@ -164,18 +200,19 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
                     console.log(err);
                 }
             });
-        }, "image/jpeg", 0.75);
-
+        }
+        
         // console.log(cropper.getCroppedCanvas().toDataURL("image/jpeg", 0.7));
     }
 
     $scope.enableAutocomplete = function() {
-        $('#myText').autocomplete('enable');
+        $('.tagText').autocomplete('enable');
     }
 
     $scope.$on('$viewContentLoaded', function(){
         
         $(document).ready(function() {
+        
             var dataURItoBlob = function (dataURI) {
                 var byteString = atob(dataURI.split(',')[1]);
                 var ab = new ArrayBuffer(byteString.length);
@@ -190,7 +227,7 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
             var c = 0;
             var editor = null;
             
-            var myDropzone = new Dropzone("#my-dropzone-container", {
+            var myDropzone = new Dropzone("#image-dropzone-container", {
                 addRemoveLinks: true,
                 parallelUploads: 10,
                 uploadMultiple: false,
@@ -210,11 +247,12 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
                         editor.style.bottom = 0;
                         editor.style.zIndex = 1000;
                         editor.style.backgroundColor = '#000';
-                        $('#my-dropzone-container').append(editor);
-                        editor.setAttribute("id", "jcrop_editor")
+                        $('#image-dropzone-container').append(editor);
+                        editor.setAttribute("id", "jcrop_editor");
                         // Load the image
                         var image = new Image();
                         image.src = URL.createObjectURL(file);
+                        image.setAttribute("id", "jcrop_img")
                         editor.appendChild(image);
 
                         // Append the editor to the page
@@ -251,7 +289,7 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
                         $('#iedit-camera-change').click(function(){
                             if (editor != null) {
                                 editor.parentNode.removeChild(editor);
-                                Dropzone.forElement("#my-dropzone-container").removeAllFiles(true);
+                                Dropzone.forElement("#image-dropzone-container").removeAllFiles(true);
                                 editor = null;
                             }
                         });
@@ -259,25 +297,99 @@ app.controller('MUploadCtrl', ['$scope', 'categoryService', 'mediaService', '$co
                 }
             });
             
+            var videoDropzone = new Dropzone("#video-dropzone-container", {
+                addRemoveLinks: true,
+                parallelUploads: 10,
+                uploadMultiple: false,
+                maxFiles: 10,
+                init: function () {
+                    // $('.edit-bar .btn').attr('disabled', true);
+                    var _CANVAS = document.querySelector("#video-canvas"),
+                        _CTX = _CANVAS.getContext("2d");
+
+                    this.on('success', function (file) {
+                        if(['video/mp4'].indexOf(file.type) == -1) {
+                            swal('Error : Only MP4 format allowed');
+                            Dropzone.forElement("#video-dropzone-container").removeAllFiles(true);
+                            return;
+                        }
+                        // var $button = $('<a href="#" class="js-open-cropper-modal" data-file-name="' + file.name + '">Crop & Upload</a>');
+                        // $(file.previewElement).append($button);
+                        var jcrop_api;
+                        
+                        var editor = document.createElement('video');
+                        editor.setAttribute("id", "main-video");
+                        editor.setAttribute("controls", "");
+                        
+                        $('#video-dropzone-container').append(editor);
+
+                        var source = document.createElement('source');
+                        source.setAttribute("id", "main-source");
+                        source.setAttribute("type", "video/mp4");
+                        source.setAttribute("src", URL.createObjectURL(file));
+
+                        editor.appendChild(source);
+
+                        var capture = document.createElement('span');
+                        capture.setAttribute("id", "main-capture");
+                        capture.setAttribute("class", "btn");
+                        
+                        $('#video-dropzone-container').append(capture);
+                        var captureImage = document.createElement('i');
+                        captureImage.setAttribute('class', 'mdi mdi-camera');
+                        capture.appendChild(captureImage);
+
+                        var changeBtn = document.createElement('span');
+                        changeBtn.setAttribute("id", "main-change");
+                        changeBtn.setAttribute("class", "btn");
+                        
+                        $('#video-dropzone-container').append(changeBtn);
+                        var changeImage = document.createElement('i');
+                        changeImage.setAttribute('class', 'fa fa-refresh');
+                        changeBtn.appendChild(changeImage);
+
+                        var _VIDEO = document.querySelector("#main-video");
+                        
+                        _VIDEO.addEventListener('loadedmetadata', function() { 
+                            // Set canvas dimensions same as video dimensions
+                            console.log('video size:'+_VIDEO.videoWidth+"-"+_VIDEO.videoHeight);
+                            _CANVAS.width = _VIDEO.videoWidth;
+                            _CANVAS.style.width = _VIDEO.videoWidth;
+                            _CANVAS.height = _VIDEO.videoHeight;
+                            _CANVAS.style.height = _VIDEO.videoHeight;
+                        });
+
+                        capture.addEventListener('click', function(){
+                            console.log('abc');
+                            _CTX.drawImage(_VIDEO, 0, 0, _VIDEO.videoWidth, _VIDEO.videoHeight);
+                        
+                            // document.querySelector("#get-thumbnail").setAttribute('href', _CANVAS.toDataURL());
+                            // document.querySelector("#get-thumbnail").setAttribute('download', 'thumbnail.png');
+                        });
+
+                        changeBtn.addEventListener('click', function(){
+                            if (editor != null) {
+                                editor.parentNode.removeChild(editor);
+                                Dropzone.forElement("#video-dropzone-container").removeAllFiles(true);
+                                editor = null;
+                            }
+                        });
+                    });
+                }
+            });
          
-          $('.dropify').dropify();
+        //   $('.dropify').dropify();
           
-          $('#treeview5').treeview({
-            expandIcon: 'ti-angle-right',
-            onhoverColor: "rgba(0, 0, 0, 0.05)",
-            selectedBackColor: "#08bb44",
-            collapseIcon: 'ti-angle-down',
-            data: $scope.categoryTree
-          });
+        //   $('#treeview5').treeview({
+        //     expandIcon: 'ti-angle-right',
+        //     onhoverColor: "rgba(0, 0, 0, 0.05)",
+        //     selectedBackColor: "#08bb44",
+        //     collapseIcon: 'ti-angle-down',
+        //     data: $scope.categoryTree
+        //   });
         });
         // $(document).ready(function () {
         $('.img-container').imagesLoaded(function () {  
-            
-            // ----------------------------- Alert module
-            var SweetAlert = function() {};
-            //init
-            $.SweetAlert = new SweetAlert, $.SweetAlert.Constructor = SweetAlert
-            // $.SweetAlert.init()
 
             setTimeout(function(){
                 $('#LoadingLoop').hide();
