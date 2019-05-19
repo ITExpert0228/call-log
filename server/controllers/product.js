@@ -6,7 +6,7 @@ exports.test = function (req, res) {
 
     console.log(consts.IP+'---'+consts.LOCALIP);
 
-    res.send('Greetings from the Test controller!');
+    res.send(consts.IP+'---'+consts.LOCALIP);
 };
 
 exports.product_create = function (req, res) {
